@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>                                                                                                      
+<customization xmlns="http://xmlns.oracle.com/jrad" version="9.0.5.4.89_555" xml:lang="en-US"                                               
+customizes="/oracle/apps/pji/viewplan/reporting/webui/VPBudgetResAnalysisPG">                                                               
+<modifications>
+      <modify element="flexibleContent2" flexibleLayoutRef=""/>
+   </modifications>
+</customization>
+                      
+

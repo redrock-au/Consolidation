@@ -1,0 +1,66 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<customization xmlns="http://xmlns.oracle.com/jrad" version="9.0.5.5.65_565" xml:lang="en-US" customizes="/oracle/apps/icx/por/req/webui/CheckoutSummaryPG" MDSActiveDoc="true" xmlns:oa="http://xmlns.oracle.com/oa">
+   <modifications>
+      <modify element="ReqHeaderDFF" rendered="true"/>
+      <modify element="ReqLineDFFRow" rendered="true"/>
+      <modify element="UrgentCheckBox" rendered="false"/>
+      <modify element="TaxCodeMultiple" tipMessageName=""/>
+      <modify element="TaxCode" tipMessageAppShortName="ICX" tipMessageName="POC_TAXCODE_TIP" tipType="shortTip"/>
+      <move element="ToTaxCodeId" after="ToFromTaxCode"/>
+      <move element="ProjectOnSummary" after="PCard"/>
+      <move element="ProjectMultiple" after="ProjectOnSummary"/>
+      <move element="Task" after="ProjectMultiple"/>
+      <move element="TaskMultiple" after="Task"/>
+      <move element="Award" after="TaskMultiple"/>
+      <move element="AwardMultiple" after="Award"/>
+      <move element="ExpenditureType" after="AwardMultiple"/>
+      <move element="ExpenditureTypeMultiple" after="ExpenditureType"/>
+      <move element="ExpenditureOrg" after="ExpenditureTypeMultiple"/>
+      <move element="ExpenditureOrgMultiple" after="ExpenditureOrg"/>
+      <move element="ExpenditureItemDate" after="ExpenditureOrgMultiple"/>
+      <move element="ExpenditureItemDateMultiple" after="ExpenditureItemDate"/>
+      <move element="Taxable" after="ExpenditureItemDateMultiple"/>
+      <move element="TaxableMultiple" after="Taxable"/>
+      <move element="TaxCode" after="TaxableMultiple"/>
+      <move element="TaxCodeMultiple" after="TaxCode"/>
+      <move element="ChargeAccount" after="TaxCodeMultiple"/>
+      <move element="ChargeAccountMultiple" after="ChargeAccount"/>
+      <move element="EnterChargeAccount" after="ChargeAccountMultiple"/>
+      <move element="TransactionCode" after="EnterChargeAccount"/>
+      <move element="TransactionCodeMultiple" after="TransactionCode"/>
+      <move element="GLDate" after="TransactionCodeMultiple"/>
+      <move element="GLDateMultiple" after="GLDate"/>
+      <insert after="Dummy">
+         <oa:messageStyledText id="DoiInclGstAmt" adminCustomizable="true" cellNoWrapFormat="false" dataType="VARCHAR2" initSortSeq="none" prompt="GST Inclusive Amount" queryable="false" rendered="true" required="no" scope="." selectiveSearchCriteria="false" serverUnvalidated="false" sortState="no" styleClass="OraDataText" tipType="none" totalValue="false" userCustomizable="false" vAlign="middle" viewAttr="AmountInclGst" viewName="DoiGstVO1" warnAboutChanges="true" xmlns:oa="http://xmlns.oracle.com/oa"/>
+      </insert>
+      <modify element="Taxable" readOnly="true" styleClass="OraDataText"/>
+      <modify element="ReqLineDFFRN" rendered="false"/>
+      <modify element="PageButtonsRN.Submit" rendered="false"/>
+      <insert before="BillingLabeledFieldLayout">
+         <oa:formattedText id="DOI_PROJ_MSG" adminCustomizable="true" cellNoWrapFormat="false" dataType="VARCHAR2" initSortSeq="none" queryable="false" rendered="true" scope="." sortState="no" styleClass="OraDataText" text="Only to be used for OPA related projects" totalValue="false" userCustomizable="false" xmlns:oa="http://xmlns.oracle.com/oa"/>
+      </insert>
+      <insert before="BillingLabeledFieldLayout">
+         <oa:spacer id="DOI_SPACER" adminCustomizable="true" height="10" rendered="true" scope="." xmlns:oa="http://xmlns.oracle.com/oa"/>
+      </insert>
+      <move element="DoiGstRN" after="BillingLabeledFieldLayout"/>
+      <move element="ProjectId" after="DoiGstRN"/>
+      <move element="HasExpenseLines" after="ProjectId"/>
+      <move element="HasInventoryLines" after="HasExpenseLines"/>
+      <move element="HasShopFloorLines" after="HasInventoryLines"/>
+      <move element="TaskId" after="HasShopFloorLines"/>
+      <move element="ReqAwardId" after="TaskId"/>
+      <move element="ExpenditureOrgId" after="ReqAwardId"/>
+      <move element="TaxCodeId" after="ExpenditureOrgId"/>
+      <move element="ReqHeaderDFF" after="ReqDescription"/>
+      <insert after="ReqHeaderDFF">
+         <oa:messageTextInput id="xxpoCMSText" adminCustomizable="true" cellNoWrapFormat="false" dataType="VARCHAR2" disabled="false" initSortSeq="none" prompt="CMS Number" queryable="false" readOnly="false" rendered="true" required="no" rows="1" scope="." secret="false" selectiveSearchCriteria="false" serverUnvalidated="false" sortState="no" tipType="none" totalValue="false" userCustomizable="false" vAlign="middle" warnAboutChanges="true" xmlns:oa="http://xmlns.oracle.com/oa"/>
+      </insert>
+      <insert after="ReqHeaderDFF">
+         <oa:messageLovInput id="xxpoCMSLOV" adminCustomizable="true" cellNoWrapFormat="false" dataType="VARCHAR2" disabled="false" externalListOfValues="/doi/oracle/apps/icx/por/req/webui/CMSLovRN" initSortSeq="none" prompt="CMS Number" queryable="false" readOnly="false" rendered="true" required="no" rows="1" scope="." selectiveSearchCriteria="false" sortState="no" tipType="none" unvalidated="false" userCustomizable="false" vAlign="middle" warnAboutChanges="true" xmlns:oa="http://xmlns.oracle.com/oa">
+            <lovMappings>
+               <lovMap id="xxCMSNumber" criteriaFrom="xxpoCMSLOV" lovItem="ContractNumber" programmaticQuery="false" requiredForLOV="false" resultTo="xxpoCMSLOV" scope="." useForValidation="default"/>
+            </lovMappings>
+         </oa:messageLovInput>
+      </insert>
+   </modifications>
+</customization>

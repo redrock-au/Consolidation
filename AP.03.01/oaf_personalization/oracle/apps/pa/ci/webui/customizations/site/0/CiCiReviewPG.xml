@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8'?>                                                                                                      
+<customization xmlns="http://xmlns.oracle.com/jrad" version="9.0.5.4.89_555" xml:lang="en-US"                                               
+customizes="/oracle/apps/pa/ci/webui/CiCiReviewPG">                                                                                         
+<modifications>                                                                                                                             
+<modify element="crRegion.CRSummary" prompt="Title"/>                                                                                       
+<modify element="Classification" prompt="Category"/>                                                                                        
+<modify element="LevelOfEffort" rendered="false"/>                                                                                          
+<modify element="Reason" rendered="false"/>                                                                                                 
+<modify element="Price" prompt="Cost"/>                                                                                                     
+<modify element="SourceType" prompt="Fund Source"/>                                                                                         
+<modify element="SourcePerson" rendered="false"/>                                                                                           
+<modify element="SourceDateRequired" rendered="false"/>                                                                                     
+<modify element="SourceComment" prompt="Consequence"/>                                                                                      
+<modify element="PaFooterRg.DummyIssueText" prompt="Update Control Item"/>                                                                  
+<modify element="sourceRegion" controllerClass="doi.oracle.apps.pa.ci.webui.DOICISourceUpdateCO" text=""/>                                  
+<modify element="ResolutionComment" prompt="Mitigation Strategy"/>                                                                          
+<modify element="Resolution" rendered="false"/>                                                                                             
+<move element="detail1Region" after="PaNestedRegion3"/>                                                                                     
+<move element="detail2Region" after="detail1Region"/>                                                                                       
+<move element="sourceRegion" after="detail2Region"/>                                                                                        
+<move element="resolutionRegion" after="sourceRegion"/>                                                                                     
+<move element="PaNestedRegion4" after="resolutionRegion"/>                                                                                  
+<move element="crRegion" after="PaNestedRegion4"/>                                                                                          
+<move element="PaDocAttach" after="crRegion"/>                                                                                              
+<move element="PaNestedRegion2" after="PaDocAttach"/>                                                                                       
+<move element="PaNestedRegion6" after="PaNestedRegion2"/>                                                                                   
+<move element="PaNestedRegion8" after="PaNestedRegion6"/>                                                                                   
+<move element="PaNestedRegion10" after="PaNestedRegion8"/>                                                                                  
+<move element="PaNestedRegion9" after="PaNestedRegion10"/>                                                                                  
+<move element="PaNestedRegion11" after="PaNestedRegion9"/>
+      <move element="PaNestedRegion7" after="PaNestedRegion11"/>
+      <move     
+element="PaNestedRegion1" after="PaNestedRegion7"/>
+   </modifications>
+</customization>
+                                                  
+

@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>                                                                                                      
+<customization xmlns="http://xmlns.oracle.com/jrad" version="9.0.5.4.89_555" xml:lang="en-US"                                               
+customizes="/oracle/apps/pa/ci/webui/CiAddRelatedItemPG">                                                                                   
+<modifications>
+      <modify element="PA_CI_ADD_RELATED_ITEM_LAYOUT"                                                                       
+controllerClass="doi.oracle.apps.pa.ci.webui.DOIAddRelatedItemLayoutCO"/>
+   </modifications>
+</customization>
+                            
+

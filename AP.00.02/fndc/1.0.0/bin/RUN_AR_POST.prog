@@ -1,0 +1,160 @@
+#! /bin/ksh
+#
+# parameters : 1. post_do_date
+#
+#set -x 
+work_dir=$LBATCH/ar
+export work_dir
+cd $work_dir
+
+if [ "$5" = "" ]
+then 
+  typeset -u DT=`date '+%d-%b-%y'`
+  export DT
+else
+  export DT=$5
+fi 
+
+typeset -u post_date=20`date '+%y/%m/%d'`
+export post_date
+typeset -u start_date=20`date '+%y/%m/01'`
+export start_date
+export end_date=`sqlplus -s $fmslgn @$PRODS/last_day`
+
+#export period=`expr substr $DT 4 6`
+export period=`echo $DT|cut -c 4-9`
+
+export DT1=01-$period
+
+#export nm=`expr substr $3 1 8`
+export nm=`echo $3|cut -c 1-8`
+
+echo $DT $DT1 $period
+
+sqlplus $fmslgn @$PRODS/fail_if_holiday
+if [ $? -ne 0 ]
+then
+   echo 'Error:  Unscheduled Run..........'
+   return 1
+fi
+
+export book_id=`sqlplus -s $1 @ $PRODS/get_book_id $4`
+export org_id=`sqlplus -s $1 @ $PRODS/get_org_id $4`
+
+$PRODB/INTERNAL_RECEIPT_ALERT
+
+echo 'Inserting row in ar_posting_control......'
+
+if [ "$6" = "1" ]; then
+   echo $6
+else
+   export controlid=`sqlplus -s $1 @$PRODS/arcontrol $DT1 $DT`
+
+   if [ $? -ne 0 ]
+   then
+      echo 'arcontrol sql failed.....'
+      exit 1
+   fi
+fi
+
+echo $controlid
+echo $post_date
+echo $start_date
+
+echo ' '
+echo 'Submitting Posting run... '
+echo ' '
+
+export reqid=`CONCSUB $1 AR 'Receivables Manager' FINPROD CONCURRENT AR ARGLTP $start_date $end_date $post_date N N Y 31 $controlid N $org_id $book_id|cut -f 3 -d" "`
+
+echo $reqid
+
+if [ $? -ne 0 ]
+then
+   exit 1
+else
+   if [ "$reqid" = "" ]
+   then 
+      exit 1
+   fi
+fi
+
+echo ' '
+echo 'Updating reqid in ar_posting_control ......'
+echo ' '
+sqlplus -s $1 @$PRODS/arcontrol_upd $reqid
+if [ $? -ne 0 ]
+then
+   exit 1
+fi
+
+echo $reqid
+sqlplus $1 @$PRODS/concwait $reqid 30 900
+if [ $? -ne 0 ]
+then 
+   exit 1
+fi
+
+sqlplus $1 @$PRODS/concwait_next $reqid 60 1800 20215
+
+if [ $? != 0 ]
+then
+   exit 1
+fi
+
+sqlplus $1 @$PRODS/adjust_receivables 0 
+
+export nextno=`sqlplus -s $gllgn @$PRODS/interface_id`
+echo $nextno
+
+sqlplus -s $gllgn @$PRODS/load_interface '"Receivables Adjustments"' $nextno
+
+export reqid=`CONCSUB $1 SQLGL 'General Ledger Super User' FINPROD CONCURRENT SQLGL GLLEZL $nextno 1 N '""' '""' N O|cut -f 3 -d" "`
+
+echo $reqid
+
+sqlplus $1 @$PRODS/concwait $reqid 60 1800
+
+if [ $? != 0 ]
+then
+   exit 1
+fi
+
+#export user1=simon.wilson@transport.vic.gov.au
+#export user2=ar@transport.vic.gov.au
+
+#export m_subject="AR Recon Output"
+#export m_list=$(cat ar_recon.lst)
+#export m_mess=" \r\n${m_list} "
+#echo "$m_mess" | mailx -s"$m_subject" $user1
+#echo "$m_mess" | mailx -s"$m_subject" $user2
+
+mv ar_recon.lst $APPLCSF/$APPLOUT/$nm.$4
+
+if [ "$6" = "1" ]; then
+  sqlplus -s $1 @$PRODS/cashbal_all_sources.sql Receivables $post_date
+  echo 'Run ends Successfully....Please check logs'
+  exit 0
+fi
+
+sqlplus $1 @$PRODS/cashbal_rec_adj 0 
+
+export nextno=`sqlplus -s $gllgn @$PRODS/interface_id`
+echo $nextno
+
+sqlplus -s $gllgn @$PRODS/load_interface '"Cash Balancing"' $nextno
+
+export reqid=`CONCSUB $1 SQLGL 'General Ledger Super User' FINPROD CONCURRENT SQLGL GLLEZL $nextno 1 N '""' '""' N O|cut -f 3 -d" "`
+
+echo $reqid
+
+sqlplus $1 @$PRODS/concwait $reqid 60 1800
+
+if [ $? != 0 ]
+then
+   exit 1
+fi
+
+echo 'Run ends Successfully....Please check logs\n'
+exit 0
+) 2>&1

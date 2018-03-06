@@ -1,0 +1,96 @@
+#! /bin/ksh
+
+aplink_dir=$APBAT/isip    
+export aplink_dir
+
+cd $aplink_dir
+
+typeset -u DT=`date '+%d-%b-%y'`
+export DT
+
+export glname=AP`date '+%y%m%d%H'`
+echo $glname $DT
+
+export end_date=`sqlplus -s $fmslgn @$PRODS/last_day`
+typeset -u start_date=20`date '+%y/%m/01'`
+export start_date
+
+echo $start_date $end_date
+echo $2
+echo $3
+echo $4
+echo $5
+
+#env|grep lgn
+
+sqlplus $fmslgn @$PRODS/fail_if_holiday
+if [ $? -ne 0 ]
+then
+   echo 'Error:  Unscheduled Run..........'
+   return 1
+fi
+
+export thru_date=`sqlplus -s $fmslgn @$PRODS/last_day`
+
+export reqid=`CONCSUB $1 SQLAP 'Payables Manager' FINPROD CONCURRENT SQLAP APACCENG $start_date $end_date All Y Y Y Y 500 '""' N '""''""' N|cut -f 3 -d" "`
+echo $reqid
+
+sqlplus $1 @$PRODS/concwait $reqid 60 1800
+
+if [ $? != 0 ]
+then
+   exit 1
+fi
+
+sleep 300
+
+#sqlplus $1 @$PRODS/concwait_next $reqid 60 1800 20215
+
+#if [ $? != 0 ]
+##then
+#   exit 1
+#fi
+
+sqlplus $1 @$PRODS/adjust_payables 0 
+
+export nextno=`sqlplus -s $gllgn @$PRODS/interface_id`
+echo $nextno
+
+sqlplus -s $gllgn @$PRODS/load_interface '"Payables Adjustment"' $nextno
+
+export reqid=`CONCSUB $1 SQLGL 'General Ledger Super User' FINPROD CONCURRENT SQLGL GLLEZL $nextno 1 N '""' '""' N O|cut -f 3 -d" "`
+
+echo $reqid
+
+sqlplus $1 @$PRODS/concwait $reqid 60 1800
+
+if [ $? != 0 ]
+then
+   exit 1
+fi
+
+if [ "$5" = "1" ]; then
+  echo subtmit request
+  sqlplus -s $1 @$PRODS/cashbal_all_sources.sql Payables $start_date 0
+  exit 0
+fi
+
+sqlplus $1 @$PRODS/cashbal_pay_adj 0 
+
+export nextno=`sqlplus -s $gllgn @$PRODS/interface_id`
+echo $nextno
+
+sqlplus -s $gllgn @$PRODS/load_interface '"Cash Balancing"' $nextno
+
+export reqid=`CONCSUB $1 SQLGL 'General Ledger Super User' FINPROD CONCURRENT SQLGL GLLEZL $nextno 1 N '""' '""' N O|cut -f 3 -d" "`
+
+echo $reqid
+
+sqlplus $1 @$PRODS/concwait $reqid 60 1800
+
+if [ $? != 0 ]
+then
+   exit 1
+fi
+
+exit 0

@@ -1,0 +1,39 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<customization xmlns="http://xmlns.oracle.com/jrad" version="9.0.5.5.65_565" xml:lang="en-US" customizes="/oracle/apps/icx/por/rcv/webui/IcxPorRcvSrchPG" MDSActiveDoc="true" xmlns:oa="http://xmlns.oracle.com/oa">
+   <modifications>
+      <move element="RequisitionNumberBlind" after="RequisitionNumber"/>
+      <move element="ItemDescription" after="RequisitionNumberBlind"/>
+      <move element="ItemDescriptionBlind" after="ItemDescription"/>
+      <move element="NeedByDate" after="ItemDescriptionBlind"/>
+      <move element="ReceiptQuantity" after="NeedByDate"/>
+      <move element="ReceiptUnit" after="ReceiptQuantity"/>
+      <insert before="ReceiptUnit">
+         <oa:messageTextInput id="xx_derived_qty_amt" adminCustomizable="true" cellNoWrapFormat="false" dataType="NUMBER" disabled="false" initSortSeq="none" prompt="Derived Qty / Amount" queryable="false" readOnly="true" rendered="${oa.ReceiveReqItemsVO.Displaykofax}" required="no" rows="1" scope="." secret="false" selectiveSearchCriteria="false" serverUnvalidated="false" sortState="no" tipType="none" totalValue="false" userCustomizable="false" vAlign="middle" viewAttr="Attribute2" viewName="ReceiveReqItemsVO" warnAboutChanges="true" xmlns:oa="http://xmlns.oracle.com/oa"/>
+      </insert>
+      <move element="QuantityOrdered" after="ReceiptUnit"/>
+      <move element="QuantityDelivered" after="QuantityOrdered"/>
+      <move element="Source" after="QuantityDelivered"/>
+      <move element="OrderType" after="Source"/>
+      <move element="PoNumber" after="OrderType"/>
+      <move element="OperatingUnit" after="PoNumber"/>
+      <move element="RcvShipmentNumber" after="OperatingUnit"/>
+      <move element="RequesterName" after="RcvShipmentNumber"/>
+      <move element="ItemNumber" after="RequesterName"/>
+      <move element="ReqHeaderId" after="ItemNumber"/>
+      <move element="ReqLineId" after="ReqHeaderId"/>
+      <move element="VendorProductNum" after="ReqLineId"/>
+      <move element="DistributionNumber" after="VendorProductNum"/>
+      <move element="PrimaryUomClass" after="DistributionNumber"/>
+      <move element="SupplierSite" after="PrimaryUomClass"/>
+      <move element="ReceiptDate" after="SupplierSite"/>
+      <move element="PoLineNumber" after="ReceiptDate"/>
+      <move element="PoShipmentNumber" after="PoLineNumber"/>
+      <move element="DeliverToLocationId" after="PoShipmentNumber"/>
+      <move element="RequesterId" after="DeliverToLocationId"/>
+      <move element="Unit" after="RequesterId"/>
+      <move element="MatchingBasis" after="Unit"/>
+      <move element="ManufacturerPartNumber" after="MatchingBasis"/>
+      <move element="PromisedDate" after="ManufacturerPartNumber"/>
+      <modify element="PageLayoutRN" controllerClass="doi.oracle.apps.icx.por.rcv.webui.DoiRcvSrchCO"/>
+   </modifications>
+</customization>

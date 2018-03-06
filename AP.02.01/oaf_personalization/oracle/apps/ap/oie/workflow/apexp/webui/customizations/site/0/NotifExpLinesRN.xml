@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8'?>                                                                                                      
+<customization xmlns="http://xmlns.oracle.com/jrad" version="9.0.5.4.89_555" xml:lang="en-US"                                               
+customizes="/oracle/apps/ap/oie/workflow/apexp/webui/NotifExpLinesRN" xmlns:oa="http://xmlns.oracle.com/oa"                                 
+xmlns:ui="http://xmlns.oracle.com/uix/ui">                                                                                                  
+<modifications>                                                                                                                             
+<move element="CCViolationTypeCol" after="CCLineCol"/>                                                                                      
+<move element="CCDateCol" after="CCViolationTypeCol"/>                                                                                      
+<move element="CCExpenseTypeCol" after="CCDateCol"/>                                                                                        
+<move element="CCMerchantNameCol" after="CCExpenseTypeCol"/>                                                                                
+<move element="CCProjectNumberCol" after="CCMerchantNameCol"/>                                                                              
+<move element="CCTaskNumberCol" after="CCProjectNumberCol"/>                                                                                
+<move element="CCAwardNumberCol" after="CCTaskNumberCol"/>                                                                                  
+<move element="CCAmountCol" after="CCAwardNumberCol"/>                                                                                      
+<insert before="CCAmountCol">                                                                                                               
+<oa:column id="XXDOT_COST_CENTRE1" adminCustomizable="true" bandingShade="none" cellNoWrapFormat="false" columnDataFormat="textFormat"      
+displayGrid="true" rendered="true" scope="." totalValue="false" userCustomizable="false"                                                    
+xmlns:oa="http://xmlns.oracle.com/oa">                                                                                                      
+<ui:columnHeader xmlns:ui="http://xmlns.oracle.com/uix/ui">                                                                                 
+<oa:sortableHeader id="XXDOT_CC_HEADER1" adminCustomizable="true" cellNoWrapFormat="false" initSortSeq="none" prompt="Cost Centre"          
+rendered="true" required="no" scope="." sortState="no" userCustomizable="false"/>                                                           
+</ui:columnHeader>                                                                                                                          
+<ui:contents xmlns:ui="http://xmlns.oracle.com/uix/ui">                                                                                     
+<oa:messageStyledText id="XXDOT_COST_CENTRE_VALUE1" adminCustomizable="true" cellNoWrapFormat="false" dataType="VARCHAR2" initSortSeq="none"
+queryable="false" rendered="true" required="no" scope="." selectiveSearchCriteria="false"                                                   
+serverUnvalidated="false" sortState="no" tipType="none" totalValue="false" userCustomizable="false" vAlign="middle" viewAttr="CostCenter"   
+warnAboutChanges="true"/>                                                                                                                   
+</ui:contents>                                                                                                                              
+</oa:column>                                                                                                                                
+</insert>                                                                                                                                   
+<move element="CCJustificationCol" after="CCAmountCol"/>                                                                                    
+<move element="CCExpAllocationsUpdatedCol" after="CCJustificationCol"/>                                                                     
+<move element="CCLineAttachmentsCol" after="CCExpAllocationsUpdatedCol"/>                                                                   
+<move element="ViolationTypeCol" after="LineCol"/>                                                                                          
+<move element="DateCol" after="ViolationTypeCol"/>                                                                                          
+<move element="ExpenseTypeCol" after="DateCol"/>                                                                                            
+<move element="MerchantNameCol" after="ExpenseTypeCol"/>                                                                                    
+<move element="ProjectNumberCol" after="MerchantNameCol"/>                                                                                  
+<move element="TaskNumberCol" after="ProjectNumberCol"/>                                                                                    
+<move element="AwardNumberCol" after="TaskNumberCol"/>                                                                                      
+<move element="AmountCol" after="AwardNumberCol"/>                                                                                          
+<insert before="AmountCol">                                                                                                                 
+<oa:column id="XXDOT_COST_CENTRE2" adminCustomizable="true" bandingShade="none" cellNoWrapFormat="false" columnDataFormat="textFormat"      
+displayGrid="true" rendered="true" scope="." totalValue="false" userCustomizable="false"                                                    
+xmlns:oa="http://xmlns.oracle.com/oa">                                                                                                      
+<ui:columnHeader xmlns:ui="http://xmlns.oracle.com/uix/ui">                                                                                 
+<oa:sortableHeader id="XXDOT_CC_HEADER2" adminCustomizable="true" cellNoWrapFormat="false" initSortSeq="none" prompt="Cost Centre"          
+rendered="true" required="no" scope="." sortState="no" userCustomizable="false"/>                                                           
+</ui:columnHeader>                                                                                                                          
+<ui:contents xmlns:ui="http://xmlns.oracle.com/uix/ui">                                                                                     
+<oa:messageStyledText id="XXDOT_COST_CENTRE_VALUE2" adminCustomizable="true" cellNoWrapFormat="false" dataType="VARCHAR2" initSortSeq="none"
+queryable="false" rendered="true" required="no" scope="." selectiveSearchCriteria="false"                                                   
+serverUnvalidated="false" sortState="no" tipType="none" totalValue="false" userCustomizable="false" vAlign="middle" viewAttr="CostCenter"   
+warnAboutChanges="true"/>                                                                                                                   
+</ui:contents>                                                                                                                              
+</oa:column>                                                                                                                                
+</insert>                                                                                                                                   
+<move element="JustificationCol" after="AmountCol"/>
+      <move element="ExpAllocationsUpdatedCol" after="JustificationCol"/>
+      <move  
+element="LineAttachmentsCol" after="ExpAllocationsUpdatedCol"/>
+   </modifications>
+</customization>
+                                      
+

@@ -1,0 +1,63 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<dataTemplate name="XXAR_RRAM_INV_STATUS_RPT_XML" version="1.0">
+<properties>
+<property name="debug_mode" value="on"/>
+</properties>
+ <parameters>
+  <parameter name="P_CREATION_DATE_FROM"               dataType="varchar2" />
+  <parameter name="P_CREATION_DATE_TO"                 dataType="varchar2" /> 
+    <parameter name="P_CONC_REQUEST_ID"                 dataType="number" /> 
+ </parameters>
+<dataQuery>
+ <sqlStatement name="Q_REPORT_DATA">
+       <![CDATA[
+SELECT name ledger_name
+FROM gl_ledgers
+WHERE ledger_id = :P_LEDGER_ID
+      ]]> 
+   </sqlStatement>
+   <sqlStatement name="Q_REPORT_DATA">
+       <![CDATA[
+SELECT status.INVOICE_ID,
+       status.INVOICE_NUMBER,
+       status.SOURCE_SYSTEM,
+       status.SOURCE_SYSTEM_REF,
+       status.INVOICE_AMOUNT,
+       status.AMOUNT_APPLIED,
+       status.AMOUNT_CREDITED,
+       status.AMOUNT_ADJUSTED,
+       status.AMOUNT_DISCOUNTED,
+       status.AMOUNT_DUE_REMAINING,
+       to_char(status.CREATION_DATE,'DD-MON-RRRR') CREATION_DATE,
+       (select user_name from fnd_user where user_id = status.CREATED_BY ) CREATED_BY, -- Using subquery because some created_by is null
+       to_char(status.LAST_UPDATE_DATE,'DD-MON-RRRR') LAST_UPDATE_DATE,
+       (select user_name from fnd_user where user_id = status.LAST_UPDATED_BY ) LAST_UPDATED_BY -- Using subquery because some LAST_UPDATED_BY is null
+FROM   RRAM_INVOICE_STATUS  status,
+       RRAM_AR_TRANS_STAGE stage
+WHERE  TRUNC(status.CREATION_DATE) BETWEEN nvl(FND_DATE.CANONICAL_TO_DATE(:P_CREATION_DATE_FROM),TRUNC(status.CREATION_DATE))
+  AND  nvl(FND_DATE.CANONICAL_TO_DATE(:P_CREATION_DATE_TO) ,TRUNC(status.CREATION_DATE))
+  AND  status.INVOICE_ID = stage.INVOICE_ID
+  AND  stage.CONC_REQUEST_ID = nvl(:P_CONC_REQUEST_ID,stage.CONC_REQUEST_ID)
+      ]]> 
+   </sqlStatement>
+</dataQuery>
+<dataStructure>  
+   <group name="G_REPORT_DATA"           source="Q_REPORT_DATA">
+            <element name ="INVOICE_ID"                value="INVOICE_ID"/> 
+            <element name ="INVOICE_NUMBER"            value="INVOICE_NUMBER"/>
+            <element name ="SOURCE_SYSTEM"             value="SOURCE_SYSTEM"/>
+            <element name ="SOURCE_SYSTEM_REF"         value="SOURCE_SYSTEM_REF"/>
+            <element name ="INVOICE_AMOUNT"            value="INVOICE_AMOUNT"/>
+            <element name ="AMOUNT_APPLIED"            value="AMOUNT_APPLIED"/>
+            <element name ="AMOUNT_CREDITED"           value="AMOUNT_CREDITED"/>
+            <element name ="AMOUNT_ADJUSTED"           value="AMOUNT_ADJUSTED"/>
+            <element name ="AMOUNT_DISCOUNTED"         value="AMOUNT_DISCOUNTED"/>
+            <element name ="AMOUNT_DUE_REMAINING"      value="AMOUNT_DUE_REMAINING"/>
+            <element name ="CREATION_DATE"             value="CREATION_DATE"/>
+            <element name ="CREATED_BY"                value="CREATED_BY"/>
+            <element name ="LAST_UPDATE_DATE"          value="LAST_UPDATE_DATE"/>
+            <element name ="LAST_UPDATED_BY"           value="LAST_UPDATED_BY"/>           
+    </group>
+   <element name="record_count"    function="count" dataType="number"           value="G_REPORT_DATA.INVOICE_ID" />  
+ </dataStructure>
+</dataTemplate>

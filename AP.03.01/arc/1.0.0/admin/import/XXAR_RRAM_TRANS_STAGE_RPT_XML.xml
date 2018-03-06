@@ -1,0 +1,79 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<dataTemplate name="XXAR_RRAM_TRANS_STAGE_RPT_XML" version="1.0">
+<properties>
+<property name="debug_mode" value="on"/>
+</properties>
+ <parameters>
+  <parameter name="P_CREATION_DATE_FROM"               dataType="varchar2" />
+  <parameter name="P_CREATION_DATE_TO"                 dataType="varchar2" />  
+  <parameter name="P_CONC_REQUEST_ID"                 dataType="number" /> 
+ </parameters>
+<dataQuery>
+   <sqlStatement name="Q_REPORT_DATA">
+       <![CDATA[
+SELECT STAGE_ID,
+       SOURCE_SYSTEM,
+       SOURCE_SYSTEM_REF,
+       ACCOUNT_NUMBER,
+       PARTY_SITE_NUMBER,
+       to_char(TRANS_DATE) TRANS_DATE,
+       TRANS_TYPE,
+       CURRENCY_CODE,
+       FEE_NUMBER,
+       LINE_NUMBER,
+       DESCRIPTION,
+       QUANTITY,
+       UNIT_OF_MEASURE,
+       UNIT_PRICE,
+       EXTENDED_AMOUNT,
+       TAX_CODE,
+       REVENUE_ACCOUNT,
+       INVOICE_NUMBER,
+       INVOICE_ID,
+       to_char(CREATION_DATE,'DD-MON-RRRR') CREATION_DATE,
+       (select user_name from fnd_user where user_id = stage.CREATED_BY ) CREATED_BY, -- Using subquery because some created_by is null
+       CREATED_BY_USER,
+       to_char(LAST_UPDATE_DATE,'DD-MON-RRRR') LAST_UPDATE_DATE,
+       (select user_name from fnd_user where user_id = stage.LAST_UPDATED_BY ) LAST_UPDATED_BY, -- Using subquery because some LAST_UPDATED_BY is null
+       INTERFACE_STATUS,
+       CONC_REQUEST_ID
+FROM   RRAM_AR_TRANS_STAGE  stage  
+WHERE  TRUNC(stage.CREATION_DATE) BETWEEN nvl(FND_DATE.CANONICAL_TO_DATE(:P_CREATION_DATE_FROM),TRUNC(stage.CREATION_DATE))
+  AND  nvl(FND_DATE.CANONICAL_TO_DATE(:P_CREATION_DATE_TO) ,TRUNC(stage.CREATION_DATE))
+  AND  stage.CONC_REQUEST_ID = nvl(:P_CONC_REQUEST_ID,stage.CONC_REQUEST_ID)
+      ]]> 
+   </sqlStatement>
+</dataQuery>
+<dataStructure>  
+   <group name="G_REPORT_DATA"           source="Q_REPORT_DATA">
+            <element name ="STAGE_ID"              value="STAGE_ID"/> 
+            <element name ="INVOICE_NUMBER"        value="INVOICE_NUMBER"/>
+            <element name ="SOURCE_SYSTEM"         value="SOURCE_SYSTEM"/>
+            <element name ="SOURCE_SYSTEM_REF"     value="SOURCE_SYSTEM_REF"/>
+            <element name ="ACCOUNT_NUMBER"        value="ACCOUNT_NUMBER"/>
+            <element name ="PARTY_SITE_NUMBER"     value="PARTY_SITE_NUMBER"/>            
+            <element name ="TRANS_DATE"            value="TRANS_DATE"/>
+            <element name ="TRANS_TYPE"            value="TRANS_TYPE"/>
+            <element name ="CURRENCY_CODE"         value="CURRENCY_CODE"/>
+            <element name ="FEE_NUMBER"            value="FEE_NUMBER"/>
+            <element name ="LINE_NUMBER"           value="LINE_NUMBER"/>
+            <element name ="DESCRIPTION"           value="DESCRIPTION"/>
+            <element name ="QUANTITY"              value="QUANTITY"/>
+            <element name ="UNIT_OF_MEASURE"       value="UNIT_OF_MEASURE"/>
+            <element name ="UNIT_PRICE"            value="UNIT_PRICE"/>            
+            <element name ="EXTENDED_AMOUNT"       value="EXTENDED_AMOUNT"/>
+            <element name ="TAX_CODE"              value="TAX_CODE"/>
+            <element name ="REVENUE_ACCOUNT"       value="REVENUE_ACCOUNT"/>
+            <element name ="INVOICE_NUMBER"        value="INVOICE_NUMBER"/>
+            <element name ="INVOICE_ID"            value="INVOICE_ID"/>           
+            <element name ="CREATION_DATE"         value="CREATION_DATE"/>
+            <element name ="CREATED_BY"            value="CREATED_BY"/>
+            <element name ="CREATED_BY_USER"            value="CREATED_BY_USER"/>
+            <element name ="LAST_UPDATE_DATE"      value="LAST_UPDATE_DATE"/>
+            <element name ="LAST_UPDATED_BY"       value="LAST_UPDATED_BY"/>           
+            <element name ="INTERFACE_STATUS"      value="INTERFACE_STATUS"/>
+            <element name ="CONC_REQUEST_ID"       value="CONC_REQUEST_ID"/>           
+    </group>
+   <element name="record_count"    function="count" dataType="number"           value="G_REPORT_DATA.INVOICE_ID" />  
+ </dataStructure>
+</dataTemplate>

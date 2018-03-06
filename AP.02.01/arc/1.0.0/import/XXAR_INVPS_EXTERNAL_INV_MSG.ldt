@@ -1,0 +1,52 @@
+# $Header: svn://d02584/consolrepos/branches/AP.02.01/arc/1.0.0/import/XXAR_INVPS_EXTERNAL_INV_MSG.ldt 1427 2017-07-04 07:19:13Z svnuser $
+
+# dbdrv: exec fnd bin FNDLOAD bin &phase=daa+52 checkfile:~PROD:~PATH:~FILE &ui_apps 0 Y UPLOAD @FND:patch/115/import/afmdmsg.lct @~PROD:~PATH/~FILE
+LANGUAGE = "US"
+LDRCONFIG = "afmdmsg.lct 115.29"
+
+#Source Database CONDEV
+
+#RELEASE_NAME 11.5.10.2
+
+# -- Begin Entity Definitions -- 
+
+DEFINE FND_NEW_MESSAGES
+  KEY   APPLICATION_SHORT_NAME          VARCHAR2(50)
+  KEY   MESSAGE_NAME                    VARCHAR2(30)
+  CTX   OWNER                           VARCHAR2(4000)
+  BASE  LAST_UPDATE_DATE                VARCHAR2(10)
+  CTX   MESSAGE_NUMBER                  VARCHAR2(50)
+  TRANS MESSAGE_TEXT                    VARCHAR2(2000)
+  CTX   DESCRIPTION                     VARCHAR2(240)
+  CTX   TYPE                            VARCHAR2(30)
+  CTX   MAX_LENGTH                      VARCHAR2(50)
+  CTX   CATEGORY                        VARCHAR2(10)
+  CTX   SEVERITY                        VARCHAR2(10)
+  CTX   FND_LOG_SEVERITY                VARCHAR2(50)
+END FND_NEW_MESSAGES
+
+# -- End Entity Definitions -- 
+
+
+BEGIN FND_NEW_MESSAGES "ARC" "XXAR_INVPS_EXTERNAL_INV"
+  OWNER = "NCHENNURI"
+  LAST_UPDATE_DATE = "2017/06/20"
+  MESSAGE_NUMBER = "*NULL*"
+  MESSAGE_TEXT =
+ "Dear &CUSTOMER_CONTACT,<BR>\n\
+<BR>\n\
+Please find attached your tax invoice from the Department of Economic Development, Jobs, Transport and Resources.<BR>\n\
+<BR>\n\
+For further details relating to these services, please refer to the contact provided on the attached invoice or alternatively please email accounts.rev@ecodev.vic.gov.au<BR>\n\
+<BR>\n\
+Kind regards,<BR><BR>\n\
+Accounts Receivable<BR><BR>\n\
+Department of Economic Development, Jobs, Transport and Resources."
+  DESCRIPTION = "*NULL*"
+  TYPE = "30_PCT_EXPANSION_PROMPT"
+  MAX_LENGTH = "*NULL*"
+  CATEGORY = "*NULL*"
+  SEVERITY = "*NULL*"
+  FND_LOG_SEVERITY = "*NULL*"
+END FND_NEW_MESSAGES
+

@@ -1,0 +1,137 @@
+#! /bin/ksh
+#
+# parameters : 1. post_do_date
+#
+#set -x
+work_dir=$LBATCH/ar
+export work_dir
+cd $work_dir
+
+if [ "$5" = "" ]
+then
+  typeset -u DT=`date '+%d-%b-%y'`
+  export DT
+else
+  #export DT=$5                       -- arellanod rr 29-Jul-2015
+  export DT=`sqlplus -s $fmslgn @$PRODS/convert_date $5`
+fi
+
+typeset -u post_date=20`date '+%y/%m/%d'`
+export post_date
+typeset -u start_date=20`date '+%y/%m/01'`
+export start_date
+export end_date=`sqlplus -s $fmslgn @$PRODS/last_day`
+
+# arellanod rr 29-Jul-2015
+export DT1=`sqlplus -s $fmslgn @$PRODS/first_day $DT`
+
+#export period=`expr substr $DT 4 6`
+#export period=`echo $DT|cut -c 4-9`  -- arellanod rr 29-Jul-2015
+#export DT1=01-$period                -- arellanod rr 29-Jul-2015
+
+#export nm=`expr substr $3 1 8`
+export nm=`echo $3|cut -c 1-8`
+
+#debug
+echo DEBUG post_date: $post_date
+echo DEBUG start_date: $start_date
+echo DEBUG end_date: $end_date
+echo DEBUG DT: $DT
+echo DEBUG DT1: $DT1
+
+sqlplus $fmslgn @$PRODS/fail_if_holiday
+if [ $? -ne 0 ]
+then
+   echo 'Error:  Unscheduled Run..........'
+   return 1
+fi
+
+export book_id=`sqlplus -s $1 @ $PRODS/get_book_id $4`
+export org_id=`sqlplus -s $1 @ $PRODS/get_org_id $4`
+export responsibility=`sqlplus -s $1 @$PRODS/get_responsibility $4|grep -i [A-Z]`
+export resp1=""$responsibility""
+echo $resp1
+export org=cat `echo $resp1 |cut -c1-3 `
+export resp2=$org'-General Ledeger Super User'
+echo $resp2
+
+echo 'Inserting row in ar_posting_control......'
+export controlid=`sqlplus -s $1 @$PRODS/arcontrol $DT1 $DT`
+
+if [ $? -ne 0 ]
+then
+   echo 'arcontrol sql failed.....'
+   exit 1
+fi
+
+echo $controlid
+echo $post_date
+echo $start_date
+echo $org_id
+
+echo ' '
+echo 'Submitting Posting run... '
+echo ' '
+
+export reqid=`CONCSUB $1 AR "$resp1" FINPROD CONCURRENT AR ARGLTP $start_date $end_date $post_date N N Y 31 $controlid N $org_id $book_id|cut -f 3 -d" "`
+
+echo $reqid
+
+if [ $? -ne 0 ]
+then
+   exit 1
+else
+   if [ "$reqid" = "" ]
+   then
+      exit 1
+   fi
+fi
+
+echo ' '
+echo 'Updating reqid in ar_posting_control ......'
+echo ' '
+sqlplus -s $1 @$PRODS/arcontrol_upd $reqid
+if [ $? -ne 0 ]
+then
+   exit 1
+fi
+
+echo $reqid
+sqlplus $1 @$PRODS/concwait $reqid 30 900
+if [ $? -ne 0 ]
+then
+   exit 1
+fi
+
+sqlplus $1 @$PRODS/concwait_next $reqid 60 1800 20215
+
+if [ $? != 0 ]
+then
+   exit 1
+fi
+
+#if [ $org = TSC ]                    -- arellanod rr 29-Jul-2015
+if [ $org_id = 710 ]
+then
+   sqlplus $1 @$PRODS/adjust_receivables_tsc 0
+
+   export nextno=`sqlplus -s $1 @$PRODS/interface_id`
+   echo $nextno
+
+   #sqlplus -s $1 @$PRODS/load_interface '"Receivables Adjustments"' $nextno
+   sqlplus -s $1 @$PRODS/load_interface_tsc '"Receivables Adjustments"' $nextno
+   
+   export reqid=`CONCSUB $1 SQLGL 'TSC-General Ledger Super User' FINPROD CONCURRENT SQLGL GLLEZL $nextno $book_id N '""' '""' N O|cut -f 3 -d" "`
+
+   echo $reqid
+   
+   sqlplus $1 @$PRODS/concwait $reqid 60 1800
+
+   if [ $? != 0 ]
+   then
+      exit 1
+   fi
+fi
+
+   echo 'Run ends Successfully....Please check logs\n'
+exit 0

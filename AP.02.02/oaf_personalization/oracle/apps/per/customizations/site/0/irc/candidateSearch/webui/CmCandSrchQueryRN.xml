@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>                                                                                                      
+<customization customizes="/oracle/apps/per/irc/candidateSearch/webui/CmCandSrchQueryRN" xmlns="http://xmlns.oracle.com/jrad"               
+xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:user="http://xmlns.oracle.com/jrad/user"              
+file-version="$Header: svn://d02584/consolrepos/branches/AP.02.02/oaf_personalization/oracle/apps/per/customizations/site/0/irc/candidateSearch/webui/CmCandSrchQueryRN.xml 317 2017-05-05 02:11:23Z sryan $" version="9.0.3.8.12_1271" xml:lang="en-US">
+   <modifications>
+      <move element="Results"                        
+after="CandidateSearchCriteria"/>
+   </modifications>
+</customization>
+                                                                    
+

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>                                                                                                      
+<customization xmlns="http://xmlns.oracle.com/jrad" version="9.0.5.4.89_555" xml:lang="en-US"                                               
+customizes="/oracle/apps/fnd/cp/viewreq/webui/CPViewRequestPG" xmlns:oa="http://xmlns.oracle.com/oa">                                       
+<modifications>                                                                                                                             
+<move element="Fndcpreqsummarytable" after="Fndcpseparator"/>                                                                               
+<insert before="Fndcpreqsummarytable">                                                                                                      
+<oa:tip id="XXDOT_CONC_REQUEST_OUTPUT_TIP" adminCustomizable="true" rendered="true" scope="."                                               
+text="When clicking on the Output button, the Concurrent Program output will be displayed in the same window. Use the back button to return 
+to iProcurement. Do not close this window. Alternatively, press the &quot;Shift&quot; button and                                            
+click to view the output in a new window." xmlns:oa="http://xmlns.oracle.com/oa"/>                                                          
+</insert>
+      <modify element="item1" shortDesc="Press &quot;Shift&quot; button and click to view request results"/>
+                    
+
+</modifications>
+</customization>
+                                                                                                         
+

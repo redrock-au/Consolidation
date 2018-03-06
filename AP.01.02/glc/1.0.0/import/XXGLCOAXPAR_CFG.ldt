@@ -1,0 +1,120 @@
+# $Header: svn://d02584/consolrepos/branches/AP.01.02/glc/1.0.0/import/XXGLCOAXPAR_CFG.ldt 1368 2017-07-02 23:54:39Z svnuser $
+
+# dbdrv: exec fnd bin FNDLOAD bin &phase=daa+51 checkfile:~PROD:~PATH:~FILE &ui_apps 0 Y UPLOAD @FND:patch/115/import/aflvmlu.lct @~PROD:~PATH/~FILE
+LANGUAGE = "US"
+LDRCONFIG = "aflvmlu.lct 115.20"
+
+#Source Database CONDEV
+
+#RELEASE_NAME 11.5.10.2
+
+# -- Begin Entity Definitions -- 
+
+DEFINE FND_LOOKUP_TYPE
+  KEY   VIEW_APPSNAME                   VARCHAR2(50)
+  KEY   LOOKUP_TYPE                     VARCHAR2(30)
+  CTX   APPLICATION_SHORT_NAME          VARCHAR2(50)
+  BASE  CUSTOMIZATION_LEVEL             VARCHAR2(1)
+  CTX   OWNER                           VARCHAR2(4000)
+  BASE  LAST_UPDATE_DATE                VARCHAR2(10)
+  TRANS MEANING                         VARCHAR2(80)
+  TRANS DESCRIPTION                     VARCHAR2(240)
+
+  DEFINE FND_LOOKUP_VALUE
+    KEY   LOOKUP_CODE                     VARCHAR2(30)
+    BASE  ENABLED_FLAG                    VARCHAR2(1)
+    BASE  START_DATE_ACTIVE               VARCHAR2(10)
+    BASE  END_DATE_ACTIVE                 VARCHAR2(10)
+    BASE  TERRITORY_CODE                  VARCHAR2(2)
+    BASE  TAG                             VARCHAR2(150)
+    BASE  ATTRIBUTE_CATEGORY              VARCHAR2(30)
+    BASE  ATTRIBUTE1                      VARCHAR2(150)
+    BASE  ATTRIBUTE2                      VARCHAR2(150)
+    BASE  ATTRIBUTE3                      VARCHAR2(150)
+    BASE  ATTRIBUTE4                      VARCHAR2(150)
+    BASE  ATTRIBUTE5                      VARCHAR2(150)
+    BASE  ATTRIBUTE6                      VARCHAR2(150)
+    BASE  ATTRIBUTE7                      VARCHAR2(150)
+    BASE  ATTRIBUTE8                      VARCHAR2(150)
+    BASE  ATTRIBUTE9                      VARCHAR2(150)
+    BASE  ATTRIBUTE10                     VARCHAR2(150)
+    BASE  ATTRIBUTE11                     VARCHAR2(150)
+    BASE  ATTRIBUTE12                     VARCHAR2(150)
+    BASE  ATTRIBUTE13                     VARCHAR2(150)
+    BASE  ATTRIBUTE14                     VARCHAR2(150)
+    BASE  ATTRIBUTE15                     VARCHAR2(150)
+    CTX   OWNER                           VARCHAR2(4000)
+    BASE  LAST_UPDATE_DATE                VARCHAR2(10)
+    TRANS MEANING                         VARCHAR2(80)
+    TRANS DESCRIPTION                     VARCHAR2(240)
+  END FND_LOOKUP_VALUE
+END FND_LOOKUP_TYPE
+
+# -- End Entity Definitions -- 
+
+
+BEGIN FND_LOOKUP_TYPE "AU" "XXGL_COA_EXTRACT_PARAMETERS"
+  APPLICATION_SHORT_NAME = "SQLGLC"
+  CUSTOMIZATION_LEVEL = "U"
+  OWNER = "ARELLAD"
+  LAST_UPDATE_DATE = "2017/05/30"
+  MEANING = "GL Chart of Accounts Extract Parameters"
+
+  BEGIN FND_LOOKUP_VALUE "10"
+    ENABLED_FLAG = "Y"
+    START_DATE_ACTIVE = "2017/05/30"
+    ATTRIBUTE_CATEGORY = "XXGL_COA_EXTRACT_PARAMETERS"
+    ATTRIBUTE1 = "1"
+    ATTRIBUTE2 = "Account"
+    ATTRIBUTE3 = "A0000"
+    ATTRIBUTE4 = "5"
+    OWNER = "ARELLAD"
+    LAST_UPDATE_DATE = "2017/05/30"
+    MEANING = "10"
+    DESCRIPTION = "DOI-Account-A0000-5"
+  END FND_LOOKUP_VALUE
+  
+  BEGIN FND_LOOKUP_VALUE "20"
+    ENABLED_FLAG = "Y"
+    START_DATE_ACTIVE = "2017/05/30"
+    ATTRIBUTE_CATEGORY = "XXGL_COA_EXTRACT_PARAMETERS"
+    ATTRIBUTE1 = "1"
+    ATTRIBUTE2 = "Authority"
+    ATTRIBUTE3 = "A000"
+    ATTRIBUTE4 = "6"
+    OWNER = "ARELLAD"
+    LAST_UPDATE_DATE = "2017/05/30"
+    MEANING = "20"
+    DESCRIPTION = "DOI-Authority-A000-6"
+  END FND_LOOKUP_VALUE
+  
+  BEGIN FND_LOOKUP_VALUE "30"
+    ENABLED_FLAG = "Y"
+    START_DATE_ACTIVE = "2017/05/30"
+    ATTRIBUTE_CATEGORY = "XXGL_COA_EXTRACT_PARAMETERS"
+    ATTRIBUTE1 = "1"
+    ATTRIBUTE2 = "Cost Centre"
+    ATTRIBUTE3 = "A00"
+    ATTRIBUTE4 = "7"
+    OWNER = "ARELLAD"
+    LAST_UPDATE_DATE = "2017/05/30"
+    MEANING = "30"
+    DESCRIPTION = "DOI-CostCentre-A00-7"
+  END FND_LOOKUP_VALUE
+  
+  BEGIN FND_LOOKUP_VALUE "40"
+    ENABLED_FLAG = "Y"
+    START_DATE_ACTIVE = "2017/05/30"
+    ATTRIBUTE_CATEGORY = "XXGL_COA_EXTRACT_PARAMETERS"
+    ATTRIBUTE1 = "1"
+    ATTRIBUTE2 = "Identifier"
+    ATTRIBUTE3 = "A1111111"
+    ATTRIBUTE4 = "4"
+    OWNER = "ARELLAD"
+    LAST_UPDATE_DATE = "2017/05/30"
+    MEANING = "40"
+    DESCRIPTION = "DOI-Identifier-A1111111-4"
+  END FND_LOOKUP_VALUE
+  
+END FND_LOOKUP_TYPE
+

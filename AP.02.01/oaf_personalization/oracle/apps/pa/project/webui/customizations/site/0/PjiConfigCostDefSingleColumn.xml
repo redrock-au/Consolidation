@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>                                                                                                      
+<customization xmlns="http://xmlns.oracle.com/jrad" version="9.0.5.4.89_555" xml:lang="en-US"                                               
+customizes="/oracle/apps/pa/project/webui/PjiConfigCostDefSingleColumn">                                                                    
+<modifications>                                                                                                                             
+<move element="CurrentBudget" after="OriginalBudget"/>                                                                                      
+<move element="Forecast" after="CurrentBudget"/>                                                                                            
+<move element="EstimatetoComplete" after="Forecast"/>                                                                                       
+<move element="Actual" after="EstimatetoComplete"/>                                                                                         
+<move element="PercentSpent" after="Actual"/>                                                                                               
+<move element="Commitments" after="PercentSpent"/>                                                                                          
+<move element="ActualCommitments" after="Commitments"/>
+      <modify element="Commitments" prompt="PO Commitments"/>
+      <modify         
+element="ActualCommitments" prompt="Actual + PO Commitments"/>
+   </modifications>
+</customization>
+                                       
+
