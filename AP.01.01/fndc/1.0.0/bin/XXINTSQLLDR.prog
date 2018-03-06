@@ -1,0 +1,99 @@
+#!/usr/bin/ksh
+#*******************************************************************************
+#* 
+#* $Header: svn://d02584/consolrepos/branches/AP.01.01/fndc/1.0.0/bin/XXINTSQLLDR.prog 2674 2017-10-05 01:02:16Z svnuser $
+#* 
+#* CEMLI ID: INT.02.00
+#* 
+#* Description: Interface Framework - SQL Loader
+#*
+#********************************************************************************
+
+#---------------------------------------
+#  Arguments:
+#  1  - APPS/password
+#  2  - User ID
+#  3  - User Name
+#  4  - Request ID
+#  5  - Inbound
+#  6  - Outbound
+#  7  - Staging
+#  8  - Archive 
+#  9  - Data file
+#  10 - Log file
+#  11 - Bad file
+#  12 - Control file
+#---------------------------------------
+
+if [ -d $7 ]; then
+   LOG="$7/Request_ID_$4.log"
+else
+   echo Directory $7 does not exist
+   exit 1
+fi
+
+export ctlf=${12}
+
+echo >> $LOG
+echo User ID:             $2    >> $LOG
+echo User Name:           $3    >> $LOG
+echo Request ID:          $4    >> $LOG
+echo File Path                  >> $LOG
+echo Inbound:             $5    >> $LOG
+echo Outbound:            $6    >> $LOG
+echo Staging:             $7    >> $LOG
+echo Archive:             $8    >> $LOG
+echo Data File:           $9    >> $LOG
+echo Log File:            ${10} >> $LOG
+echo Bad File:            ${11} >> $LOG
+echo Control File:        $ctlf >> $LOG 
+echo >> $LOG
+
+cat $LOG
+
+if [ -s $5/$9 ]; then
+   # Copy data file to staging 
+   # cp -p $5/$9 $7
+   dos2unix -437 $5/$9 > $7/$9
+
+   # Copy data file to archive
+   if [ ! -z "$8" ]; then
+      cp -p $5/$9 $8
+      chmod 644 $8/$9
+   else
+      echo Archive directory not specified
+   fi
+
+   # Change permission
+   chmod 777 $7/$9
+
+   # Go to staging directory
+   cd $7
+
+   # Load data
+   sqlldr $1 control=$ctlf data=$9 log=${10} bad=${11}
+
+   # Show sqlldr log file 
+   cat ${10}
+
+   # check for bad file creation
+   if [ -f ${11} ]
+   then
+      cat ${10}
+      cat ${11}
+      cp -p ${11} $6
+      rm ${11}
+      rm $9
+      rm ${10}
+      exit 1
+   fi
+
+   rm $5/$9
+   rm $9
+   rm ${10}
+
+else
+   echo "Input file not found"
+   exit 1
+fi
+

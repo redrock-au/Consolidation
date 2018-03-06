@@ -1,0 +1,59 @@
+#!/bin/ksh
+#####################################################################
+#
+# PROGRAM:	POCNOTIFEMAIL
+#
+# PARAMETERS:
+#
+# 		$1   Applications Database Login (eg. APPS/<APPS_PASSWORD>)
+# 		$2   Applications User ID   (eg. 1004)
+# 		$3   Applications User Name (eg. Receiver)
+# 		$4   Applications Concurrent Request Number (eg. 12345)
+# 		$5   PO Number 
+# 		$6   Email address
+#               $7   Output File Name
+#
+# COMMENTS:	script called from a concurrent process that drives
+#		the email procedure for Purchase Orders.
+#
+# AUTHOR:	Joy Pinto
+#
+# MODIFIED:	
+#
+#
+####################################################################
+
+VERSION="1.0"
+
+# Logon Id and Password
+# LOGON=`echo $1 | cut -d'"' -f2`
+LOGON=$1
+
+# directories
+TOP_DIR=$POC_TOP
+SQL_DIR=$POC_TOP/$APPLSQL
+TMP_DIR=$TOP_DIR/tmp
+BIN_DIR=$TOP_DIR/$APPLBIN
+LOG_DIR=$TOP_DIR/$APPLLOG
+SRW_DIR=$TOP_DIR/$APPLREP/US
+MISC_DIR=$TOP_DIR/misc
+
+# extensions
+TMP_EXT="tmp"
+SEND_EXT="lst"
+PDF_EXT="pdf"
+MSG_EXT="msg"
+
+
+echo 'Return-Receipt-To: <corporate.finance@doi.vic.gov.au> ' > $TMP_DIR/$5.$MSG_EXT
+echo 'Subject: DEDJTR Purchase Order '$5' ' >> $TMP_DIR/$5.$MSG_EXT
+cat $MISC_DIR/notify_body.txt >> $TMP_DIR/$5.$MSG_EXT
+#add attachment using the Order Number as its name
+uuencode $APPLCSF/$APPLOUT/$7 $5_Supplier.$PDF_EXT>> $TMP_DIR/$5.$MSG_EXT
+
+
+cat $TMP_DIR/$5.$MSG_EXT | /usr/sbin/sendmail -B8BITMIME  -F"Department of Economic Development, Jobs, Transport and Resources" $6
+
+#rm -f $TMP_DIR/$5*.$PDF_EXT
+rm -f $TMP_DIR/$5*.$MSG_EXT
+exit 0

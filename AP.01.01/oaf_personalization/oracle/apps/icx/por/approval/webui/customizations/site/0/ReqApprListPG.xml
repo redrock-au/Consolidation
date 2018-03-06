@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8'?>                                                                                                      
+<customization xmlns="http://xmlns.oracle.com/jrad" version="9.0.5.4.89_555" xml:lang="en-US"                                               
+customizes="/oracle/apps/icx/por/approval/webui/ReqApprListPG">                                                                             
+<modifications>                                                                                                                             
+<modify element="JustificationRN.Justification" prompt="Note to Approver"/>                                                                 
+<modify element="PageActionButtonsBar.Submit" rendered="false"/>
+      <modify element="JustificationRN.NoteToBuyer" prompt="Note to        
+Supplier"/>
+   </modifications>
+</customization>
+                                                                                          
+

@@ -1,0 +1,332 @@
+# $Header: svn://d02584/consolrepos/branches/AP.03.01/glc/1.0.0/import/XXGL_CHRIS_ACC_DEDJTR_GL_RULES.ldt 2724 2017-10-09 03:53:46Z svnuser $
+
+# dbdrv: exec fnd bin FNDLOAD bin &phase=daa+51 checkfile:~PROD:~PATH:~FILE &ui_apps 0 Y UPLOAD @FND:patch/115/import/aflvmlu.lct @~PROD:~PATH/~FILE
+LANGUAGE = "US"
+LDRCONFIG = "aflvmlu.lct 115.20"
+
+#Source Database CONDEV
+
+#RELEASE_NAME 11.5.10.2
+
+# -- Begin Entity Definitions -- 
+
+DEFINE FND_LOOKUP_TYPE
+  KEY   VIEW_APPSNAME                   VARCHAR2(50)
+  KEY   LOOKUP_TYPE                     VARCHAR2(30)
+  CTX   APPLICATION_SHORT_NAME          VARCHAR2(50)
+  BASE  CUSTOMIZATION_LEVEL             VARCHAR2(1)
+  CTX   OWNER                           VARCHAR2(4000)
+  BASE  LAST_UPDATE_DATE                VARCHAR2(10)
+  TRANS MEANING                         VARCHAR2(80)
+  TRANS DESCRIPTION                     VARCHAR2(240)
+
+  DEFINE FND_LOOKUP_VALUE
+    KEY   LOOKUP_CODE                     VARCHAR2(30)
+    BASE  ENABLED_FLAG                    VARCHAR2(1)
+    BASE  START_DATE_ACTIVE               VARCHAR2(10)
+    BASE  END_DATE_ACTIVE                 VARCHAR2(10)
+    BASE  TERRITORY_CODE                  VARCHAR2(2)
+    BASE  TAG                             VARCHAR2(150)
+    BASE  ATTRIBUTE_CATEGORY              VARCHAR2(30)
+    BASE  ATTRIBUTE1                      VARCHAR2(150)
+    BASE  ATTRIBUTE2                      VARCHAR2(150)
+    BASE  ATTRIBUTE3                      VARCHAR2(150)
+    BASE  ATTRIBUTE4                      VARCHAR2(150)
+    BASE  ATTRIBUTE5                      VARCHAR2(150)
+    BASE  ATTRIBUTE6                      VARCHAR2(150)
+    BASE  ATTRIBUTE7                      VARCHAR2(150)
+    BASE  ATTRIBUTE8                      VARCHAR2(150)
+    BASE  ATTRIBUTE9                      VARCHAR2(150)
+    BASE  ATTRIBUTE10                     VARCHAR2(150)
+    BASE  ATTRIBUTE11                     VARCHAR2(150)
+    BASE  ATTRIBUTE12                     VARCHAR2(150)
+    BASE  ATTRIBUTE13                     VARCHAR2(150)
+    BASE  ATTRIBUTE14                     VARCHAR2(150)
+    BASE  ATTRIBUTE15                     VARCHAR2(150)
+    CTX   OWNER                           VARCHAR2(4000)
+    BASE  LAST_UPDATE_DATE                VARCHAR2(10)
+    TRANS MEANING                         VARCHAR2(80)
+    TRANS DESCRIPTION                     VARCHAR2(240)
+  END FND_LOOKUP_VALUE
+END FND_LOOKUP_TYPE
+
+# -- End Entity Definitions -- 
+
+
+BEGIN FND_LOOKUP_TYPE "AU" "XXGL_CHRIS_ACC_DEDJTR_GL_RULES"
+  APPLICATION_SHORT_NAME = "SQLGLC"
+  CUSTOMIZATION_LEVEL = "U"
+  OWNER = "RYANSH"
+  LAST_UPDATE_DATE = "2017/03/21"
+  MEANING = "XXGL_CHRIS_ACC_DEDJTR_GL_RULES"
+  DESCRIPTION =
+ "CHRIS21 Transaction to Accruals Journal Line Transformation for DEDJTR"
+
+  BEGIN FND_LOOKUP_VALUE "R10INT0"
+    ENABLED_FLAG = "Y"
+    START_DATE_ACTIVE = "2017/05/31"
+    TAG = "INT"
+    ATTRIBUTE_CATEGORY = "XXGL_CHRIS_ACC_DEDJTR_GL_RULES"
+    ATTRIBUTE7 = "-92011-000-0000-0000-0000-REMUSAUT"
+    ATTRIBUTE8 = "nvl(offset_flag,'N')='N'"
+    OWNER = "RYANSH"
+    LAST_UPDATE_DATE = "2017/06/02"
+    MEANING = "R10INT0"
+  END FND_LOOKUP_VALUE
+  
+  BEGIN FND_LOOKUP_VALUE "R10INT1"
+    ENABLED_FLAG = "Y"
+    START_DATE_ACTIVE = "2017/05/31"
+    TAG = "INT"
+    ATTRIBUTE_CATEGORY = "XXGL_CHRIS_ACC_DEDJTR_GL_RULES"
+    ATTRIBUTE7 = "-92011-000-0000-0000-0000-REMUSAUT"
+    ATTRIBUTE8 = "identifier<>'REMUSAUT' and offset_flag='Y'"
+    OWNER = "RYANSH"
+    LAST_UPDATE_DATE = "2017/06/05"
+    MEANING = "R10INT1"
+  END FND_LOOKUP_VALUE
+  
+  BEGIN FND_LOOKUP_VALUE "R02DEL0"
+    ENABLED_FLAG = "Y"
+    START_DATE_ACTIVE = "2017/05/31"
+    TAG = "DEL"
+    ATTRIBUTE_CATEGORY = "XXGL_CHRIS_ACC_DEDJTR_GL_RULES"
+    ATTRIBUTE1 = "184"
+    ATTRIBUTE2 = "187"
+    ATTRIBUTE3 = "185"
+    ATTRIBUTE4 = "186"
+    ATTRIBUTE5 = "188"
+    ATTRIBUTE8 = "cost_centre='096'"
+    OWNER = "RYANSH"
+    LAST_UPDATE_DATE = "2017/06/26"
+    MEANING = "R02DEL0"
+  END FND_LOOKUP_VALUE
+  
+  BEGIN FND_LOOKUP_VALUE "R07OFF1"
+    ENABLED_FLAG = "Y"
+    START_DATE_ACTIVE = "2017/06/07"
+    TAG = "OFF"
+    ATTRIBUTE_CATEGORY = "XXGL_CHRIS_ACC_DEDJTR_GL_RULES"
+    ATTRIBUTE1 = "186"
+    ATTRIBUTE7 =
+   "account='30503', authority=to_char(to_number(authority)+1, 'FM0000')"
+    ATTRIBUTE8 =
+   "to_number(authority) not between 2000 and 2999 and nvl(offset_flag,'N')='N'"
+    ATTRIBUTE9 =
+   "account='17401', authority=to_char(to_number(authority)+1, 'FM0000')"
+    OWNER = "RYANSH"
+    LAST_UPDATE_DATE = "2017/07/10"
+    MEANING = "R07OFF1"
+  END FND_LOOKUP_VALUE
+  
+  BEGIN FND_LOOKUP_VALUE "R07OFF2"
+    ENABLED_FLAG = "Y"
+    START_DATE_ACTIVE = "2017/06/07"
+    TAG = "OFF"
+    ATTRIBUTE_CATEGORY = "XXGL_CHRIS_ACC_DEDJTR_GL_RULES"
+    ATTRIBUTE1 = "186"
+    ATTRIBUTE7 =
+   "account='30503', authority=to_char(to_number(authority)+1, 'FM0000')"
+    ATTRIBUTE8 =
+   "to_number(authority) between 6000 and 9999  and nvl(offset_flag,'N')='N'"
+    ATTRIBUTE9 =
+   "account='17401', authority=to_char(to_number(authority)+1, 'FM0000')"
+    OWNER = "SAMUELP"
+    LAST_UPDATE_DATE = "2017/09/21"
+    MEANING = "R07OFF2"
+  END FND_LOOKUP_VALUE
+  
+  BEGIN FND_LOOKUP_VALUE "R06OFF3"
+    ENABLED_FLAG = "Y"
+    START_DATE_ACTIVE = "2017/06/07"
+    TAG = "OFF"
+    ATTRIBUTE_CATEGORY = "XXGL_CHRIS_ACC_DEDJTR_GL_RULES"
+    ATTRIBUTE1 = "184"
+    ATTRIBUTE2 = "187"
+    ATTRIBUTE3 = "185"
+    ATTRIBUTE4 = "188"
+    ATTRIBUTE7 = "account='35101'"
+    ATTRIBUTE8 =
+   "(( to_number(authority) = 0000 ) OR (to_number(authority) between 4000 and 5999 )) and nvl(offset_flag,'N')='N'"
+    ATTRIBUTE9 = "account='17406'"
+    OWNER = "SAMUELP"
+    LAST_UPDATE_DATE = "2017/09/28"
+    MEANING = "R06OFF3"
+  END FND_LOOKUP_VALUE
+  
+  BEGIN FND_LOOKUP_VALUE "R07OFF3"
+    ENABLED_FLAG = "Y"
+    START_DATE_ACTIVE = "2017/06/07"
+    TAG = "OFF"
+    ATTRIBUTE_CATEGORY = "XXGL_CHRIS_ACC_DEDJTR_GL_RULES"
+    ATTRIBUTE1 = "186"
+    ATTRIBUTE7 = "account='35101'"
+    ATTRIBUTE8 =
+   "(( to_number(authority) = 0000 ) OR (to_number(authority) between 4000 and 5999 )) and nvl(offset_flag,'N')='N'"
+    ATTRIBUTE9 = "account='17406'"
+    OWNER = "SAMUELP"
+    LAST_UPDATE_DATE = "2017/09/28"
+    MEANING = "R07OFF3"
+  END FND_LOOKUP_VALUE
+  
+  BEGIN FND_LOOKUP_VALUE "R04EXT1"
+    ENABLED_FLAG = "Y"
+    START_DATE_ACTIVE = "2017/05/31"
+    TAG = "EXT"
+    ATTRIBUTE_CATEGORY = "XXGL_CHRIS_ACC_DEDJTR_GL_RULES"
+    ATTRIBUTE1 = "187"
+    ATTRIBUTE7 =
+   "account='80104', authority=to_char(to_number(authority)+1, 'FM0000')"
+    ATTRIBUTE8 =
+   "(( to_number(authority) between 0001 and 2799 ) OR ( to_number(authority) between 3000 and 3999 ) OR ( to_number(authority) between 6000 and 9999 ))"
+    OWNER = "SAMUELP"
+    LAST_UPDATE_DATE = "2017/10/06"
+    MEANING = "R04EXT1"
+  END FND_LOOKUP_VALUE
+  
+  BEGIN FND_LOOKUP_VALUE "R04EXT0"
+    ENABLED_FLAG = "Y"
+    START_DATE_ACTIVE = "2017/05/31"
+    TAG = "EXT"
+    ATTRIBUTE_CATEGORY = "XXGL_CHRIS_ACC_DEDJTR_GL_RULES"
+    ATTRIBUTE1 = "187"
+    ATTRIBUTE7 = "account='80104'"
+    ATTRIBUTE8 =
+   "(( to_number(authority) = 0000 ) OR (to_number(authority) between 2800 and 2999 ))"
+    OWNER = "SAMUELP"
+    LAST_UPDATE_DATE = "2017/10/06"
+    MEANING = "R04EXT0"
+  END FND_LOOKUP_VALUE
+  
+  BEGIN FND_LOOKUP_VALUE "R01DEL0"
+    ENABLED_FLAG = "Y"
+    START_DATE_ACTIVE = "2017/05/31"
+    TAG = "DEL"
+    ATTRIBUTE_CATEGORY = "XXGL_CHRIS_ACC_DEDJTR_GL_RULES"
+    ATTRIBUTE1 = "186"
+    ATTRIBUTE8 = "to_char(cost_centre) between 504 and 525"
+    OWNER = "SAMUELP"
+    LAST_UPDATE_DATE = "2017/10/06"
+    MEANING = "R01DEL0"
+  END FND_LOOKUP_VALUE
+  
+  BEGIN FND_LOOKUP_VALUE "R03EXT0"
+    ENABLED_FLAG = "Y"
+    START_DATE_ACTIVE = "2017/05/31"
+    TAG = "EXT"
+    ATTRIBUTE_CATEGORY = "XXGL_CHRIS_ACC_DEDJTR_GL_RULES"
+    ATTRIBUTE1 = "184"
+    ATTRIBUTE2 = "186"
+    ATTRIBUTE3 = "188"
+    ATTRIBUTE7 = "authority=to_char(to_number(authority)+1, 'FM0000')"
+    ATTRIBUTE8 =
+   "(( to_number(authority) between 0001 and 2799 ) OR ( to_number(authority) between 3000 and 3999 ) OR ( to_number(authority) between 6000 and 9999 ))"
+    OWNER = "SAMUELP"
+    LAST_UPDATE_DATE = "2017/10/06"
+    MEANING = "R03EXT0"
+  END FND_LOOKUP_VALUE
+  
+  BEGIN FND_LOOKUP_VALUE "R05EXT0"
+    ENABLED_FLAG = "Y"
+    START_DATE_ACTIVE = "2017/06/26"
+    TAG = "EXT"
+    ATTRIBUTE_CATEGORY = "XXGL_CHRIS_ACC_DEDJTR_GL_RULES"
+    ATTRIBUTE1 = "185"
+    ATTRIBUTE7 = "account='80501'"
+    ATTRIBUTE8 =
+   "(( to_number(authority) = 0000 ) OR (to_number(authority) between 2800 and 2999 ))"
+    OWNER = "SAMUELP"
+    LAST_UPDATE_DATE = "2017/10/06"
+    MEANING = "R05EXT0"
+  END FND_LOOKUP_VALUE
+  
+  BEGIN FND_LOOKUP_VALUE "R05EXT1"
+    ENABLED_FLAG = "Y"
+    START_DATE_ACTIVE = "2017/06/26"
+    TAG = "EXT"
+    ATTRIBUTE_CATEGORY = "XXGL_CHRIS_ACC_DEDJTR_GL_RULES"
+    ATTRIBUTE1 = "185"
+    ATTRIBUTE7 =
+   "account='80501', authority=to_char(to_number(authority)+1, 'FM0000')"
+    ATTRIBUTE8 =
+   "(( to_number(authority) between 0001 and 2799 ) OR ( to_number(authority) between 3000 and 3999 ) OR ( to_number(authority) between 6000 and 9999 ))"
+    OWNER = "SAMUELP"
+    LAST_UPDATE_DATE = "2017/10/06"
+    MEANING = "R05EXT1"
+  END FND_LOOKUP_VALUE
+  
+  BEGIN FND_LOOKUP_VALUE "R06OFF0"
+    ENABLED_FLAG = "Y"
+    START_DATE_ACTIVE = "2017/06/07"
+    TAG = "OFF"
+    ATTRIBUTE_CATEGORY = "XXGL_CHRIS_ACC_DEDJTR_GL_RULES"
+    ATTRIBUTE1 = "184"
+    ATTRIBUTE2 = "187"
+    ATTRIBUTE3 = "185"
+    ATTRIBUTE4 = "188"
+    ATTRIBUTE7 = "account='35101', authority='3001'"
+    ATTRIBUTE8 =
+   "to_number(authority) between 2000 and 2999 and nvl(offset_flag,'N')='N'"
+    ATTRIBUTE9 = "account='17406', authority='3001'"
+    OWNER = "SAMUELP"
+    LAST_UPDATE_DATE = "2017/10/06"
+    MEANING = "R06OFF0"
+  END FND_LOOKUP_VALUE
+  
+  BEGIN FND_LOOKUP_VALUE "R06OFF1"
+    ENABLED_FLAG = "Y"
+    START_DATE_ACTIVE = "2017/06/07"
+    TAG = "OFF"
+    ATTRIBUTE_CATEGORY = "XXGL_CHRIS_ACC_DEDJTR_GL_RULES"
+    ATTRIBUTE1 = "184"
+    ATTRIBUTE2 = "187"
+    ATTRIBUTE3 = "185"
+    ATTRIBUTE4 = "188"
+    ATTRIBUTE7 =
+   "account='35101', authority=to_char(to_number(authority)+1, 'FM0000')"
+    ATTRIBUTE8 =
+   "(( to_number(authority) between 0001 and 1999 ) OR ( to_number(authority) between 3000 and 3999 )) and nvl(offset_flag,'N')='N'"
+    ATTRIBUTE9 =
+   "account='17406', authority=to_char(to_number(authority)+1, 'FM0000')"
+    OWNER = "SAMUELP"
+    LAST_UPDATE_DATE = "2017/10/06"
+    MEANING = "R06OFF1"
+  END FND_LOOKUP_VALUE
+  
+  BEGIN FND_LOOKUP_VALUE "R06OFF2"
+    ENABLED_FLAG = "Y"
+    START_DATE_ACTIVE = "2017/06/07"
+    TAG = "OFF"
+    ATTRIBUTE_CATEGORY = "XXGL_CHRIS_ACC_DEDJTR_GL_RULES"
+    ATTRIBUTE1 = "184"
+    ATTRIBUTE2 = "187"
+    ATTRIBUTE3 = "185"
+    ATTRIBUTE4 = "188"
+    ATTRIBUTE7 =
+   "account='35101', authority=to_char(to_number(authority)+1, 'FM0000')"
+    ATTRIBUTE8 =
+   "to_number(authority) between 6000 and 9999  and nvl(offset_flag,'N')='N'"
+    ATTRIBUTE9 =
+   "account='17406', authority=to_char(to_number(authority)+1, 'FM0000')"
+    OWNER = "SAMUELP"
+    LAST_UPDATE_DATE = "2017/10/06"
+    MEANING = "R06OFF2"
+  END FND_LOOKUP_VALUE
+  
+  BEGIN FND_LOOKUP_VALUE "R07OFF0"
+    ENABLED_FLAG = "Y"
+    START_DATE_ACTIVE = "2017/06/07"
+    TAG = "OFF"
+    ATTRIBUTE_CATEGORY = "XXGL_CHRIS_ACC_DEDJTR_GL_RULES"
+    ATTRIBUTE1 = "186"
+    ATTRIBUTE7 = "account='30503', authority='3001'"
+    ATTRIBUTE8 =
+   "to_number(authority) between 2000 and 2999 and nvl(offset_flag,'N')='N'"
+    ATTRIBUTE9 = "account='17401', authority='3001'"
+    OWNER = "SAMUELP"
+    LAST_UPDATE_DATE = "2017/10/06"
+    MEANING = "R07OFF0"
+  END FND_LOOKUP_VALUE
+  
+END FND_LOOKUP_TYPE
+

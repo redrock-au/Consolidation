@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8'?>                                                                                                      
+<customization xmlns="http://xmlns.oracle.com/jrad" version="9.0.5.4.89_562" xml:lang="en-US"                                               
+customizes="/oracle/apps/icx/lov/webui/ReqSupplierLovRN" xmlns:oa="http://xmlns.oracle.com/oa">                                             
+<modifications>                                                                                                                             
+<move element="TableSupplierName" after="TableSupplierId"/>                                                                                 
+<move element="TableSupplierSiteId" after="TableSupplierName"/>                                                                             
+<move element="TableSupplierSite" after="TableSupplierSiteId"/>                                                                             
+<move element="TableAddress" after="TableSupplierSite"/>                                                                                    
+<insert before="TableAddress">                                                                                                              
+<oa:messageStyledText id="dotVatRegistrationNum" adminCustomizable="true" cellNoWrapFormat="false" dataType="VARCHAR2" initSortSeq="none"   
+prompt="ABN" queryable="false" rendered="true" required="no" scope="." selectiveSearchCriteria="false"                                      
+serverUnvalidated="false" sortState="no" tipType="none" totalValue="false" userCustomizable="false" vAlign="middle"                         
+viewAttr="VatRegistrationNum" warnAboutChanges="true" xmlns:oa="http://xmlns.oracle.com/oa"/>                                               
+</insert>                                                                                                                                   
+<move element="TableSupplierContactId" after="TableAddress"/>                                                                               
+<move element="TableSupplierContactName" after="TableSupplierContactId"/>                                                                   
+<move element="TableSupplierContactPhone" after="TableSupplierContactName"/>                                                                
+<move element="TableSupplierContactFax" after="TableSupplierContactPhone"/>                                                                 
+<move element="TableSupplierContactEmail" after="TableSupplierContactFax"/>                                                                 
+<move element="TableOrganizationId" after="TableSupplierContactEmail"/>                                                                     
+<move element="TableRestrictSupplierType" after="TableOrganizationId"/>                                                                     
+<move element="TableCategoryId" after="TableRestrictSupplierType"/>                                                                         
+<insert after="TableCategoryId">                                                                                                            
+<oa:messageStyledText id="dotAttribute13" adminCustomizable="true" cellNoWrapFormat="false" dataType="VARCHAR2" initSortSeq="none"          
+prompt="RCTI" queryable="false" rendered="true" required="no" scope="." selectiveSearchCriteria="false"                                     
+serverUnvalidated="false" sortState="no" tipType="none" totalValue="false" userCustomizable="false" vAlign="middle" viewAttr="Attribute13"  
+warnAboutChanges="true" xmlns:oa="http://xmlns.oracle.com/oa"/>                                                                             
+</insert>                                                                                                                                   
+<insert after="TableCategoryId">                                                                                                            
+<oa:messageStyledText id="dotPaymentMethod" adminCustomizable="true" cellNoWrapFormat="false" dataType="VARCHAR2" initSortSeq="none"        
+prompt="Payment Method" queryable="false" rendered="true" required="no" scope="." selectiveSearchCriteria="false"                           
+serverUnvalidated="false" sortState="no" tipType="none" totalValue="false" userCustomizable="false" vAlign="middle" viewAttr="PaymentMethod"
+warnAboutChanges="true" xmlns:oa="http://xmlns.oracle.com/oa"/>                                                                             
+</insert>
+   </modifications>
+</customization>
+                                                                                            
+

@@ -1,0 +1,284 @@
+# $Header: svn://d02584/consolrepos/branches/AP.02.01/apc/1.0.0/import/XXAP_SUPPLIER_CONV_SET.ldt 2126 2017-08-16 04:27:46Z svnuser $
+
+# dbdrv: exec fnd bin FNDLOAD bin &phase=daa+64 checkfile:~PROD:~PATH:~FILE &ui_apps 0 Y UPLOAD @FND:patch/115/import/afcprset.lct @~PROD:~PATH/~FILE
+LANGUAGE = "US"
+LDRCONFIG = "afcprset.lct 115.28"
+
+#Source Database CONDEV
+
+#RELEASE_NAME 11.5.10.2
+
+# -- Begin Entity Definitions -- 
+
+DEFINE REQ_SET
+  KEY   APPLICATION_SHORT_NAME          VARCHAR2(50)
+  KEY   REQUEST_SET_NAME                VARCHAR2(30)
+  CTX   OWNER                           VARCHAR2(4000)
+  BASE  ALLOW_CONSTRAINTS_FLAG          VARCHAR2(1)
+  BASE  PRINT_TOGETHER_FLAG             VARCHAR2(1)
+  BASE  START_DATE_ACTIVE               VARCHAR2(11)
+  BASE  START_STAGE_NAME                VARCHAR2(30)
+  BASE  END_DATE_ACTIVE                 VARCHAR2(11)
+  BASE  CONCURRENT_PROGRAM_NAME         VARCHAR2(30)
+  BASE  OWNER_USER_NAME                 VARCHAR2(100)
+  BASE  PRINTER                         VARCHAR2(30)
+  BASE  PRINT_STYLE                     VARCHAR2(30)
+  TRANS USER_REQUEST_SET_NAME           VARCHAR2(240)
+  TRANS DESCRIPTION                     VARCHAR2(240)
+  BASE  LAST_UPDATE_DATE                VARCHAR2(10)
+
+  DEFINE STAGE
+    KEY   STAGE_NAME                      VARCHAR2(30)
+    CTX   OWNER                           VARCHAR2(4000)
+    BASE  CRITICAL                        VARCHAR2(1)
+    BASE  OUTCOME                         VARCHAR2(1)
+    BASE  ALLOW_CONSTRAINTS_FLAG          VARCHAR2(1)
+    BASE  DISPLAY_SEQUENCE                VARCHAR2(50)
+    BASE  FUNCTION_APPLICATION            VARCHAR2(50)
+    BASE  FUNCTION                        VARCHAR2(30)
+    BASE  SUCCESS_LINK                    VARCHAR2(30)
+    BASE  WARNING_LINK                    VARCHAR2(30)
+    BASE  ERROR_LINK                      VARCHAR2(30)
+    BASE  CONCURRENT_PROGRAM_NAME         VARCHAR2(30)
+    TRANS USER_STAGE_NAME                 VARCHAR2(240)
+    TRANS DESCRIPTION                     VARCHAR2(240)
+    BASE  LAST_UPDATE_DATE                VARCHAR2(10)
+
+    DEFINE STAGE_PROG
+      KEY   SEQUENCE                        VARCHAR2(50)
+      CTX   OWNER                           VARCHAR2(4000)
+      BASE  PROGRAM_APPLICATION             VARCHAR2(50)
+      BASE  PROGRAM_NAME                    VARCHAR2(30)
+      BASE  NLS_LANGUAGE                    VARCHAR2(30)
+      BASE  NLS_TERRITORY                   VARCHAR2(30)
+      BASE  CRITICAL                        VARCHAR2(1)
+      BASE  NUMBER_OF_COPIES                VARCHAR2(50)
+      BASE  PRINTER                         VARCHAR2(30)
+      BASE  PRINT_STYLE                     VARCHAR2(30)
+      BASE  SAVE_OUTPUT_FLAG                VARCHAR2(1)
+      BASE  LAST_UPDATE_DATE                VARCHAR2(10)
+
+      DEFINE PROG_ARGS
+        KEY   DESC_FLEX_APPL                  VARCHAR2(50)
+        KEY   DESC_FLEX_NAME                  VARCHAR2(50)
+        KEY   COL_NAME                        VARCHAR2(30)
+        CTX   OWNER                           VARCHAR2(4000)
+        BASE  DISPLAY_FLAG                    VARCHAR2(1)
+        BASE  INSERT_FLAG                     VARCHAR2(1)
+        BASE  UPDATE_FLAG                     VARCHAR2(1)
+        BASE  DEFAULT_TYPE                    VARCHAR2(1)
+        BASE  DEFAULT_VALUE                   VARCHAR2(2000)
+        BASE  SHARED_PARAMETER_NAME           VARCHAR2(30)
+        BASE  LAST_UPDATE_DATE                VARCHAR2(10)
+      END PROG_ARGS
+    END STAGE_PROG
+  END STAGE
+END REQ_SET
+
+# -- End Entity Definitions -- 
+
+
+BEGIN REQ_SET "SQLAPC" "XXAP_SUPPLIER_CONV_SET"
+  OWNER = "RYANSH"
+  ALLOW_CONSTRAINTS_FLAG = "N"
+  PRINT_TOGETHER_FLAG = "N"
+  START_DATE_ACTIVE = "2017/05/26"
+  START_STAGE_NAME = "STAGE10"
+  USER_REQUEST_SET_NAME = "DEDJTR Supplier Conversion Set"
+  LAST_UPDATE_DATE = "2017/05/30"
+
+  BEGIN STAGE "STAGE10"
+    OWNER = "RYANSH"
+    CRITICAL = "Y"
+    OUTCOME = "C"
+    ALLOW_CONSTRAINTS_FLAG = "N"
+    DISPLAY_SEQUENCE = "10"
+    FUNCTION_APPLICATION = "FND"
+    FUNCTION = "FNDRSSTE"
+    SUCCESS_LINK = "STAGE20"
+    USER_STAGE_NAME = "DEDJTR Supplier Conversion"
+    LAST_UPDATE_DATE = "2017/05/30"
+  
+    BEGIN STAGE_PROG "10"
+      OWNER = "ORACLE"
+      PROGRAM_APPLICATION = "SQLAPC"
+      PROGRAM_NAME = "XXAPSUPCONV"
+      CRITICAL = "Y"
+      NUMBER_OF_COPIES = "0"
+      SAVE_OUTPUT_FLAG = "Y"
+      LAST_UPDATE_DATE = "2017/05/30"
+    
+    END STAGE_PROG
+    
+  END STAGE
+  
+  BEGIN STAGE "STAGE20"
+    OWNER = "RYANSH"
+    CRITICAL = "N"
+    OUTCOME = "C"
+    ALLOW_CONSTRAINTS_FLAG = "N"
+    DISPLAY_SEQUENCE = "20"
+    FUNCTION_APPLICATION = "FND"
+    FUNCTION = "FNDRSSTE"
+    SUCCESS_LINK = "STAGE30"
+    USER_STAGE_NAME = "Supplier Open Interface"
+    LAST_UPDATE_DATE = "2017/05/30"
+  
+    BEGIN STAGE_PROG "10"
+      OWNER = "ORACLE"
+      PROGRAM_APPLICATION = "SQLAP"
+      PROGRAM_NAME = "APXSUIMP"
+      CRITICAL = "Y"
+      NUMBER_OF_COPIES = "0"
+      PRINT_STYLE = "LANDSCAPE"
+      SAVE_OUTPUT_FLAG = "Y"
+      LAST_UPDATE_DATE = "2017/05/30"
+    
+      BEGIN PROG_ARGS "SQLAP" "$SRS$.APXSUIMP" "ATTRIBUTE1"
+        OWNER = "RYANSH"
+        DISPLAY_FLAG = "Y"
+        INSERT_FLAG = "Y"
+        UPDATE_FLAG = "Y"
+        DEFAULT_TYPE = "S"
+        DEFAULT_VALUE =
+       "Select DISPLAYED_FIELD from AP_LOOKUP_CODES where lookup_type = 'AP_IMPORT_OPTIONS' and lookup_code='NEW'"
+        LAST_UPDATE_DATE = "2017/05/26"
+      END PROG_ARGS
+      
+      BEGIN PROG_ARGS "SQLAP" "$SRS$.APXSUIMP" "ATTRIBUTE4"
+        OWNER = "RYANSH"
+        DISPLAY_FLAG = "Y"
+        INSERT_FLAG = "Y"
+        UPDATE_FLAG = "Y"
+        DEFAULT_TYPE = "S"
+        DEFAULT_VALUE =
+       "select meaning from fnd_lookups where lookup_type = 'YES_NO' and lookup_code = 'Y'"
+        LAST_UPDATE_DATE = "2017/05/26"
+      END PROG_ARGS
+      
+    END STAGE_PROG
+    
+  END STAGE
+  
+  BEGIN STAGE "STAGE30"
+    OWNER = "RYANSH"
+    CRITICAL = "N"
+    OUTCOME = "C"
+    ALLOW_CONSTRAINTS_FLAG = "N"
+    DISPLAY_SEQUENCE = "30"
+    FUNCTION_APPLICATION = "FND"
+    FUNCTION = "FNDRSSTE"
+    SUCCESS_LINK = "STAGE40"
+    USER_STAGE_NAME = "Supplier Site Open Interface"
+    LAST_UPDATE_DATE = "2017/05/30"
+  
+    BEGIN STAGE_PROG "10"
+      OWNER = "ORACLE"
+      PROGRAM_APPLICATION = "SQLAP"
+      PROGRAM_NAME = "APXSSIMP"
+      CRITICAL = "Y"
+      NUMBER_OF_COPIES = "0"
+      PRINT_STYLE = "LANDSCAPE"
+      SAVE_OUTPUT_FLAG = "Y"
+      LAST_UPDATE_DATE = "2017/05/30"
+    
+      BEGIN PROG_ARGS "SQLAP" "$SRS$.APXSSIMP" "ATTRIBUTE1"
+        OWNER = "RYANSH"
+        DISPLAY_FLAG = "Y"
+        INSERT_FLAG = "Y"
+        UPDATE_FLAG = "Y"
+        DEFAULT_TYPE = "S"
+        DEFAULT_VALUE =
+       "Select DISPLAYED_FIELD from AP_LOOKUP_CODES where lookup_type = 'AP_IMPORT_OPTIONS' and lookup_code='NEW'"
+        LAST_UPDATE_DATE = "2017/05/26"
+      END PROG_ARGS
+      
+      BEGIN PROG_ARGS "SQLAP" "$SRS$.APXSSIMP" "ATTRIBUTE4"
+        OWNER = "RYANSH"
+        DISPLAY_FLAG = "Y"
+        INSERT_FLAG = "Y"
+        UPDATE_FLAG = "Y"
+        DEFAULT_TYPE = "S"
+        DEFAULT_VALUE =
+       "select meaning from fnd_lookups where lookup_type = 'YES_NO' and lookup_code = 'Y'"
+        LAST_UPDATE_DATE = "2017/05/26"
+      END PROG_ARGS
+      
+    END STAGE_PROG
+    
+  END STAGE
+  
+  BEGIN STAGE "STAGE40"
+    OWNER = "RYANSH"
+    CRITICAL = "N"
+    OUTCOME = "C"
+    ALLOW_CONSTRAINTS_FLAG = "N"
+    DISPLAY_SEQUENCE = "40"
+    FUNCTION_APPLICATION = "FND"
+    FUNCTION = "FNDRSSTE"
+    SUCCESS_LINK = "STAGE50"
+    USER_STAGE_NAME = "Supplier Site Contact Open Interface"
+    LAST_UPDATE_DATE = "2017/05/30"
+  
+    BEGIN STAGE_PROG "10"
+      OWNER = "ORACLE"
+      PROGRAM_APPLICATION = "SQLAP"
+      PROGRAM_NAME = "APXSCIMP"
+      CRITICAL = "Y"
+      NUMBER_OF_COPIES = "0"
+      PRINT_STYLE = "LANDSCAPE"
+      SAVE_OUTPUT_FLAG = "Y"
+      LAST_UPDATE_DATE = "2017/05/30"
+    
+      BEGIN PROG_ARGS "SQLAP" "$SRS$.APXSCIMP" "ATTRIBUTE1"
+        OWNER = "RYANSH"
+        DISPLAY_FLAG = "Y"
+        INSERT_FLAG = "Y"
+        UPDATE_FLAG = "Y"
+        DEFAULT_TYPE = "S"
+        DEFAULT_VALUE =
+       "Select DISPLAYED_FIELD from AP_LOOKUP_CODES where lookup_type = 'AP_IMPORT_OPTIONS' and lookup_code='NEW'"
+        LAST_UPDATE_DATE = "2017/05/26"
+      END PROG_ARGS
+      
+      BEGIN PROG_ARGS "SQLAP" "$SRS$.APXSCIMP" "ATTRIBUTE4"
+        OWNER = "RYANSH"
+        DISPLAY_FLAG = "Y"
+        INSERT_FLAG = "Y"
+        UPDATE_FLAG = "Y"
+        DEFAULT_TYPE = "S"
+        DEFAULT_VALUE =
+       "select meaning from fnd_lookups where lookup_type = 'YES_NO' and lookup_code = 'Y'"
+        LAST_UPDATE_DATE = "2017/05/26"
+      END PROG_ARGS
+      
+    END STAGE_PROG
+    
+  END STAGE
+  
+  BEGIN STAGE "STAGE50"
+    OWNER = "RYANSH"
+    CRITICAL = "Y"
+    OUTCOME = "C"
+    ALLOW_CONSTRAINTS_FLAG = "N"
+    DISPLAY_SEQUENCE = "50"
+    FUNCTION_APPLICATION = "FND"
+    FUNCTION = "FNDRSSTE"
+    USER_STAGE_NAME = "DEDJTR Post Conversion Supplier Update"
+    LAST_UPDATE_DATE = "2017/05/30"
+  
+    BEGIN STAGE_PROG "10"
+      OWNER = "ORACLE"
+      PROGRAM_APPLICATION = "SQLAPC"
+      PROGRAM_NAME = "XXAPSUPCONVUPD"
+      CRITICAL = "Y"
+      NUMBER_OF_COPIES = "0"
+      SAVE_OUTPUT_FLAG = "Y"
+      LAST_UPDATE_DATE = "2017/05/30"
+    
+    END STAGE_PROG
+    
+  END STAGE
+  
+END REQ_SET
+

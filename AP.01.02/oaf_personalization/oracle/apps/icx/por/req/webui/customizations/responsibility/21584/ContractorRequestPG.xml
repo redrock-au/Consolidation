@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8'?>                                                                                                      
+<customization xmlns="http://xmlns.oracle.com/jrad" version="9.0.5.4.89_555" xml:lang="en-US"                                               
+customizes="/oracle/apps/icx/por/req/webui/ContractorRequestPG">                                                                            
+<modifications>                                                                                                                             
+<modify element="CandidateScreening" defaultValue="Y" prompt="Require Multiple Rates"/>
+      <modify element="JobDetails" required="yes"/>
+
+<modify element="ContactInfo" prompt="" readOnly="true"/>
+   </modifications>
+</customization>
+                                            
+

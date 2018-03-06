@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8'?>                                                                                                      
+<customization customizes="/oracle/apps/pa/assignment/webui/MyRequirementsPG" xmlns="http://xmlns.oracle.com/jrad"                          
+xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:user="http://xmlns.oracle.com/jrad/user"              
+file-version="$Header: svn://d02584/consolrepos/branches/AP.02.02/oaf_personalization/oracle/apps/pa/customizations/site/0/assignment/webui/MyRequirementsPG.xml 317 2017-05-05 02:11:23Z sryan $" version="9.0.3.6.2_398" xml:lang="en-US"        
+package="/oracle/apps/pa/customizations/site/0/assignment/webui">                                                                           
+<modifications>                                                                                                                             
+<modify element="MyReqTable" blockSize="25"/>                                                                                               
+<modify element="Location" rendered="false"/>                                                                                               
+<modify element="WorkType" rendered="false"/>                                                                                               
+<modify element="Effort" rendered="false"/>                                                                                                 
+<modify element="Duration" rendered="false"/>                                                                                               
+<modify element="RefNumber" rendered="false"/>                                                                                              
+<modify element="Calendar" rendered="false"/>                                                                                               
+<modify element="MinJobLevel" rendered="false"/>                                                                                            
+<modify element="MaxJobLevel" rendered="false"/>                                                                                            
+<move element="UpdateSchedule" after="SearchResources"/>                                                                                    
+<move element="DirectAssign" after="UpdateSchedule"/>                                                                                       
+<move element="Delete" after="DirectAssign"/>                                                                                               
+<move element="ProjectRole" after="TeamRole"/>                                                                                              
+<move element="ProjectName" after="ProjectRole"/>                                                                                           
+<move element="ProjectNumber" after="ProjectName"/>                                                                                         
+<move element="Organization" after="ProjectNumber"/>                                                                                        
+<move element="NoOfActiveCandidates" after="Organization"/>                                                                                 
+<move element="ProjectManager" after="NoOfActiveCandidates"/>                                                                               
+<move element="StartDate" after="ProjectManager"/>                                                                                          
+<move element="EndDate" after="StartDate"/>                                                                                                 
+<move element="StatusName" after="EndDate"/>                                                                                                
+<move element="StaffingPriority" after="StatusName"/>                                                                                       
+<move element="RefNumber" after="StaffingPriority"/>                                                                                        
+<move element="Location" after="RefNumber"/>                                                                                                
+<move element="WorkType" after="Location"/>                                                                                                 
+<move element="Effort" after="WorkType"/>                                                                                                   
+<move element="Duration" after="Effort"/>
+      <move element="Calendar" after="Duration"/>
+      <move element="MinJobLevel"               
+after="Calendar"/>
+      <move element="MaxJobLevel" after="MinJobLevel"/>
+   </modifications>
+</customization>
+                           
+

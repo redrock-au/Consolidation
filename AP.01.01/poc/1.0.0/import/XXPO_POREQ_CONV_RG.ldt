@@ -1,0 +1,55 @@
+# $Header: svn://d02584/consolrepos/branches/AP.01.01/poc/1.0.0/import/XXPO_POREQ_CONV_RG.ldt 2674 2017-10-05 01:02:16Z svnuser $
+
+# dbdrv: exec fnd bin FNDLOAD bin &phase=daa+66 checkfile:~PROD:~PATH:~FILE &ui_apps 0 Y UPLOAD @FND:patch/115/import/afcpreqg.lct @~PROD:~PATH/~FILE
+LANGUAGE = "US"
+LDRCONFIG = "afcpreqg.lct 115.24"
+
+#Source Database CONDEV
+
+#RELEASE_NAME 11.5.10.2
+
+# -- Begin Entity Definitions -- 
+
+DEFINE REQUEST_GROUP
+  KEY   REQUEST_GROUP_NAME              VARCHAR2(30)
+  KEY   APPLICATION_SHORT_NAME          VARCHAR2(50)
+  CTX   OWNER                           VARCHAR2(4000)
+  BASE  LAST_UPDATE_DATE                VARCHAR2(75)
+  TRANS DESCRIPTION                     VARCHAR2(80)
+  BASE  REQUEST_GROUP_CODE              VARCHAR2(30)
+
+  DEFINE REQUEST_GROUP_UNIT
+    KEY   UNIT_TYPE                       VARCHAR2(1)
+    KEY   UNIT_APP                        VARCHAR2(50)
+    KEY   UNIT_NAME                       VARCHAR2(255)
+    CTX   OWNER                           VARCHAR2(4000)
+    BASE  LAST_UPDATE_DATE                VARCHAR2(75)
+  END REQUEST_GROUP_UNIT
+END REQUEST_GROUP
+
+# -- End Entity Definitions -- 
+
+
+BEGIN REQUEST_GROUP "All Reports" "PO"
+  OWNER = "ORACLE"
+  LAST_UPDATE_DATE = "2000/07/24"
+  DESCRIPTION = "All Purchasing SRS Reports"
+
+  BEGIN REQUEST_GROUP_UNIT "P" "POC" "XXPO_POREQ_CONV"
+    OWNER = "RYANSH"
+    LAST_UPDATE_DATE = "2017/06/27"
+  END REQUEST_GROUP_UNIT
+  
+  BEGIN REQUEST_GROUP_UNIT "P" "POC" "XXPO_POREQ_WF_RETRY"
+    OWNER = "CONVERSION"
+    LAST_UPDATE_DATE = "2017/07/28"
+  END REQUEST_GROUP_UNIT
+  
+  BEGIN REQUEST_GROUP_UNIT "P" "POC" "XXPO_POREQ_APPROVE"
+    OWNER = "CONVERSION"
+    LAST_UPDATE_DATE = "2017/07/31"
+  END REQUEST_GROUP_UNIT
+  
+  
+END REQUEST_GROUP
+

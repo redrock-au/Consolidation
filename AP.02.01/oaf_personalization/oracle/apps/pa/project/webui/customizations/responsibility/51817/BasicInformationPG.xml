@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>                                                                                                      
+<customization xmlns="http://xmlns.oracle.com/jrad" version="9.0.5.4.89_555" xml:lang="en-US"                                               
+customizes="/oracle/apps/pa/project/webui/BasicInformationPG">                                                                              
+<modifications>                                                                                                                             
+<modify element="AccessLevel" rendered="false"/>                                                                                            
+<modify element="Priority" rendered="false"/>                                                                                               
+<modify element="PublicSector" readOnly="true"/>
+      <modify element="City" rendered="false"/>
+      <modify element="StateRegion"        
+rendered="false"/>
+      <modify element="CountryName" rendered="false"/>
+   </modifications>
+</customization>
+                            
+

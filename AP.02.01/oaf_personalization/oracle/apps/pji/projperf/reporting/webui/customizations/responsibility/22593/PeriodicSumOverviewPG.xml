@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>                                                                                                      
+<customization xmlns="http://xmlns.oracle.com/jrad" version="9.0.5.4.89_555" xml:lang="en-US"                                               
+customizes="/oracle/apps/pji/projperf/reporting/webui/PeriodicSumOverviewPG">                                                               
+<modifications>
+      <modify element="ProfitabilityRN" rendered="false"/>
+   </modifications>
+</customization>
+                           
+

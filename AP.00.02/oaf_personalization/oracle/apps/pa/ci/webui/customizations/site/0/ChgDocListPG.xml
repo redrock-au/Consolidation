@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8'?>                                                                                                      
+<customization xmlns="http://xmlns.oracle.com/jrad" version="9.0.5.4.89_555" xml:lang="en-US"                                               
+customizes="/oracle/apps/pa/ci/webui/ChgDocListPG">                                                                                         
+<modifications>                                                                                                                             
+<move element="ProjectNameNumber" after="Type"/>                                                                                            
+<move element="Number" after="ProjectNameNumber"/>                                                                                          
+<move element="Summary" after="Number"/>                                                                                                    
+<move element="Owner" after="Summary"/>                                                                                                     
+<move element="Priority" after="Owner"/>                                                                                                    
+<move element="ProgressStatus" after="Priority"/>                                                                                           
+<move element="LastModifiedDate" after="ProgressStatus"/>                                                                                   
+<move element="RequiredByDate" after="LastModifiedDate"/>                                                                                   
+<move element="DaysRemaining" after="RequiredByDate"/>                                                                                      
+<move element="SystemStatusName" after="DaysRemaining"/>                                                                                    
+<move element="Status" after="SystemStatusName"/>                                                                                           
+<move element="OpenActions" after="Status"/>                                                                                                
+<move element="Item" after="OpenActions"/>                                                                                                  
+<move element="Update" after="Item"/>                                                                                                       
+<move element="Impact" after="Update"/>                                                                                                     
+<move element="Task" after="Impact"/>                                                                                                       
+<move element="SystemNumber" after="Task"/>                                                                                                 
+<move element="SourceType" after="SystemNumber"/>                                                                                           
+<move element="SourceComment" after="SourceType"/>                                                                                          
+<move element="SourceNumber" after="SourceComment"/>                                                                                        
+<move element="ReceivedDate" after="SourceNumber"/>                                                                                         
+<move element="SourceOrganization" after="ReceivedDate"/>                                                                                   
+<move element="SourcePerson" after="SourceOrganization"/>                                                                                   
+<move element="DaysLastModified" after="SourcePerson"/>                                                                                     
+<move element="CreationDate" after="DaysLastModified"/>                                                                                     
+<move element="Description" after="CreationDate"/>                                                                                          
+<move element="Resolution" after="Description"/>                                                                                            
+<move element="Currency" after="Resolution"/>                                                                                               
+<move element="Price" after="Currency"/>                                                                                                    
+<move element="Classification" after="Price"/>                                                                                              
+<move element="Reason" after="Classification"/>                                                                                             
+<move element="StatusOverview" after="Reason"/>                                                                                             
+<move element="ClosedDate" after="StatusOverview"/>                                                                                         
+<move element="ClosedBy" after="ClosedDate"/>                                                                                               
+<move element="ResolutionClassification" after="ClosedBy"/>                                                                                 
+<move element="ProgressAsOfDate" after="ResolutionClassification"/>                                                                         
+<move element="LevelOfEffort" after="ProgressAsOfDate"/>                                                                                    
+<move element="CiTypeName" after="LevelOfEffort"/>                                                                                          
+<move element="SystemStatusCode" after="CiTypeName"/>                                                                                       
+<move element="ProjectCurrencyCode" after="SystemStatusCode"/>                                                                              
+<move element="ObjectName" after="ProjectCurrencyCode"/>                                                                                    
+<move element="ObjectNumber" after="ObjectName"/>                                                                                           
+<move element="DerivedCost" after="ObjectNumber"/>                                                                                          
+<move element="DerivedRevenue" after="DerivedCost"/>                                                                                        
+<move element="DerivedMargin" after="DerivedRevenue"/>                                                                                      
+<move element="DerivedMarginPercentage" after="DerivedMargin"/>                                                                             
+<move element="EstRawCost" after="DerivedMarginPercentage"/>                                                                                
+<move element="EstBurdenedCost" after="EstRawCost"/>                                                                                        
+<move element="EstRevenue" after="EstBurdenedCost"/>                                                                                        
+<move element="PlannedRawCost" after="EstRevenue"/>                                                                                         
+<move element="PlannedBurdenedCost" after="PlannedRawCost"/>                                                                                
+<move element="PlannedRevenue" after="PlannedBurdenedCost"/>                                                                                
+<move element="ProjectLongName" after="PlannedRevenue"/>                                                                                    
+<move element="EstMargin" after="ProjectLongName"/>                                                                                         
+<move element="EstMarginPercentage" after="EstMargin"/>                                                                                     
+<move element="PlannedMargin" after="EstMarginPercentage"/>                                                                                 
+<move element="PlannedMarginPercentage" after="PlannedMargin"/>                                                                             
+<move element="ProjectNumber" after="PlannedMarginPercentage"/>                                                                             
+<move element="LastUpdatedBy" after="ProjectNumber"/>                                                                                       
+<move element="ProgressStatusCode" after="LastUpdatedBy"/>
+      <move element="PrioritySort" after="ProgressStatusCode"/>
+      <move      
+element="ProjectName" after="PrioritySort"/>
+   </modifications>
+</customization>
+                                                         
+

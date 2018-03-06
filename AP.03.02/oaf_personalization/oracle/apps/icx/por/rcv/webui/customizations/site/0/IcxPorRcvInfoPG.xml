@@ -1,0 +1,8 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<customization xmlns="http://xmlns.oracle.com/jrad" version="9.0.5.5.65_565" xml:lang="en-US" customizes="/oracle/apps/icx/por/rcv/webui/IcxPorRcvInfoPG">
+   <modifications>
+      <modify element="WaybillNum" prompt="Invoice Date" required="yes" tipType="dateFormat"/>
+      <modify element="PackingSlip" prompt="Invoice Number" required="yes"/>
+      <modify element="ApplyAllLines" rendered="false"/>
+   </modifications>
+</customization>

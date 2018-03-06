@@ -1,0 +1,240 @@
+#! /bin/ksh
+
+# Re-apply fixes for Jira defect FSC-5796 30/11/2017 arellanod 03
+
+typeset -u DT=`date '+%d-%b-%y'`
+typeset -u DT1=`date '+%d%m'`
+typeset -u DT_A=20`date '+%y/%m/%d'`
+
+#export DT=01-FEB-99
+if [ "$2" = "C" ]
+then
+   export run_type=CHQ${4}
+else
+   export run_type=EFT${4}
+fi
+if [ "$3" = "C" ]
+then
+#   export cheqprog=APCFPPS
+#   export eftprog=APCEFTFM
+   export eftprog=APCEFTWB3
+else
+   export cheqprog=APCWPPS
+   export eftprog=APCEFTWB
+fi
+
+export batch_name=${1}${DT}$run_type
+
+(
+echo '------------------------------------------------'
+echo $batch_name ':  ' $run_type
+echo '------------------------------------------------'
+
+sqlplus -s $fmslgn @$PRODS/fail_if_holiday
+if [ $? -ne 0 ]
+then
+   echo 'Error:  Unscheduled Run..........'
+   return 1
+fi
+
+#
+# Autoselect
+#
+
+sqlplus -s $aplgn @$PRODS/inv_sel $1 $DT $run_type
+
+if [ $? != 0 ]
+then
+   echo '**** Error in autoselect ***'
+   return 1
+fi
+
+export reqid=`CONCSUB $appslgn SQLAP 'Payables Manager' FINPROD CONCURRENT SQLAP APXPBASL '"P_PAYMENT_BATCH='$batch_name'" "P_TRACE_SWITCH=N" "P_DEBUG_SWITCH=N"'|cut -f 3 -d" "`
+echo $reqid
+
+sqlplus -s $aplgn @$PRODS/updconc $batch_name $reqid AUTOSELECT
+
+sqlplus -s $appslgn @$PRODS/concwait $reqid 10 1800
+
+if [ $? != 0 ]
+then
+   echo '**** Error in autoselect ***'
+   return 1
+fi
+
+
+#
+# Build
+#
+
+export reqid=`CONCSUB $appslgn SQLAP 'Payables Manager' FINPROD CONCURRENT SQLAP APXPBBLD '"P_PAYMENT_BATCH='$batch_name'" "P_CONFIRM_NOW=N" "P_USER_ID=1003" "P_LOGIN_ID=0" "P_TRACE_SWITCH=N" "P_DEBUG_SWITCH=N"'|cut -f 3 -d" "`
+echo $reqid
+sqlplus -s $aplgn @$PRODS/updconc $batch_name $reqid BUILD
+
+sqlplus -s $appslgn @$PRODS/concwait $reqid 10 1800
+
+if [ $? != 0 ]
+then
+   echo '**** Error in Build ***'
+   return 1
+fi
+
+#
+# Preliminary Register
+#
+
+
+export reqid=`CONCSUB $appslgn SQLAP 'Payables Manager' FINPROD CONCURRENT SQLAP APXPBPPR $batch_name|cut -f 3 -d" "`
+echo $reqid
+
+sqlplus -s $appslgn @$PRODS/concwait $reqid 10 1800
+
+if [ $? != 0 ]
+then
+   echo '**** Error in Preliminary register ***'
+   return 1
+fi
+
+#FSC-5786 Error if the control total > 99,999,999.99
+
+#AMOUNT=`echo "select '===='||control_invoice_total RETENTION from ap_batches_all where batch_name = '$batch_name'  ;" | $ORACLE_HOME/bin/sqlplus $aplgn | grep '====' | grep -v 'CTLAMOUNT' | sed 's/====//'`
+AMOUNT=`echo "select '===='||SUM(NVL(check_amount,0)) RETENTION FROM ap_selected_invoice_checks_all WHERE checkrun_name = '$batch_name' ;" | $ORACLE_HOME/bin/sqlplus $aplgn | grep '====' | grep -v 'CTLAMOUNT' | sed 's/====//'`
+
+#FSC-5796 : If EFT, amount will be checked whether it exceeds $99,999,999.99 or not
+
+#export AMOUNT=`sqlplus $aplgn @$PRODS/payment_amount $batch_name`
+
+echo 'Check Amount Start'
+
+if [ "$2" = "E" ]
+then
+   if [ "$AMOUNT" -gt "99999999.99" ]
+   then
+
+       echo '**** Control amount exceeds $99,999,999.99  ***'
+
+       #FSC-5796 Add logic to Cancel Payment Batch if the control total is more than 99,999,999.99
+
+       sqlplus -s $appslgn @$PRODS/cancel_run $batch_name
+       CONCSUB $appslgn SQLAP 'Payables Manager' FINPROD CONCURRENT SQLAP APPBCN $batch_name '""' '""' '""'
+
+       echo '**** The Batch was cancelled due to the exceeded Amount ***'
+
+       ##FSC-5796 : Once it is Cancelled Due to the Amount, will fire Alert to send a mail
+       $PRODB/EFT_AMT_ALERT $batch_name
+	   
+	   echo '**** Alert sent, Please check the detail in the Mail ***'
+
+       return 1
+   fi
+
+fi
+echo 'Check Amount End'
+
+#
+# Format
+#
+
+if [ "$2" = "C" ]
+then
+   export reqid=`CONCSUB $appslgn SQLAP 'Payables Manager' FINPROD CONCURRENT SQLAP $cheqprog '"P_PAYMENT_BATCH='$batch_name'" '|cut -f 3 -d" "`
+else
+   export reqid=`CONCSUB $appslgn SQLAP 'Payables Manager' FINPROD CONCURRENT SQLAP $eftprog $batch_name|cut -f 3 -d" "`
+fi
+
+echo $reqid
+sqlplus -s $aplgn @$PRODS/updconc $batch_name $reqid FORMAT
+sqlplus -s $appslgn @$PRODS/concwait $reqid 10 1800
+
+if [ $? != 0 ]
+then
+   echo '**** Error in format ***'
+   return 1
+fi
+
+# Added by Antony Snow (Oracle Corporation) 01-OCT-1998
+# This spools the request id for this payment to a temporary file for use
+# with cheque printing.
+if [ "$2" = "C" ]
+then
+   echo $reqid >> $APPLCSF/$APPLOUT/chq_run.lst
+   echo $reqid >> $APPLCSF/$APPLOUT/DOIchq_run.lst
+fi
+
+export cheqrun=$reqid
+#
+# Confirm
+#
+
+export startno=`sqlplus -s $aplgn @$PRODS/first_chq $batch_name`
+if [ $startno -eq 0 ]
+then
+   echo '****  No cheques in run ' $batch_name
+   sqlplus $appslgn @$PRODS/cancel_run $batch_name
+   CONCSUB $appslgn SQLAP 'Payables Manager' FINPROD CONCURRENT SQLAP APPBCN $batch_name '""' '""' '""'
+   return 0
+fi
+
+sqlplus -s $aplgn @$PRODS/load_confirm $batch_name
+
+if [ $? != 0 ]
+then
+   echo '**** Error in Confirm ***'
+   return 1
+fi
+
+export reqid=`CONCSUB $appslgn SQLAP 'Payables Manager' FINPROD CONCURRENT SQLAP APPBCF $batch_name $DT_A 1003 57 |cut -f 3 -d" "`
+echo $reqid
+sqlplus -s $aplgn @$PRODS/updconc $batch_name $reqid CONFIRM
+sqlplus -s $appslgn @$PRODS/concwait $reqid 10 1800
+
+if [ $? != 0 ]
+then
+   echo '**** Error in Confirm ***'
+   return 1
+fi
+
+
+#
+# Final Payment register
+#
+
+export reqid=`CONCSUB $appslgn SQLAP 'Payables Manager' FINPROD CONCURRENT SQLAP APXPBFPR $batch_name|cut -f 3 -d" "`
+echo $reqid
+
+sqlplus -s $appslgn @$PRODS/concwait $reqid 10 1800
+
+if [ $? != 0 ]
+then
+   echo '**** Error in final payment register ***'
+   return 1
+fi
+
+#
+# EFT Advice
+#
+
+if [ "$2" = "E" ]
+then
+   export reqid=`CONCSUB $appslgn SQLAP 'Payables Manager' FINPROD CONCURRENT SQLAP APCEFTRF $batch_name|cut -f 3 -d" "`
+   echo $reqid
+   sqlplus -s $appslgn @$PRODS/concwait $reqid 10 1800
+
+   if [ $? != 0 ]
+   then
+      echo '**** Error in Remittance advice ***'
+      return 1
+   fi
+#   awk '{printf "%s\r\n",$0;}'<$APPLCSF/$APPLOUT/FINPROD.$cheqrun>/corpfin/${1}EFT$DT1.csv
+   awk '{printf "%s\r\n",$0;}'<$APPLCSF/$APPLOUT/FINPROD.$cheqrun>/NFS/finance/EFT/${1}EFT$DT1.csv
+#else
+#   cat $APPLCSF/$APPLOUT/FINPROD.$cheqrun>>cheq$DT1
+fi) 2>&1 |tee -a $1$2.log
+if [ $? != 0 ]
+then
+   echo '** Error in Cheque processing **' | tee -a $1$2.log
+   exit 1
+fi
+echo '** Cheque Processing Successful' | tee -a $1$2.log
+exit 0
+

@@ -1,0 +1,25 @@
+#! /bin/ksh
+# $Header: svn://d02584/consolrepos/branches/AP.01.01/glc/1.0.0/bin/EMPRPT.prog 1074 2017-06-21 05:34:42Z svnuser $
+#echo $*
+
+work_dir=$APPLCSF/$APPLOUT
+export work_dir
+cd $work_dir
+
+#export nm=`expr substr $3 1 8`
+export nm=`echo $3|cut -c 1-8`
+
+#if [ $6 = 0000 ]
+#then
+#   echo
+#   echo '**ERROR: ' $6 ' is not a valid cost centre for this report'
+#   echo
+#   exit 1
+#fi
+
+echo 'Running employee report for ' $6 ' ' $7 ' Cost centre(s)'
+sqlplus $appslgn @$PRODS/emprpt $6 $7 $4
+mv emprpt.$4 $nm.$4
+
+exit 0
+
