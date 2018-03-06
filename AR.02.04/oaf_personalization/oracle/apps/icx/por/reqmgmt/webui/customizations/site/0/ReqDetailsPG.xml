@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>                                                                                                      
+<customization xmlns="http://xmlns.oracle.com/jrad" version="9.0.5.4.89_555" xml:lang="en-US"                                               
+customizes="/oracle/apps/icx/por/reqmgmt/webui/ReqDetailsPG">                                                                               
+<modifications>                                                                                                                             
+<move element="ChangeHistory" after="Status"/>                                                                                              
+<move element="UrgentFlag" after="ChangeHistory"/>                                                                                          
+<move element="Attachment" after="UrgentFlag"/>                                                                                             
+<move element="PCardNumber" after="Attachment"/>                                                                                            
+<move element="PCardDesc" after="PCardNumber"/>                                                                                             
+<move element="EmergencyPONum" after="PCardDesc"/>                                                                                          
+<move element="NoteToBuyer" after="EmergencyPONum"/>                                                                                        
+<modify element="ReqHeaderDff" rendered="true"/>                                                                                            
+<modify element="ReqHeaderDffRN" rendered="true"/>
+      <modify element="NoteToApprover" prompt="Note to Approver"/>
+      <modify         
+element="NoteToBuyer" prompt="Note to Supplier"/>
+   </modifications>
+</customization>
+                                                    
+

@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>                                                                                                      
+<customization xmlns="http://xmlns.oracle.com/jrad" version="9.0.5.4.89_555" xml:lang="en-US"                                               
+customizes="/oracle/apps/hxc/selfservice/timecard/webui/TcActivitiesPG">                                                                    
+<modifications>
+      <modify element="OTL_HELP" destination="\\DOI\GroupData\All Staff - Permanent Area\OTL CIO\timecard_helpv4.htm"       
+rendered="true"/>
+   </modifications>
+</customization>
+                                                                                    
+

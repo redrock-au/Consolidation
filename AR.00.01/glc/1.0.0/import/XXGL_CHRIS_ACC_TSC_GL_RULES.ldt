@@ -1,0 +1,143 @@
+# $Header: svn://d02584/consolrepos/branches/AR.00.01/glc/1.0.0/import/XXGL_CHRIS_ACC_TSC_GL_RULES.ldt 1492 2017-07-05 07:01:42Z svnuser $
+
+# dbdrv: exec fnd bin FNDLOAD bin &phase=daa+51 checkfile:~PROD:~PATH:~FILE &ui_apps 0 Y UPLOAD @FND:patch/115/import/aflvmlu.lct @~PROD:~PATH/~FILE
+LANGUAGE = "US"
+LDRCONFIG = "aflvmlu.lct 115.20"
+
+#Source Database CONDEV
+
+#RELEASE_NAME 11.5.10.2
+
+# -- Begin Entity Definitions -- 
+
+DEFINE FND_LOOKUP_TYPE
+  KEY   VIEW_APPSNAME                   VARCHAR2(50)
+  KEY   LOOKUP_TYPE                     VARCHAR2(30)
+  CTX   APPLICATION_SHORT_NAME          VARCHAR2(50)
+  BASE  CUSTOMIZATION_LEVEL             VARCHAR2(1)
+  CTX   OWNER                           VARCHAR2(4000)
+  BASE  LAST_UPDATE_DATE                VARCHAR2(10)
+  TRANS MEANING                         VARCHAR2(80)
+  TRANS DESCRIPTION                     VARCHAR2(240)
+
+  DEFINE FND_LOOKUP_VALUE
+    KEY   LOOKUP_CODE                     VARCHAR2(30)
+    BASE  ENABLED_FLAG                    VARCHAR2(1)
+    BASE  START_DATE_ACTIVE               VARCHAR2(10)
+    BASE  END_DATE_ACTIVE                 VARCHAR2(10)
+    BASE  TERRITORY_CODE                  VARCHAR2(2)
+    BASE  TAG                             VARCHAR2(150)
+    BASE  ATTRIBUTE_CATEGORY              VARCHAR2(30)
+    BASE  ATTRIBUTE1                      VARCHAR2(150)
+    BASE  ATTRIBUTE2                      VARCHAR2(150)
+    BASE  ATTRIBUTE3                      VARCHAR2(150)
+    BASE  ATTRIBUTE4                      VARCHAR2(150)
+    BASE  ATTRIBUTE5                      VARCHAR2(150)
+    BASE  ATTRIBUTE6                      VARCHAR2(150)
+    BASE  ATTRIBUTE7                      VARCHAR2(150)
+    BASE  ATTRIBUTE8                      VARCHAR2(150)
+    BASE  ATTRIBUTE9                      VARCHAR2(150)
+    BASE  ATTRIBUTE10                     VARCHAR2(150)
+    BASE  ATTRIBUTE11                     VARCHAR2(150)
+    BASE  ATTRIBUTE12                     VARCHAR2(150)
+    BASE  ATTRIBUTE13                     VARCHAR2(150)
+    BASE  ATTRIBUTE14                     VARCHAR2(150)
+    BASE  ATTRIBUTE15                     VARCHAR2(150)
+    CTX   OWNER                           VARCHAR2(4000)
+    BASE  LAST_UPDATE_DATE                VARCHAR2(10)
+    TRANS MEANING                         VARCHAR2(80)
+    TRANS DESCRIPTION                     VARCHAR2(240)
+  END FND_LOOKUP_VALUE
+END FND_LOOKUP_TYPE
+
+# -- End Entity Definitions -- 
+
+
+BEGIN FND_LOOKUP_TYPE "AU" "XXGL_CHRIS_ACC_TSC_GL_RULES"
+  APPLICATION_SHORT_NAME = "SQLGLC"
+  CUSTOMIZATION_LEVEL = "U"
+  OWNER = "RYANSH"
+  LAST_UPDATE_DATE = "2017/06/26"
+  MEANING = "XXGL_CHRIS_ACC_TSC_GL_RULES"
+
+  BEGIN FND_LOOKUP_VALUE "R01DEL0"
+    ENABLED_FLAG = "Y"
+    START_DATE_ACTIVE = "2017/06/26"
+    TAG = "DEL"
+    ATTRIBUTE_CATEGORY = "XXGL_CHRIS_ACC_TSC_GL_RULES"
+    ATTRIBUTE1 = "188"
+    OWNER = "RYANSH"
+    LAST_UPDATE_DATE = "2017/06/26"
+    MEANING = "R01DEL0"
+  END FND_LOOKUP_VALUE
+  
+  BEGIN FND_LOOKUP_VALUE "R02EXT0"
+    ENABLED_FLAG = "Y"
+    START_DATE_ACTIVE = "2017/06/26"
+    TAG = "EXT"
+    ATTRIBUTE_CATEGORY = "XXGL_CHRIS_ACC_TSC_GL_RULES"
+    ATTRIBUTE1 = "184"
+    ATTRIBUTE2 = "186"
+    ATTRIBUTE7 = "authority='2101'"
+    OWNER = "RYANSH"
+    LAST_UPDATE_DATE = "2017/06/26"
+    MEANING = "R02EXT0"
+  END FND_LOOKUP_VALUE
+  
+  BEGIN FND_LOOKUP_VALUE "R03EXT0"
+    ENABLED_FLAG = "Y"
+    START_DATE_ACTIVE = "2017/06/26"
+    TAG = "EXT"
+    ATTRIBUTE_CATEGORY = "XXGL_CHRIS_ACC_TSC_GL_RULES"
+    ATTRIBUTE1 = "187"
+    ATTRIBUTE7 =
+   "account='80104', authority=to_char(to_number(authority)+1, 'FM0000')"
+    OWNER = "RYANSH"
+    LAST_UPDATE_DATE = "2017/06/26"
+    MEANING = "R03EXT0"
+  END FND_LOOKUP_VALUE
+  
+  BEGIN FND_LOOKUP_VALUE "R04EXT0"
+    ENABLED_FLAG = "Y"
+    START_DATE_ACTIVE = "2017/06/26"
+    TAG = "EXT"
+    ATTRIBUTE_CATEGORY = "XXGL_CHRIS_ACC_TSC_GL_RULES"
+    ATTRIBUTE1 = "185"
+    ATTRIBUTE7 =
+   "account='80501', authority=to_char(to_number(authority)+1, 'FM0000')"
+    OWNER = "RYANSH"
+    LAST_UPDATE_DATE = "2017/06/26"
+    MEANING = "R04EXT0"
+  END FND_LOOKUP_VALUE
+  
+  BEGIN FND_LOOKUP_VALUE "R05OFF0"
+    ENABLED_FLAG = "Y"
+    START_DATE_ACTIVE = "2017/06/26"
+    TAG = "OFF"
+    ATTRIBUTE_CATEGORY = "XXGL_CHRIS_ACC_TSC_GL_RULES"
+    ATTRIBUTE1 = "184"
+    ATTRIBUTE2 = "187"
+    ATTRIBUTE3 = "185"
+    ATTRIBUTE4 = "188"
+    ATTRIBUTE7 = "account='35101', authority='3001'"
+    ATTRIBUTE9 = "account='17406', authority='3001'"
+    OWNER = "RYANSH"
+    LAST_UPDATE_DATE = "2017/06/26"
+    MEANING = "R05OFF0"
+  END FND_LOOKUP_VALUE
+  
+  BEGIN FND_LOOKUP_VALUE "R06OFF0"
+    ENABLED_FLAG = "Y"
+    START_DATE_ACTIVE = "2017/06/26"
+    TAG = "OFF"
+    ATTRIBUTE_CATEGORY = "XXGL_CHRIS_ACC_TSC_GL_RULES"
+    ATTRIBUTE1 = "186"
+    ATTRIBUTE7 = "account='30503', authority='3001'"
+    ATTRIBUTE9 = "account='17401', authority='3001'"
+    OWNER = "RYANSH"
+    LAST_UPDATE_DATE = "2017/06/26"
+    MEANING = "R06OFF0"
+  END FND_LOOKUP_VALUE
+  
+END FND_LOOKUP_TYPE
+

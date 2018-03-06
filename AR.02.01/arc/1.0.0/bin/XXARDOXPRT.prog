@@ -1,0 +1,43 @@
+#!/usr/bin/ksh
+#*******************************************************************************
+#* 
+#* $HeadURL: $
+#* 
+#* Purpose : DEDJTR Document Print
+#* Author: UXC Red Rock Consulting (Rao) 
+#
+#* $Date: $
+#*
+#* $Revision: $
+#* Date          Author          Description
+#* ----------    --------------  ---------------------------------------------
+#* 16-Jun-2017   Rao Chennuri    Initial creation                             
+#*
+#* History: Refer to Source Control
+#*   
+#* Notes: Workaround to address CENITEX printer configuration issue. PDF output
+#*        sent directly to printer errors with print output in XML characters.
+#*        Unable to utilise EBS standard function FND_REQUEST.SET_PRINT_OPTIONS.
+#*
+#********************************************************************************
+#* $Id: $
+
+#---------------------------------------
+# Arguments:
+#  1 - APPS/password
+#  2 - User ID
+#  3 - User Name
+#  4 - Request ID
+#  5 - Printer Name
+#  6 - File Name
+#---------------------------------------
+
+if [ -s $APPLCSF/$APPLOUT/$6 ]; then
+   echo "Printing $6 to $5"
+   lpr -#1 -sP $5 $APPLCSF/$APPLOUT/$6
+else
+   echo "File not found"
+   exit 1
+fi
+
+

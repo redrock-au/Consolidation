@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8'?>                                                                                                      
+<customization customizes="/oracle/apps/per/irc/candidateSearch/webui/CmAplSrchQueryRN" xmlns="http://xmlns.oracle.com/jrad"                
+xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:user="http://xmlns.oracle.com/jrad/user"              
+file-version="$Header: svn://d02584/consolrepos/branches/AR.01.01/oaf_personalization/oracle/apps/per/customizations/site/0/irc/candidateSearch/webui/CmAplSrchQueryRN.xml 317 2017-05-05 02:11:23Z sryan $" version="9.0.3.8.12_1271" xml:lang="en-US">                                                                         
+<modifications>                                                                                                                             
+<modify element="ApplicantSearchResults" blockSize="25"/>                                                                                   
+<modify element="FndEmail____1" sortState="no"/>                                                                                            
+<modify element="FndLocation" sortState="no"/>                                                                                              
+<modify element="FndHomePhone" sortState="no"/>                                                                                             
+<modify element="FndLastApplication" sortState="no"/>                                                                                       
+<modify element="FndJobsAppliedFor" sortState="no"/>                                                                                        
+<modify element="FndSelectCheckbox" sortState="no"/>                                                                                        
+<modify element="FndCandidateName____1" sortState="no"/>                                                                                    
+<modify element="FndFirstName____1" sortState="no"/>                                                                                        
+<modify element="FndLastName____1" sortState="no"/>                                                                                         
+<modify element="FndBirthDate" sortState="no"/>                                                                                             
+<modify element="FndCurrentEmployer" sortState="no"/>                                                                                       
+<modify element="FndEmployeeType" sortState="no"/>                                                                                          
+<modify element="FndApplicantType" sortState="no"/>                                                                                         
+<modify element="FndQualificationType" sortState="no"/>                                                                                     
+<modify element="FndExApplications" sortState="no"/>                                                                                        
+<modify element="FndVacancyName____2" sortState="no"/>                                                                                      
+<modify element="FndVacancyStatus____1" sortState="no"/>                                                                                    
+<modify element="FndApplicationDate____1" sortState="no"/>                                                                                  
+<modify element="FndApplicationStatus2" sortState="no"/>                                                                                    
+<modify element="FndApplicationStatus" rendered="false" sortState="no"/>                                                                    
+<modify element="FndRecruitingManager____1" rendered="false" sortState="no"/>                                                               
+<modify element="FndRecruitingTeamMember" sortState="no"/>                                                                                  
+<modify element="FndRecruitingManagerId____1" rendered="false" sortState="no"/>                                                             
+<modify element="FndRecruiter____1" rendered="false" sortState="no"/>                                                                       
+<modify element="FndRecruiterId____1" rendered="false" sortState="no"/>
+      <modify element="FndVacancyId____2" rendered="false"          
+sortState="no"/>
+      <modify element="FndAddressLine1" sortState="no"/>
+   </modifications>
+</customization>
+                            
+

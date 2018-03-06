@@ -1,0 +1,43 @@
+# $Header: svn://d02584/consolrepos/branches/AR.00.02/apc/1.0.0/import/XXAP_INV_IMP_MISS_GST_AMT.ldt 1496 2017-07-05 07:15:13Z svnuser $
+
+# dbdrv: exec fnd bin FNDLOAD bin &phase=daa+52 checkfile:~PROD:~PATH:~FILE &ui_apps 0 Y UPLOAD @FND:patch/115/import/afmdmsg.lct @~PROD:~PATH/~FILE
+LANGUAGE = "US"
+LDRCONFIG = "afmdmsg.lct 115.29"
+
+#Source Database CONDEV
+
+#RELEASE_NAME 11.5.10.2
+
+# -- Begin Entity Definitions -- 
+
+DEFINE FND_NEW_MESSAGES
+  KEY   APPLICATION_SHORT_NAME          VARCHAR2(50)
+  KEY   MESSAGE_NAME                    VARCHAR2(30)
+  CTX   OWNER                           VARCHAR2(4000)
+  BASE  LAST_UPDATE_DATE                VARCHAR2(10)
+  CTX   MESSAGE_NUMBER                  VARCHAR2(50)
+  TRANS MESSAGE_TEXT                    VARCHAR2(2000)
+  CTX   DESCRIPTION                     VARCHAR2(240)
+  CTX   TYPE                            VARCHAR2(30)
+  CTX   MAX_LENGTH                      VARCHAR2(50)
+  CTX   CATEGORY                        VARCHAR2(10)
+  CTX   SEVERITY                        VARCHAR2(10)
+  CTX   FND_LOG_SEVERITY                VARCHAR2(50)
+END FND_NEW_MESSAGES
+
+# -- End Entity Definitions -- 
+
+
+BEGIN FND_NEW_MESSAGES "SQLAPC" "XXAP_INV_IMP_MISS_GST_AMT"
+  OWNER = "NITHINJ"
+  LAST_UPDATE_DATE = "2017/06/06"
+  MESSAGE_NUMBER = "*NULL*"
+  MESSAGE_TEXT = "Mandatory Information GST Amount is missing for this invoice"
+  DESCRIPTION = "*NULL*"
+  TYPE = "30_PCT_EXPANSION_PROMPT"
+  MAX_LENGTH = "*NULL*"
+  CATEGORY = "*NULL*"
+  SEVERITY = "*NULL*"
+  FND_LOG_SEVERITY = "*NULL*"
+END FND_NEW_MESSAGES
+

@@ -1,0 +1,187 @@
+#! /bin/ksh
+
+# $Header: svn://d02584/consolrepos/branches/AR.01.01/fndc/1.0.0/bin/RUN_AP.prog 3173 2017-12-12 05:28:14Z svnuser $
+# CEMLI ID: GL.03.01
+
+# Apply fix for FSC-5795: GL overnight RUN_AP payment program needs to be looked at
+# as it does not pick up all Pay Groups. Currently picking up S Bank only
+
+# Added by Antony Snow (Oracle Corporation) 01-OCT-1998
+# This removes the existing cheque run file ($APPLCSF/$APPLOUT/chq_run.lst)
+
+#rm $APPLCSF/$APPLOUT/chq_run.lst
+
+export fin_printer=nh225si02
+
+aplink_dir=$APBAT/isip    
+export aplink_dir
+
+cd $aplink_dir
+
+typeset -u DT=`date '+%d-%b-%y'`
+export DT
+
+DT1=`date '+%y%m%d%H%M'`
+export DT1
+
+typeset -u DT2=`date '+%d%m'`
+export DT2
+
+export glname=AP`date '+%y%m%d%H'`
+echo $glname $DT
+
+export end_date=`sqlplus -s $fmslgn @$PRODS/last_day`
+typeset -u start_date=20`date '+%y/%m/01'`
+export start_date
+
+echo $start_date $end_date
+
+export thru_date=`sqlplus -s $fmslgn @$PRODS/last_day`
+
+rm ??.log
+
+sqlplus $fmslgn @$PRODS/fail_if_holiday
+if [ $? -ne 0 ]
+then
+   echo 'Error:  Unscheduled Run..........'
+   return 1
+fi
+
+run_cheques () {
+(
+$PRODB/cheq.prog S C W
+#$PRODB/cheq.prog H C W
+#$PRODB/cheq.prog D C W
+#$PRODB/cheq.prog E C W
+#$PRODB/cheq.prog M C W
+#$PRODB/cheq.prog R C W
+#$PRODB/cheq.prog B C W
+$PRODB/cheq.prog Q C W
+#$PRODB/cheq.prog T C W
+#$PRODB/cheq.prog U C W
+#$PRODB/cheq.prog C C W
+#$PRODB/cheq.prog I C W
+#$PRODB/cheq.prog L C W
+#$PRODB/cheq.prog K C W
+#$PRODB/cheq.prog P C W
+$PRODB/cheq.prog F C W
+$PRODB/cheq.prog G C W
+$PRODB/cheq.prog S E W
+#$PRODB/cheq.prog H E W
+#$PRODB/cheq.prog D E W
+#$PRODB/cheq.prog E E C
+#$PRODB/cheq.prog M E W
+#$PRODB/cheq.prog R E W
+#$PRODB/cheq.prog B E W
+$PRODB/cheq.prog Q E W
+#$PRODB/cheq.prog T E W
+#$PRODB/cheq.prog U E W
+#$PRODB/cheq.prog C E W
+#$PRODB/cheq.prog I E W
+#$PRODB/cheq.prog L E W
+#$PRODB/cheq.prog K E W
+#$PRODB/cheq.prog P E W
+$PRODB/cheq.prog F E W
+$PRODB/cheq.prog G E W
+)2>&1
+
+}
+
+echo ' '
+echo 'Approving data for Tax Office '
+echo ' '
+
+export reqid=`CONCSUB $1 SQLAP 'Payables Manager' FINPROD CONCURRENT SQLAP APPRVL All '""' '""' '""' 1 '""' '""' 3 1 N|cut -f 3 -d" "`
+
+echo $reqid
+
+sqlplus $1 @$PRODS/concwait $reqid 30 900
+
+if [ $? -ne 0 ]
+then
+   echo '** Please check Approval job...'
+fi
+
+echo '\nUpdating Pay Groups.........\n'
+
+sqlplus $1 @$PRODS/update_paygroup
+
+sqlplus $1 @$PRODS/upd_pay_priority
+
+#$PRODB/MULTI_GL_RESP_ALERT 
+
+run_cheques
+
+$PRODB/PAYMENT_ALERT
+
+$PRODB/EFT_ALERT
+
+$PRODB/ROLES_ALERT
+
+export reqid=`CONCSUB $1 SQLAP 'Payables Manager' FINPROD CONCURRENT SQLAP APACCENG $start_date $end_date All Y Y Y Y 500 '""' N '""''""' N|cut -f 3 -d" "`
+echo $reqid
+
+sqlplus $1 @$PRODS/concwait $reqid 60 1800
+
+if [ $? != 0 ]
+then
+   exit 1
+fi
+
+sleep 300
+
+#sqlplus $1 @$PRODS/concwait_next $reqid 60 1800 20215
+
+#if [ $? != 0 ]
+#then
+#   exit 1
+#fi
+
+sqlplus $1 @$PRODS/adjust_payables 0 
+
+export nextno=`sqlplus -s $gllgn @$PRODS/interface_id`
+echo $nextno
+
+sqlplus -s $gllgn @$PRODS/load_interface '"Payables Adjustment"' $nextno
+
+export reqid=`CONCSUB $1 SQLGL GL-FMS FINPROD CONCURRENT SQLGL GLLEZL $nextno 1 N '""' '""' N O|cut -f 3 -d" "`
+echo $reqid
+
+#sqlplus $aplgn @$PRODS/update_pps_due_dates
+
+sqlplus $1 @$PRODS/concwait $reqid 60 1800
+
+if [ $? != 0 ]
+then
+   exit 1
+fi
+
+
+$PRODB/PROJECT_PEOPLE_ALERT
+#$PRODB/AOR_ALERT
+$PRODB/APEXP_ALERT
+
+if [ "$5" = "1" ]; then
+  echo subtmit request
+  sqlplus -s $1 @$PRODS/cashbal_all_sources.sql Payables $start_date 0
+  exit 0
+fi
+
+sqlplus $1 @$PRODS/cashbal_pay_adj 0 
+
+export nextno=`sqlplus -s $gllgn @$PRODS/interface_id`
+echo $nextno
+
+sqlplus -s $gllgn @$PRODS/load_interface '"Cash Balancing"' $nextno
+
+export reqid=`CONCSUB $1 SQLGL GL-FMS FINPROD CONCURRENT SQLGL GLLEZL $nextno 1 N '""' '""' N O|cut -f 3 -d" "`
+echo $reqid
+
+sqlplus $1 @$PRODS/concwait $reqid 60 1800
+
+if [ $? != 0 ]
+then
+   exit 1
+fi
+
+exit 0

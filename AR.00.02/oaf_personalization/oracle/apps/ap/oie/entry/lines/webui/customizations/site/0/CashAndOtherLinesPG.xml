@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>                                                                                                      
+<customization xmlns="http://xmlns.oracle.com/jrad" version="9.0.5.4.89_562" xml:lang="en-US"                                               
+customizes="/oracle/apps/ap/oie/entry/lines/webui/CashAndOtherLinesPG">                                                                     
+<modifications>                                                                                                                             
+<modify element="OIEDuplicate____20" rendered="false"/>
+      <modify element="ProjectNumber____20" prompt="Project No. (OPA only)"/>
+     
+
+<modify element="TaskNumber____20" prompt="Task No. (OPA only)"/>
+   </modifications>
+</customization>
+                                    
+

@@ -1,0 +1,53 @@
+# $Header: svn://d02584/consolrepos/branches/AR.01.02/poc/1.0.0/import/XXICX_POR_RCV_DELEGATE_MSG.ldt 1274 2017-06-27 01:12:13Z svnuser $
+
+# dbdrv: exec fnd bin FNDLOAD bin &phase=daa+52 checkfile:~PROD:~PATH:~FILE &ui_apps 0 Y UPLOAD @FND:patch/115/import/afmdmsg.lct @~PROD:~PATH/~FILE
+LANGUAGE = "US"
+LDRCONFIG = "afmdmsg.lct 115.29"
+
+#Source Database CONDEV
+
+#RELEASE_NAME 11.5.10.2
+
+# -- Begin Entity Definitions -- 
+
+DEFINE FND_NEW_MESSAGES
+  KEY   APPLICATION_SHORT_NAME          VARCHAR2(50)
+  KEY   MESSAGE_NAME                    VARCHAR2(30)
+  CTX   OWNER                           VARCHAR2(4000)
+  BASE  LAST_UPDATE_DATE                VARCHAR2(10)
+  CTX   MESSAGE_NUMBER                  VARCHAR2(50)
+  TRANS MESSAGE_TEXT                    VARCHAR2(2000)
+  CTX   DESCRIPTION                     VARCHAR2(240)
+  CTX   TYPE                            VARCHAR2(30)
+  CTX   MAX_LENGTH                      VARCHAR2(50)
+  CTX   CATEGORY                        VARCHAR2(10)
+  CTX   SEVERITY                        VARCHAR2(10)
+  CTX   FND_LOG_SEVERITY                VARCHAR2(50)
+END FND_NEW_MESSAGES
+
+# -- End Entity Definitions -- 
+
+
+BEGIN FND_NEW_MESSAGES "POC" "XXICX_POR_RCV_DELEGATE_MSG"
+  OWNER = "NITHINJ"
+  LAST_UPDATE_DATE = "2017/05/01"
+  MESSAGE_NUMBER = "*NULL*"
+  MESSAGE_TEXT =
+ "<html>\n\
+<p><b><h4>As payment delegate, you must ensure that:</h4></b></p>\n\
+<ul>The purchase is for departmental business purposes only.</ul> \n\
+<ul>The invoice is valid.</ul> \n\
+<ul>The correctness of the calculations.</ul>\n\
+<ul>The correctness of taxation treatment.</ul> \n\
+<ul>Confirmation of status of receipt good or services.</ul> \n\
+<ul>Correctness of vendor details and terms of payments.</ul> \n\
+<ul>The appropriate charge code.</ul> \n\
+</html>"
+  DESCRIPTION = "*NULL*"
+  TYPE = "30_PCT_EXPANSION_PROMPT"
+  MAX_LENGTH = "*NULL*"
+  CATEGORY = "*NULL*"
+  SEVERITY = "*NULL*"
+  FND_LOG_SEVERITY = "*NULL*"
+END FND_NEW_MESSAGES
+

@@ -1,0 +1,62 @@
+#!/bin/ksh
+#####################################################################
+#
+# PROGRAM:	ARCRAMSSENDMAIL
+#
+# PARAMETERS:
+#
+# 		$1   Applications Database Login (eg. APPS/<APPS_PASSWORD>)
+# 		$2   Applications User ID   (eg. 1004)
+# 		$3   Applications User Name (eg. Receiver)
+# 		$4   Applications Concurrent Request Number (eg. 12345)
+# 		$5   Email Address 
+# 		$6   Output File Name1
+# 		$7   Output File Name2
+# 		$8   Email Subject
+# 		$9   Email Body
+#               $10  Con Req1 ID
+#               $11  Con Req2 ID
+#
+# COMMENTS:	Script called from DEDJTR AR RRAM Import Transactions
+#               used for sending email output of RRAMS report outputs
+#
+#
+# MODIFIED:	
+#
+#
+####################################################################
+
+VERSION="1.0"
+
+# Logon Id and Password
+# LOGON=`echo $1 | cut -d'"' -f2`
+LOGON=$1
+
+# directories
+TOP_DIR=$ARC_TOP
+TMP_DIR=$TOP_DIR/tmp
+
+
+# extensions
+EXCEL_EXT="xls"
+MSG_EXT="msg"
+
+
+echo 'Return-Receipt-To: <corporate.finance@doi.vic.gov.au> ' > $TMP_DIR/$4.$MSG_EXT
+echo 'Subject: '$8' ' >> $TMP_DIR/$4.$MSG_EXT
+echo 'To:'$5'' >> $TMP_DIR/$4.$MSG_EXT
+
+C1 = echo ''$10''
+C2 = echo ''$11''
+
+echo ''$9'' > $TMP_DIR/notif.txt
+cat $TMP_DIR/notif.txt >> $TMP_DIR/$4.$MSG_EXT
+uuencode $APPLCSF/$APPLOUT/$6 ${10}_RRAMS_Staging_table_extract.$EXCEL_EXT>> $TMP_DIR/$4.$MSG_EXT
+uuencode $APPLCSF/$APPLOUT/$7 ${11}_RRAMS_invoice_status_extract.$EXCEL_EXT>> $TMP_DIR/$4.$MSG_EXT
+
+
+cat $TMP_DIR/$4.$MSG_EXT | /usr/sbin/sendmail -B8BITMIME  -F "Department of Economic Development, Jobs, Transport and Resources" $5
+
+rm -f $TMP_DIR/$4*.$MSG_EXT
+rm -f $TMP_DIR/notif.txt 
+exit 0

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8'?>                                                                                                      
+<customization customizes="/oracle/apps/pa/resource/webui/ResourceListPG" xmlns="http://xmlns.oracle.com/jrad"                              
+xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:user="http://xmlns.oracle.com/jrad/user"              
+file-version="$Header: svn://d02584/consolrepos/branches/AR.02.02/oaf_personalization/oracle/apps/pa/customizations/site/0/resource/webui/ResourceListPG.xml 317 2017-05-05 02:11:23Z sryan $" version="9.0.3.6.2_398" xml:lang="en-US"               
+package="/oracle/apps/pa/customizations/site/0/resource/webui"/>
+                                                                          
+

@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?>                                                                                                      
+<customization xmlns="http://xmlns.oracle.com/jrad" version="9.0.5.4.89_555" xml:lang="en-US"                                               
+customizes="/oracle/apps/pa/progress/webui/ProgressGeneralTopInRN">                                                                         
+<modifications>                                                                                                                             
+<modify element="Overview" prompt="Budget, Forecast &amp; Cashflow"/>                                                                       
+<modify element="Issues" prompt="Project Overview for Current Period"/>                                                                     
+<modify element="Accomplishment" prompt="Schedule &amp; Progress"/>                                                                         
+<modify element="Summary" prompt="Major Achievements for Current Quarter"/>                                                                 
+<modify element="PlannedActivity" prompt="Highlights / Events for Next Quarter"/>                                                           
+<move element="Issues" after="Progress"/>                                                                                                   
+<move element="Overview" after="Issues"/>
+      <move element="Accomplishment" after="Overview"/>
+      <move element="Summary"             
+after="Accomplishment"/>
+      <move element="PlannedActivity" after="Summary"/>
+   </modifications>
+</customization>
+                     
+

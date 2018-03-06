@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>                                                                                                      
+<customization xmlns="http://xmlns.oracle.com/jrad" version="9.0.5.4.89_555" xml:lang="en-US"                                               
+customizes="/oracle/apps/fnd/framework/toolbox/tutorial/webui/PoSummaryCreatePG" xmlns:oa="http://xmlns.oracle.com/oa">                     
+<modifications>                                                                                                                             
+<move element="OrdersRN.Status" after="OrdersRN.OrderNum"/>                                                                                 
+<move element="OrdersRN.Description" after="OrdersRN.Status"/>                                                                              
+<move element="OrdersRN.Buyer" after="OrdersRN.Description"/>                                                                               
+<move element="OrdersRN.Supplier" after="OrdersRN.Buyer"/>                                                                                  
+<move element="OrdersRN.Currency" after="OrdersRN.Supplier"/>                                                                               
+<insert before="OrdersRN.Currency">                                                                                                         
+<oa:messageStyledText id="SiteName" adminCustomizable="true" cellNoWrapFormat="false" dataType="VARCHAR2" initSortSeq="none"                
+prompt="Supplier Site" queryable="false" rendered="true" required="no" scope="." selectiveSearchCriteria="false"                            
+serverUnvalidated="false" sortState="no" tipType="none" totalValue="false" userCustomizable="false" vAlign="middle" viewAttr="SiteName"     
+viewName="POSummaryVO1" warnAboutChanges="true"/>                                                                                           
+</insert>                                                                                                                                   
+<move element="OrdersRN.OrderTotal" after="OrdersRN.Currency"/>                                                                             
+<move element="OrdersRN.DeleteSwitcher" after="OrdersRN.OrderTotal"/>
+      <move element="OrdersRN.UpdateSwitcher"                         
+after="OrdersRN.DeleteSwitcher"/>
+   </modifications>
+</customization>
+                                                                    
+

@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8'?>                                                                                                      
+<customization xmlns="http://xmlns.oracle.com/jrad" version="9.0.5.4.89_555" xml:lang="en-US"                                               
+customizes="/oracle/apps/pa/ci/webui/CIUpdatePG">                                                                                           
+<modifications>                                                                                                                             
+<modify element="CIUpdateLayoutRN" controllerClass="doi.oracle.apps.pa.ci.webui.DOICIUpdateCO"/>                                            
+<modify element="CIUpdateNavigation" controllerClass="doi.oracle.apps.pa.ci.webui.DOICIUpdDetailsFooterCO"/>                                
+<modify element="CIUpdHeader" controllerClass="doi.oracle.apps.pa.ci.webui.DOICIUpdHeaderCO"/>                                              
+<modify element="DetailsTab" controllerClass="doi.oracle.apps.pa.ci.webui.DOIDetailsTabCO"/>                                                
+<move element="detail2Region" after="detail1Region"/>                                                                                       
+<move element="sourceRegion" after="detail2Region"/>                                                                                        
+<move element="PaNestedRegion6" after="sourceRegion"/>                                                                                      
+<move element="crRegion" after="PaNestedRegion6"/>                                                                                          
+<move element="RIRegion" after="crRegion"/>                                                                                                 
+<move element="DummyLabel1" after="RIRegion"/>                                                                                              
+<move element="DummyLabel2" after="DummyLabel1"/>                                                                                           
+<move element="DummyLabel3" after="DummyLabel2"/>                                                                                           
+<modify element="Summary" prompt="Title"/>                                                                                                  
+<modify element="Classification" prompt="Category"/>                                                                                        
+<modify element="EffortLevel" rendered="false"/>                                                                                            
+<modify element="Priority" required="yes"/>                                                                                                 
+<modify element="DateRequired" required="yes"/>                                                                                             
+<modify element="Reason" rendered="false"/>                                                                                                 
+<modify element="Price" prompt="Cost"/>                                                                                                     
+<modify element="sourceRegion.SourceTypeList" prompt="Fund Source"/>                                                                        
+<modify element="sourceRegion.SourcePersonId" rendered="false"/>                                                                            
+<modify element="sourceRegion.SourceDateRequired" rendered="false"/>                                                                        
+<modify element="sourceRegion.SourceComment" prompt="Consequence"/>                                                                         
+<modify element="DummyLabel3" prompt="Other Change Alert Information"/>                                                                     
+<modify element="COTitle" prompt="Update Change Alert"/>                                                                                    
+<modify element="DummyLabel1" prompt="Other Information"/>                                                                                  
+<modify element="sourceRegion.SourceNumber" prompt="Location"/>                                                                             
+<modify element="Currency" rendered="false"/>                                                                                               
+<modify element="resComment" prompt="Mitigation Strategy"/>                                                                                 
+<modify element="Resolution" rendered="false"/>
+      <modify element="sourceRegion" text=""/>
+      <modify element="ResolutionLink"       
+text="Mitigation Strategy"/>
+   </modifications>
+</customization>
+                                                                         
+

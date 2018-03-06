@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>                                                                                                      
+<customization xmlns="http://xmlns.oracle.com/jrad" version="9.0.5.4.89_555" xml:lang="en-US"                                               
+customizes="/oracle/apps/hxc/selfservice/timecard/webui/TcActivitiesPG" xmlns:oa="http://xmlns.oracle.com/oa">                              
+<modifications>                                                                                                                             
+<move element="Hxctimecard.Hxckeynotation" after="Hxctimecard.Hxccuitcsaveforlater"/>                                                       
+<move element="Hxctimecard.HxcAccrualBalances" after="Hxctimecard.Hxckeynotation"/>                                                         
+<move element="Hxctimecard.Hxcsummary" after="Hxctimecard.HxcAccrualBalances"/>                                                             
+<insert after="Hxctimecard.Hxcsummary">                                                                                                     
+<oa:link id="OTL_HELP" adminCustomizable="true" rendered="false" scope="." serverUnvalidated="false" targetFrame="_blank" text="OTL Help"   
+userCustomizable="false" warnAboutChanges="true" xmlns:oa="http://xmlns.oracle.com/oa"/>                                                    
+</insert>
+   </modifications>
+</customization>
+                                                                                            
+
