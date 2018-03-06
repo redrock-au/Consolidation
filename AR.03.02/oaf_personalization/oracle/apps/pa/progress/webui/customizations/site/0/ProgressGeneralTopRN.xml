@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>                                                                                                      
+<customization xmlns="http://xmlns.oracle.com/jrad" version="9.0.5.4.89_555" xml:lang="en-US"                                               
+customizes="/oracle/apps/pa/progress/webui/ProgressGeneralTopRN">                                                                           
+<modifications>                                                                                                                             
+<move element="Issues" after="region1"/>                                                                                                    
+<move element="BriefOverviewField" after="Issues"/>                                                                                         
+<move element="Accomplishments" after="BriefOverviewField"/>                                                                                
+<move element="Summary" after="Accomplishments"/>                                                                                           
+<move element="Plans" after="Summary"/>                                                                                                     
+<move element="ReportedByField" after="Plans"/>                                                                                             
+<move element="RecentReports" after="ReportedByField"/>                                                                                     
+<move element="paShowReportVersionId" after="RecentReports"/>                                                                               
+<modify element="BriefOverviewField" prompt="Budget, Forecast &amp; Cashflow"/>                                                             
+<modify element="Summary" prompt="Major Achievements for Current Quarter"/>                                                                 
+<modify element="Issues" prompt="Project Overview for Current Period"/>                                                                     
+<modify element="Accomplishments" prompt="Schedule &amp; Progress"/>
+      <modify element="Plans" prompt="Highlights / Events for Next     
+Quarter"/>
+   </modifications>
+</customization>
+                                                                                           
+

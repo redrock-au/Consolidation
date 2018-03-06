@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8'?>                                                                                                      
+<customization customizes="/oracle/apps/pa/team/webui/TeamListPG" xmlns="http://xmlns.oracle.com/jrad"                                      
+xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:user="http://xmlns.oracle.com/jrad/user"              
+file-version="$Header: svn://d02584/consolrepos/branches/AR.00.02/oaf_personalization/oracle/apps/pa/customizations/site/0/team/webui/TeamListPG.xml 317 2017-05-05 02:11:23Z sryan $" version="9.0.3.6.2_398" xml:lang="en-US"                     
+package="/oracle/apps/pa/customizations/site/0/team/webui">                                                                                 
+<modifications>                                                                                                                             
+<modify element="TeamTable" blockSize="25">                                                                                                 
+<queryCriteria>                                                                                                                             
+<criterion element="TeamStatus" operator="not" operand="Cancelled"/>                                                                        
+<criterion element="TeamStatus" operator="not" operand="Filled" joinCondition="and"/>                                                       
+</queryCriteria>                                                                                                                            
+</modify>                                                                                                                                   
+<modify element="ExpenseOwner" sortState="yes" rendered="false"/>                                                                           
+<modify element="ExpenseLimit" sortState="yes" rendered="false"/>                                                                           
+<modify element="ExpenditureOU" sortState="yes" rendered="false"/>                                                                          
+<modify element="ExpenditureOrganization" sortState="yes" rendered="false"/>                                                                
+<modify element="ExpenditureType" sortState="yes" rendered="false"/>                                                                        
+<modify element="JobGroupName" sortState="yes" rendered="false"/>                                                                           
+<modify element="JobName" sortState="yes" rendered="false"/>                                                                                
+<modify element="CurrentOrganization" rendered="false" sortState="yes"/>                                                                    
+<modify element="GoUpdateButton" sortState="no"/>                                                                                           
+<modify element="UpdateAction" sortState="no"/>                                                                                             
+<modify element="Manager" rendered="false" sortState="yes"/>                                                                                
+<modify element="Location" rendered="false" sortState="yes"/>                                                                               
+<modify element="WorkType" rendered="false" sortState="yes"/>                                                                               
+<modify element="ProjectSystemStatusCode" rendered="false" sortState="yes"/>                                                                
+<modify element="Duration" rendered="false" sortState="yes"/>                                                                               
+<modify element="Calendar" rendered="false" sortState="yes"/>                                                                               
+<modify element="RoleName" rendered="false" sortState="yes"/>                                                                               
+<modify element="SubTeam" rendered="false" sortState="yes"/>                                                                                
+<modify element="MaxJobLevel" rendered="false" sortState="yes"/>                                                                            
+<modify element="MinJobLevel" rendered="false" sortState="yes"/>                                                                            
+<modify element="ExtensionPossible" rendered="false" sortState="yes"/>                                                                      
+<modify element="Select" sortState="no"/>                                                                                                   
+<modify element="TeamRole" sortState="yes"/>                                                                                                
+<modify element="Person" sortState="yes"/>                                                                                                  
+<modify element="ResourceOrganization" rendered="false" sortState="yes"/>                                                                   
+<modify element="TeamStartDate" sortState="yes"/>                                                                                           
+<modify element="TeamEndDate" sortState="yes"/>                                                                                             
+<modify element="Effort" sortState="yes"/>                                                                                                  
+<modify element="AsmtBillRate" rendered="false" sortState="yes"/>                                                                           
+<modify element="MarkupPercent" sortState="yes"/>                                                                                           
+<modify element="TeamStatus" sortState="yes"/>                                                                                              
+<modify element="ApprvlStatus" sortState="yes"/>                                                                                            
+<modify element="StaffingPriority" sortState="yes"/>                                                                                        
+<modify element="ResourceSearch" sortState="no"/>                                                                                           
+<modify element="SearchLinkText" sortState="no"/>                                                                                           
+<move element="TeamRemove" after="TeamSubmit"/>                                                                                             
+<move element="TeamCopy" after="TeamRemove"/>                                                                                               
+<move element="Person" after="TeamRole"/>                                                                                                   
+<move element="ResourceOrganization" after="Person"/>                                                                                       
+<move element="TeamStartDate" after="ResourceOrganization"/>                                                                                
+<move element="TeamEndDate" after="TeamStartDate"/>                                                                                         
+<move element="Effort" after="TeamEndDate"/>                                                                                                
+<move element="AsmtBillRate" after="Effort"/>                                                                                               
+<move element="MarkupPercent" after="AsmtBillRate"/>                                                                                        
+<move element="TeamStatus" after="MarkupPercent"/>                                                                                          
+<move element="ApprvlStatus" after="TeamStatus"/>                                                                                           
+<move element="StaffingPriority" after="ApprvlStatus"/>                                                                                     
+<move element="ResourceSearch" after="StaffingPriority"/>                                                                                   
+<move element="SearchLinkText" after="ResourceSearch"/>                                                                                     
+<move element="ProjectSystemStatusCode" after="SearchLinkText"/>                                                                            
+<move element="Manager" after="ProjectSystemStatusCode"/>                                                                                   
+<move element="Location" after="Manager"/>                                                                                                  
+<move element="WorkType" after="Location"/>                                                                                                 
+<move element="Duration" after="WorkType"/>                                                                                                 
+<move element="Calendar" after="Duration"/>                                                                                                 
+<move element="RoleName" after="Calendar"/>                                                                                                 
+<move element="SubTeam" after="RoleName"/>                                                                                                  
+<move element="MaxJobLevel" after="SubTeam"/>                                                                                               
+<move element="MinJobLevel" after="MaxJobLevel"/>                                                                                           
+<move element="ExtensionPossible" after="MinJobLevel"/>                                                                                     
+<move element="ExpenseOwner" after="ExtensionPossible"/>                                                                                    
+<move element="ExpenseLimit" after="ExpenseOwner"/>                                                                                         
+<move element="ExpenditureOU" after="ExpenseLimit"/>                                                                                        
+<move element="ExpenditureOrganization" after="ExpenditureOU"/>                                                                             
+<move element="ExpenditureType" after="ExpenditureOrganization"/>                                                                           
+<move element="CurrentOrganization" after="ExpenditureType"/>                                                                               
+<move element="JobGroupName" after="CurrentOrganization"/>                                                                                  
+<move element="JobName" after="JobGroupName"/>
+      <move element="GoUpdateButton" after="JobName"/>
+      <move element="UpdateAction"    
+after="GoUpdateButton"/>
+   </modifications>
+</customization>
+                                                                             
+

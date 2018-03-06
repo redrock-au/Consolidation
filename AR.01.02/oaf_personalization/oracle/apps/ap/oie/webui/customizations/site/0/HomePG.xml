@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>                                                                                                      
+<customization xmlns="http://xmlns.oracle.com/jrad" version="9.0.5.4.89_555" xml:lang="en-US" customizes="/oracle/apps/ap/oie/webui/HomePG">
+<modifications>                                                                                                                             
+<modify element="ActiveReportsRN.ActiveReportsTbl.DuplicateSwitcher" rendered="false"/>                                                     
+<modify element="ImportButton" rendered="false"/>                                                                                           
+<modify element="WFWorklist.worklistAccessTip" rendered="false"/>                                                                           
+<modify element="TrackReportsRN.TrackSubExpRepTable.FndDuplicate" rendered="false"/>                                                        
+<modify element="TrackReportsRN.TrackSubExpRepTable.ReceiptsStatus" rendered="false"/>
+      <modify element="WFWorklist.NtfReassign"       
+rendered="false"/>
+   </modifications>
+</customization>
+                                                                                   
+

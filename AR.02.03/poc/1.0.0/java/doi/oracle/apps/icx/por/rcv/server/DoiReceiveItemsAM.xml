@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding='windows-1252'?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+<!--/* $Header: svn://d02584/consolrepos/branches/AR.02.03/poc/1.0.0/java/doi/oracle/apps/icx/por/rcv/server/DoiReceiveItemsAM.xml 1173 2017-06-23 00:56:04Z svnuser $*/-->
+<AppModule
+   Name="DoiReceiveItemsAM"
+   ComponentClass="doi.oracle.apps.icx.por.rcv.server.DoiReceiveItemsAMImpl"
+   LoadComponentsLazily="true" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="9.0.3.14.01" />
+      <Attr Name="_deployType" Value="0" />
+   </DesignTime>
+   <ViewUsage
+      Name="DoiInvAttachmentListVO"
+      ViewObjectName="doi.oracle.apps.icx.por.rcv.server.DoiInvAttachmentListVO" >
+   </ViewUsage>
+</AppModule>

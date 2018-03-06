@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8'?>                                                                                                      
+<customization customizes="/oracle/apps/ap/oie/webui/OIEDETAILHEADER" xmlns="http://xmlns.oracle.com/jrad"                                  
+xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:user="http://xmlns.oracle.com/jrad/user"              
+file-version="$Header: svn://d02584/consolrepos/branches/AR.02.02/oaf_personalization/oracle/apps/ap/customizations/site/0/oie/webui/OIEDETAILHEADER.xml 317 2017-05-05 02:11:23Z sryan $" version="9.0.3.8.12_1271" xml:lang="en-US">                                                                         
+<modifications>                                                                                                                             
+<modify element="DetailStartDate____1" tipMessageName="" required="no"/>                                                                    
+<modify element="DetailDailyRate" tipMessageName=""/>                                                                                       
+<modify element="DetailDisplayDailyRate" tipMessageName=""/>                                                                                
+<modify element="DetailDays____1" tipMessageName=""/>                                                                                       
+<modify element="DetailReceiptAmount" tipMessageName="" required="no"/>                                                                     
+<modify element="DetailDisplayReceiptAmount" tipMessageName=""/>                                                                            
+<modify element="DetailExchRate" tipMessageName=""/>                                                                                        
+<modify element="DetailDisplayExchRate" tipMessageName=""/>                                                                                 
+<modify element="DetailReimbursAmt" tipMessageName=""/>                                                                                     
+<modify element="DetailReceiptMissing" tipMessageName=""/>                                                                                  
+<modify element="DetailTaxCode" tipMessageName=""/>                                                                                         
+<modify element="DetailTaxCodeDisplay" tipMessageName=""/>                                                                                  
+<modify element="DetailAmtInclTax" tipMessageName=""/>                                                                                      
+<modify element="DetailMerchantName" tipMessageName=""/>                                                                                    
+<modify element="DetailProjectNumber____1" tipMessageName=""/>                                                                              
+<modify element="DetailTaskNumber____1" tipMessageName=""/>                                                                                 
+<modify element="DetailAwardNumber____1" tipMessageName=""/>                                                                                
+<modify element="DetailExpType____1" tipMessageName="" required="no"/>                                                                      
+<modify element="DetailExpGroup____1" tipMessageName=""/>                                                                                   
+<modify element="DetailJust____1" tipMessageName=""/>                                                                                       
+<modify element="DetailApply____1" prompt="Return" text="Return"/>                                                                          
+<modify element="EndDate____2" tipMessageName=""/>                                                                                          
+<modify element="NumberAttendees" tipMessageName=""/>                                                                                       
+<modify element="Attendees" tipMessageName=""/>                                                                                             
+<modify element="TicketClass" tipMessageName=""/>                                                                                           
+<modify element="TravelType" tipMessageName=""/>                                                                                            
+<modify element="TicketNumber" tipMessageName=""/>                                                                                          
+<modify element="FlightNumber" tipMessageName=""/>                                                                                          
+<modify element="ToLocation____1" tipMessageName=""/>                                                                                       
+<modify element="FromLocation____1" tipMessageName=""/>                                                                                     
+<modify element="LocationName____1" tipMessageName=""/>                                                                                     
+<modify element="CostCenter____1" tipMessageName=""/>                                                                                       
+<modify element="TaxRegNumber" tipMessageName=""/>                                                                                          
+<modify element="TaxpayerID" tipMessageName=""/>                                                                                            
+<modify element="Reference" tipMessageName=""/>                                                                                             
+<modify element="ReceiptNumber" tipMessageName=""/>                                                                                         
+<move element="DetailDailyRate" after="DetailStartDate____1"/>                                                                              
+<move element="DetailDisplayDailyRate" after="DetailDailyRate"/>                                                                            
+<move element="DetailDays____1" after="DetailDisplayDailyRate"/>                                                                            
+<move element="DetailDisplayReceiptAmount" after="DetailDays____1"/>                                                                        
+<move element="DetailExchRate" after="DetailDisplayReceiptAmount"/>                                                                         
+<move element="DetailDisplayExchRate" after="DetailExchRate"/>                                                                              
+<move element="DetailReimbursAmt" after="DetailDisplayExchRate"/>                                                                           
+<move element="DetailReceiptMissing" after="DetailReimbursAmt"/>                                                                            
+<move element="DetailTaxCode" after="DetailReceiptMissing"/>                                                                                
+<move element="DetailTaxCodeDisplay" after="DetailTaxCode"/>                                                                                
+<move element="DetailAmtInclTax" after="DetailTaxCodeDisplay"/>                                                                             
+<move element="DetailMerchantName" after="DetailAmtInclTax"/>                                                                               
+<move element="DetailProjectNumber____1" after="DetailMerchantName"/>                                                                       
+<move element="DetailTaskNumber____1" after="DetailProjectNumber____1"/>                                                                    
+<move element="DetailAwardNumber____1" after="DetailTaskNumber____1"/>                                                                      
+<move element="DetailGo____1" after="DetailAwardNumber____1"/>                                                                              
+<move element="DetailExpGroup____1" after="DetailGo____1"/>                                                                                 
+<move element="DetailJust____1" after="DetailExpGroup____1"/>                                                                               
+<move element="DetailCalcAmt____1" after="DetailJust____1"/>                                                                                
+<move element="DetailSave____1" after="DetailCalcAmt____1"/>                                                                                
+<move element="DetailDuplicate____1" after="DetailSave____1"/>                                                                              
+<move element="DetailNewLine____1" after="DetailDuplicate____1"/>                                                                           
+<move element="DetailRemoveLine____1" after="DetailNewLine____1"/>                                                                          
+<move element="DetailCancel____1" after="DetailRemoveLine____1"/>                                                                           
+<move element="DetailItemize" after="DetailCancel____1"/>                                                                                   
+<move element="DetailApply____1" after="DetailItemize"/>                                                                                    
+<move element="EndDate____2" after="DetailApply____1"/>                                                                                     
+<move element="NumberAttendees" after="EndDate____2"/>                                                                                      
+<move element="Attendees" after="NumberAttendees"/>                                                                                         
+<move element="TicketClass" after="Attendees"/>                                                                                             
+<move element="TravelType" after="TicketClass"/>                                                                                            
+<move element="TicketNumber" after="TravelType"/>                                                                                           
+<move element="FlightNumber" after="TicketNumber"/>                                                                                         
+<move element="ToLocation____1" after="FlightNumber"/>                                                                                      
+<move element="FromLocation____1" after="ToLocation____1"/>                                                                                 
+<move element="LocationName____1" after="FromLocation____1"/>                                                                               
+<move element="LocationGo" after="LocationName____1"/>                                                                                      
+<move element="LocationId____1" after="LocationGo"/>                                                                                        
+<move element="CostCenter____1" after="LocationId____1"/>                                                                                   
+<move element="TaxRegNumber" after="CostCenter____1"/>                                                                                      
+<move element="TaxpayerID" after="TaxRegNumber"/>                                                                                           
+<move element="Reference" after="TaxpayerID"/>                                                                                              
+<move element="ReceiptNumber" after="Reference"/>                                                                                           
+<move element="DetailReceiptAmount" after="ReceiptNumber"/>                                                                                 
+<move element="DetailExpType____1" after="DetailReceiptAmount"/>
+      <move element="DetailFlex____1" after="DetailExpType____1"/>
+       
+
+<move element="DetailUpdate____1" after="DetailFlex____1"/>
+   </modifications>
+</customization>
+                                          
+

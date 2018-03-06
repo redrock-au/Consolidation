@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8'?>                                                                                                      
+<customization xmlns="http://xmlns.oracle.com/jrad" version="9.0.5.4.89_555" xml:lang="en-US"                                               
+customizes="/oracle/apps/fnd/framework/webui/OAFooter">                                                                                     
+<modifications>
+      <modify element="Privacy"                                                                                             
+destination="http://infraweb.doi.vic.gov.au/DOI%5CIntranet%5CInfres.nsf/AllDocs/3D4A25EA75FB1FF9CA256BEB00216BF7?OpenDocument"/>
+          
+
+</modifications>
+</customization>
+                                                                                                         
+

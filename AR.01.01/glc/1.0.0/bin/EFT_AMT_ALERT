@@ -1,0 +1,41 @@
+#! /bin/ksh
+
+# Re-apply fixes for Jira defect FSC-5796 30/11/2017 arellanod 03
+
+export work_dir=$APPLCSF/out
+cd $work_dir
+
+sender=`echo "select '=='||instance_name RETENTION FROM v\\$instance ;" | $ORACLE_HOME/bin/sqlplus $aplgn | grep '==' | grep -v 'INSTANCE' | sed 's/==//'`
+
+rm eft_payment_ammt_check_email_list.lst
+rm eft_payment_ammt_check_email_subject.lst
+
+sqlplus -s $appslgn @$PRODS/eft_amount_check_alert_recipients.sql
+
+export recipients=$(cat eft_payment_ammt_check_email_list.lst)
+
+echo "Get recipients"
+echo "$recipients"
+
+sqlplus -s $appslgn @$PRODS/eft_amount_check_alert_subject.sql
+export m_subject=$(cat eft_payment_ammt_check_email_subject.lst)
+#export m_subject="Alert - EFT Payment Amounts exceeds the Limitation"
+
+echo "Get Title"
+echo "$m_subject"
+
+
+rm eft_payment_ammt_check.lst
+
+sqlplus -s $appslgn @$PRODS/eft_payment_amount_check_alert.sql $1
+
+export file_size=$(wc -c < eft_payment_ammt_check.lst)
+
+if [ $file_size -gt 0 ]
+then
+    export m_list=$(cat eft_payment_ammt_check.lst)
+    export m_mess=" \r\n${m_list} "
+    echo "$m_mess" | mailx -r"$sender" -s"$m_subject" "$recipients"
+fi
+
+exit 0

@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>                                                                                                      
+<customization xmlns="http://xmlns.oracle.com/jrad" version="9.0.5.4.89_555" xml:lang="en-US"                                               
+customizes="/oracle/apps/pa/finplan/webui/FinPlanMvPG" developerMode="true">                                                                
+<modifications>                                                                                                                             
+<modify element="FinPlanMvWorkPeopleQuantity" rendered="false"/>                                                                            
+<modify element="FinPlanMvWorkEquipmentQuantity" rendered="false"/>                                                                         
+<modify element="FinPlanMvBasePeopleQuantity" rendered="false"/>
+      <modify element="FinPlanMvBaseEquipmentQuantity" rendered="false"/>
+
+
+</modifications>
+</customization>
+                                                                                                         
+

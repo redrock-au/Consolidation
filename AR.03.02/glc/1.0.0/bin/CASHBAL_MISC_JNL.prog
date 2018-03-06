@@ -1,0 +1,77 @@
+#! /bin/ksh
+
+echo $*
+
+work_dir=$APPLCSF/$APPLOUT
+export work_dir
+cd $work_dir
+
+#export nm=`expr substr $3 1 8`
+export nm=`echo $3|cut -c 1-8`
+
+if [ "$6" = "Y" ]
+then
+   sqlplus $1 @$PRODS/inter_auth_jnl $5
+   if [ $? -ne 0 ]
+   then
+      echo ** Error in inter_auth_jnl...
+      exit 1
+   fi
+else
+   if [ "$7" = "Y" ]
+   then
+      if [ "${10}" = "1" ]
+      then
+         echo Set of books ID: ${10}
+      else
+         sqlplus $1 @$PRODS/cashbal_gst_recoup $5
+         if [ $? -ne 0 ]
+         then
+            echo ** Error in cashbal_gst_recoup...
+            exit 1
+         fi
+      fi
+   else
+      if [ "$8" != "" ]
+      then
+         sqlplus $1 @$PRODS/cashbal_pay_adj $8
+      else
+         if [ "$9" != "" ]
+         then
+            sqlplus $1 @$PRODS/cashbal_rec_adj $9
+         else
+            echo ** Error: At least  one of the journals must be selected ...
+            exit 1
+         fi
+      fi
+   fi
+fi
+
+export nextno=`sqlplus -s $gllgn @$PRODS/interface_id`
+echo $nextno
+
+if [ "$6" = "Y" ]
+then
+   sqlplus -s $gllgn @$PRODS/load_interface '"Authority Balancing"' $nextno
+else
+   if [ "${10}" = "1" ]
+   then
+      echo Subtmit Request: DEDJTR GL Cash Balancing
+      sqlplus $1 @$PRODS/cashbal_all_sources.sql RECOUP 0 $5
+      exit 0
+   else
+      sqlplus -s $gllgn @$PRODS/load_interface '"Cash Balancing"' $nextno
+   fi
+fi
+
+export reqid=`CONCSUB $1 SQLGL 'General Ledger Super User' FINPROD CONCURRENT SQLGL GLLEZL $nextno 1 N '""' '""' N O|cut -f 3 -d" "`
+echo $reqid
+
+sqlplus $1 @$PRODS/concwait $reqid 20 1800
+
+if [ $? != 0 ]
+then
+   exit 1
+fi
+
+exit 0

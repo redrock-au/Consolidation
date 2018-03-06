@@ -1,0 +1,174 @@
+<?xml version='1.0' encoding='UTF-8'?>                                                                                                      
+<customization xmlns="http://xmlns.oracle.com/jrad" version="9.0.5.4.89_555" xml:lang="en-US"                                               
+customizes="/oracle/apps/pa/project/webui/MyProjectsPG" xmlns:oa="http://xmlns.oracle.com/oa">                                              
+<modifications>                                                                                                                             
+<move element="ProgramFlag" after="ProjectId"/>                                                                                             
+<move element="PROJECT_NAME_TAB" after="ProgramFlag"/>                                                                                      
+<move element="PROJECT_NUMBER_TAB" after="PROJECT_NAME_TAB"/>                                                                               
+<move element="PROJECT_LONG_NAME_TAB" after="PROJECT_NUMBER_TAB"/>                                                                          
+<move element="PROJECT_STATUS_TAB" after="PROJECT_LONG_NAME_TAB"/>                                                                          
+<move element="ORGANIZATION_TAB" after="PROJECT_STATUS_TAB"/>                                                                               
+<move element="PROJECT_TYPE_TAB" after="ORGANIZATION_TAB"/>                                                                                 
+<move element="ProjectNameNumber" after="PROJECT_TYPE_TAB"/>                                                                                
+<move element="PROJECT_MANAGER_TAB" after="ProjectNameNumber"/>                                                                             
+<move element="ProjectStatusCode" after="PROJECT_MANAGER_TAB"/>                                                                             
+<move element="START_DATE_TAB" after="ProjectStatusCode"/>                                                                                  
+<move element="COMPLETION_DATE_TAB" after="START_DATE_TAB"/>                                                                                
+<move element="CUSTOMER_TAB" after="COMPLETION_DATE_TAB"/>                                                                                  
+<move element="ProbabilityPercentage" after="CUSTOMER_TAB"/>                                                                                
+<move element="CarryingOutOrgId" after="ProbabilityPercentage"/>                                                                            
+<move element="ProjectManagerId" after="CarryingOutOrgId"/>                                                                                 
+<move element="CustomerId" after="ProjectManagerId"/>                                                                                       
+<move element="ManagerResourceId" after="CustomerId"/>                                                                                      
+<move element="ProbabilityMemberId" after="ManagerResourceId"/>                                                                             
+<move element="PUBLIC_SECTOR_TAB" after="ProbabilityMemberId"/>                                                                             
+<move element="ServiceType" after="PUBLIC_SECTOR_TAB"/>                                                                                     
+<move element="City" after="ServiceType"/>                                                                                                  
+<move element="Region" after="City"/>                                                                                                       
+<move element="Country" after="Region"/>                                                                                                    
+<move element="PROGRESS_AS_OF_DATE_TAB" after="Country"/>                                                                                   
+<move element="REPORT_TYPE_TAB" after="PROGRESS_AS_OF_DATE_TAB"/>                                                                           
+<move element="PROGRESS_STATUS_TAB" after="REPORT_TYPE_TAB"/>                                                                               
+<move element="Currency" after="PROGRESS_STATUS_TAB"/>                                                                                      
+<move element="ProjecOppValueFlow" after="Currency"/>                                                                                       
+<move element="OppValueCurrencyCode" after="ProjecOppValueFlow"/>                                                                           
+<move element="ProjfuncOppValueFlow" after="OppValueCurrencyCode"/>                                                                         
+<move element="ProjfuncCurrencyCode" after="ProjfuncOppValueFlow"/>                                                                         
+<move element="OpportunityValueFlow" after="ProjfuncCurrencyCode"/>                                                                         
+<move element="ProjectCurrencyCode" after="OpportunityValueFlow"/>                                                                          
+<move element="ACCESS_LEVEL_TAB" after="ProjectCurrencyCode"/>                                                                              
+<move element="DESCRIPTION" after="ACCESS_LEVEL_TAB"/>                                                                                      
+<move element="ROLE_TAB" after="DESCRIPTION"/>                                                                                              
+<move element="PERSON_TAB" after="ROLE_TAB"/>                                                                                               
+<move element="CLASS_CATEGORY_TAB" after="PERSON_TAB"/>                                                                                     
+<move element="CLASS_CODE_TAB" after="CLASS_CATEGORY_TAB"/>                                                                                 
+<move element="PROJECT_SET_TAB" after="CLASS_CODE_TAB"/>                                                                                    
+<move element="ACTUAL_START_DATE_TAB" after="PROJECT_SET_TAB"/>                                                                             
+<move element="ACTUAL_FINISH_DATE_TAB" after="ACTUAL_START_DATE_TAB"/>                                                                      
+<move element="BASELINE_START_DATE_TAB" after="ACTUAL_FINISH_DATE_TAB"/>                                                                    
+<move element="BASELINE_FINISH_DATE_TAB" after="BASELINE_START_DATE_TAB"/>                                                                  
+<move element="SCHEDULED_START_DATE_TAB" after="BASELINE_FINISH_DATE_TAB"/>                                                                 
+<move element="SCHEDULED_FINISH_DATE_TAB" after="SCHEDULED_START_DATE_TAB"/>                                                                
+<move element="ProjectStartDate" after="SCHEDULED_FINISH_DATE_TAB"/>                                                                        
+<move element="ProjectFinishDate" after="ProjectStartDate"/>                                                                                
+<move element="TARGET_START_DATE_TAB" after="ProjectFinishDate"/>                                                                           
+<move element="TARGET_END_DATE" after="TARGET_START_DATE_TAB"/>                                                                             
+<move element="ProjectPriority" after="TARGET_END_DATE"/>                                                                                   
+<move element="PPF_MSR_CBLH_PTD" after="ProjectPriority"/>                                                                                  
+<move element="PPF_MSR_CBEH_PTD" after="PPF_MSR_CBLH_PTD"/>                                                                                 
+<move element="PPF_MSR_CBLH_ITD" after="PPF_MSR_CBEH_PTD"/>                                                                                 
+<move element="PPF_MSR_CBEH_ITD" after="PPF_MSR_CBLH_ITD"/>                                                                                 
+<move element="PPF_MSR_TLH_PTD" after="PPF_MSR_CBEH_ITD"/>                                                                                  
+<move element="PPF_MSR_THE_PTD" after="PPF_MSR_TLH_PTD"/>                                                                                   
+<move element="PPF_MSR_TLH_ITD" after="PPF_MSR_THE_PTD"/>                                                                                   
+<move element="PPF_MSR_THE_ITD" after="PPF_MSR_TLH_ITD"/>                                                                                   
+<move element="PPF_MSR_CBRC_PTD" after="PPF_MSR_THE_ITD"/>                                                                                  
+<move element="PPF_MSR_CBBC_PTD" after="PPF_MSR_CBRC_PTD"/>                                                                                 
+<move element="PPF_MSR_CBRC_ITD" after="PPF_MSR_CBBC_PTD"/>                                                                                 
+<move element="PPF_MSR_CBBC_ITD" after="PPF_MSR_CBRC_ITD"/>                                                                                 
+<move element="PPF_MSR_ETC" after="PPF_MSR_CBBC_ITD"/>                                                                                      
+<move element="PPF_MSR_FC" after="PPF_MSR_ETC"/>                                                                                            
+<move element="PPF_MSR_RC_PTD" after="PPF_MSR_FC"/>                                                                                         
+<move element="PPF_MSR_TC_PTD" after="PPF_MSR_RC_PTD"/>                                                                                     
+<move element="PPF_MSR_RC_ITD" after="PPF_MSR_TC_PTD"/>                                                                                     
+<move element="PPF_MSR_TC_ITD" after="PPF_MSR_RC_ITD"/>                                                                                     
+<move element="PPF_MSR_TCC" after="PPF_MSR_TC_ITD"/>                                                                                        
+<move element="PPF_MSR_LRC_ITD" after="PPF_MSR_TCC"/>                                                                                       
+<move element="PPF_MSR_LBC_ITD" after="PPF_MSR_LRC_ITD"/>                                                                                   
+<move element="PPF_MSR_BCPOTC_ITD" after="PPF_MSR_LBC_ITD"/>                                                                                
+<move element="PPF_MSR_CCPTC_ITD" after="PPF_MSR_BCPOTC_ITD"/>                                                                              
+<move element="PPF_MSR_PSE_PTD" after="PPF_MSR_CCPTC_ITD"/>                                                                                 
+<move element="PPF_MSR_PS_PTD" after="PPF_MSR_PSE_PTD"/>                                                                                    
+<move element="PPF_MSR_PSE_ITD" after="PPF_MSR_PS_PTD"/>                                                                                    
+<move element="PPF_MSR_PS_ITD" after="PPF_MSR_PSE_ITD"/>                                                                                    
+<move element="PPF_MSR_PSLH_ITD" after="PPF_MSR_PS_ITD"/>                                                                                   
+<move element="PPF_MSR_PSEH_ITD" after="PPF_MSR_PSLH_ITD"/>                                                                                 
+<move element="PPF_MSR_FCV" after="PPF_MSR_PSEH_ITD"/>                                                                                      
+<move element="PPF_MSR_FCVOB" after="PPF_MSR_FCV"/>                                                                                         
+<move element="PPF_MSR_CBCVOB" after="PPF_MSR_FCVOB"/>                                                                                      
+<move element="PPF_MSR_CBR_PTD" after="PPF_MSR_CBCVOB"/>                                                                                    
+<move element="PPF_MSR_OBR_PTD" after="PPF_MSR_CBR_PTD"/>                                                                                   
+<move element="PPF_MSR_CBR_ITD" after="PPF_MSR_OBR_PTD"/>                                                                                   
+<move element="PPF_MSR_OBR_ITD" after="PPF_MSR_CBR_ITD"/>                                                                                   
+<move element="PPF_MSR_R_PTD" after="PPF_MSR_OBR_ITD"/>                                                                                     
+<move element="PPF_MSR_R_ITD" after="PPF_MSR_R_PTD"/>                                                                                       
+<move element="PPF_MSR_M_PTD" after="PPF_MSR_R_ITD"/>                                                                                       
+<move element="PPF_MSR_MP_PTD" after="PPF_MSR_M_PTD"/>                                                                                      
+<move element="PPF_MSR_M_ITD" after="PPF_MSR_MP_PTD"/>                                                                                      
+<move element="PPF_MSR_MP_ITD" after="PPF_MSR_M_ITD"/>                                                                                      
+<move element="PPF_MSR_RV_ITD" after="PPF_MSR_MP_ITD"/>                                                                                     
+<move element="PPF_MSR_FRV" after="PPF_MSR_RV_ITD"/>                                                                                        
+<move element="PPF_MSR_MV_ITD" after="PPF_MSR_FRV"/>                                                                                        
+<move element="PPF_MSR_MPV_ITD" after="PPF_MSR_MV_ITD"/>                                                                                    
+<move element="PPF_MSR_FMV" after="PPF_MSR_MPV_ITD"/>                                                                                       
+<move element="PPF_MSR_FMPV" after="PPF_MSR_FMV"/>                                                                                          
+<move element="PPF_MSR_PC" after="PPF_MSR_FMPV"/>                                                                                           
+<move element="PPF_MSR_PPC" after="PPF_MSR_PC"/>                                                                                            
+<move element="PPF_MSR_BA" after="PPF_MSR_PPC"/>                                                                                            
+<move element="PPF_MSR_BCWP" after="PPF_MSR_BA"/>                                                                                           
+<move element="PPF_MSR_SPI_ITD" after="PPF_MSR_BCWP"/>                                                                                      
+<move element="PPF_MSR_CPI_ITD" after="PPF_MSR_SPI_ITD"/>                                                                                   
+<move element="PPF_MSR_EVSV_ITD" after="PPF_MSR_CPI_ITD"/>                                                                                  
+<move element="PPF_MSR_EVCV_ITD" after="PPF_MSR_EVSV_ITD"/>                                                                                 
+<move element="PPF_MSR_B" after="PPF_MSR_EVCV_ITD"/>                                                                                        
+<move element="PPF_MSR_RR" after="PPF_MSR_B"/>                                                                                              
+<move element="PPF_MSR_OR" after="PPF_MSR_RR"/>                                                                                             
+<move element="PPF_MSR_PDR" after="PPF_MSR_OR"/>                                                                                            
+<move element="PPF_MSR_FP_CUST1_PTD" after="PPF_MSR_PDR"/>                                                                                  
+<move element="PPF_MSR_FP_CUST2_PTD" after="PPF_MSR_FP_CUST1_PTD"/>                                                                         
+<move element="PPF_MSR_FP_CUST3_PTD" after="PPF_MSR_FP_CUST2_PTD"/>                                                                         
+<move element="PPF_MSR_FP_CUST4_PTD" after="PPF_MSR_FP_CUST3_PTD"/>                                                                         
+<move element="PPF_MSR_FP_CUST5_PTD" after="PPF_MSR_FP_CUST4_PTD"/>                                                                         
+<move element="PPF_MSR_FP_CUST1_ITD" after="PPF_MSR_FP_CUST5_PTD"/>                                                                         
+<move element="PPF_MSR_FP_CUST2_ITD" after="PPF_MSR_FP_CUST1_ITD"/>                                                                         
+<move element="PPF_MSR_FP_CUST3_ITD" after="PPF_MSR_FP_CUST2_ITD"/>                                                                         
+<move element="PPF_MSR_FP_CUST4_ITD" after="PPF_MSR_FP_CUST3_ITD"/>                                                                         
+<move element="PPF_MSR_FP_CUST5_ITD" after="PPF_MSR_FP_CUST4_ITD"/>                                                                         
+<move element="PPF_MSR_AC_CUST1_PTD" after="PPF_MSR_FP_CUST5_ITD"/>                                                                         
+<move element="PPF_MSR_AC_CUST2_PTD" after="PPF_MSR_AC_CUST1_PTD"/>                                                                         
+<move element="PPF_MSR_AC_CUST3_PTD" after="PPF_MSR_AC_CUST2_PTD"/>                                                                         
+<move element="PPF_MSR_AC_CUST4_PTD" after="PPF_MSR_AC_CUST3_PTD"/>                                                                         
+<move element="PPF_MSR_AC_CUST5_PTD" after="PPF_MSR_AC_CUST4_PTD"/>                                                                         
+<move element="PPF_MSR_AC_CUST1_ITD" after="PPF_MSR_AC_CUST5_PTD"/>                                                                         
+<move element="PPF_MSR_AC_CUST2_ITD" after="PPF_MSR_AC_CUST1_ITD"/>                                                                         
+<move element="PPF_MSR_AC_CUST3_ITD" after="PPF_MSR_AC_CUST2_ITD"/>                                                                         
+<move element="PPF_MSR_AC_CUST4_ITD" after="PPF_MSR_AC_CUST3_ITD"/>                                                                         
+<move element="PPF_MSR_AC_CUST5_ITD" after="PPF_MSR_AC_CUST4_ITD"/>                                                                         
+<move element="KPA1" after="PPF_MSR_AC_CUST5_ITD"/>                                                                                         
+<move element="KPA2" after="KPA1"/>                                                                                                         
+<move element="KPA3" after="KPA2"/>                                                                                                         
+<move element="KPA4" after="KPA3"/>                                                                                                         
+<move element="KPA5" after="KPA4"/>                                                                                                         
+<move element="Status" after="KPA5"/>                                                                                                       
+<move element="WorkplanShortcut" after="Status"/>                                                                                           
+<move element="StatusReportsShortcut" after="WorkplanShortcut"/>                                                                            
+<move element="ChangeOrdersShortcut" after="StatusReportsShortcut"/>                                                                        
+<move element="ChangeRequestsShortcut" after="ChangeOrdersShortcut"/>                                                                       
+<move element="IssuesShortcut" after="ChangeRequestsShortcut"/>                                                                             
+<move element="TeamScheduleShortcut" after="IssuesShortcut"/>                                                                               
+<move element="DirectoryShortcut" after="TeamScheduleShortcut"/>                                                                            
+<move element="OverviewShortcut" after="DirectoryShortcut"/>                                                                                
+<move element="AttachmentsShortcut" after="OverviewShortcut"/>                                                                              
+<move element="DISPLAY_ROLE_TAB" after="AttachmentsShortcut"/>                                                                              
+<move element="DISPLAY_CLASS_CATEGORY_TAB" after="DISPLAY_ROLE_TAB"/>                                                                       
+<move element="DISPLAY_REPORT_TYPE_TAB" after="DISPLAY_CLASS_CATEGORY_TAB"/>                                                                
+<move element="ProjPerf" after="DISPLAY_REPORT_TYPE_TAB"/>                                                                                  
+<move element="ProjectManagerId1" after="ProjPerf"/>                                                                                        
+<move element="ProjectOrganizationId1" after="ProjectManagerId1"/>                                                                          
+<insert after="ProjectOrganizationId1">                                                                                                     
+<oa:rawText id="XxdoiCurrentTotalApprovedCostBudget" adminCustomizable="true" cellNoWrapFormat="false" dataType="VARCHAR2"                  
+exportByViewAttr="XxdoiCurrentTotalApprovedCostBudgetExport" initSortSeq="none" prompt="Current Total Approved Cost Budget"                 
+queryable="false" rendered="true" scope="." sortState="no" totalValue="false" userCustomizable="true"                                       
+viewAttr="XxdoiCurrentTotalApprovedCostBudgetOAF" xmlns:oa="http://xmlns.oracle.com/oa"/>                                                   
+</insert>                                                                                                                                   
+<insert after="ProjectOrganizationId1">                                                                                                     
+<oa:rawText id="XxdoiOriginalTotalApprovedCostBudget" adminCustomizable="true" cellNoWrapFormat="false" dataType="VARCHAR2"                 
+exportByViewAttr="XxdoiOriginalTotalApprovedCostBudgetExport" initSortSeq="none"                                                            
+prompt="Original Total Approved Cost Budget" queryable="false" rendered="true" scope="." sortState="no" totalValue="false"                  
+userCustomizable="true" viewAttr="XxdoiOriginalTotalApprovedCostBudgetOAF"                                                                  
+xmlns:oa="http://xmlns.oracle.com/oa"/>
+      </insert>
+   </modifications>
+</customization>
+                                              
+

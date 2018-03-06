@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?>                                                                                                      
+<customization customizes="/oracle/apps/per/irc/common/webui/CommonButtons1RN" xmlns="http://xmlns.oracle.com/jrad"                         
+xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:user="http://xmlns.oracle.com/jrad/user"              
+file-version="$Header: svn://d02584/consolrepos/branches/AR.01.01/oaf_personalization/oracle/apps/per/customizations/site/0/irc/common/webui/CommonButtons1RN.xml 317 2017-05-05 02:11:23Z sryan $" version="9.0.3.8.12_1271" xml:lang="en-US">                                                                         
+<modifications>                                                                                                                             
+<modify element="FndSaveAsDraft" rendered="false"/>                                                                                         
+<move element="FndBack" after="FndCancel"/>                                                                                                 
+<move element="IrcStepNofN" after="FndBack"/>                                                                                               
+<move element="FndNext" after="IrcStepNofN"/>                                                                                               
+<move element="FndReview" after="FndNext"/>                                                                                                 
+<move element="IrcReviewDrillDown" after="FndReview"/>                                                                                      
+<move element="IrcReturn" after="IrcReviewDrillDown"/>
+      <move element="FndSubmit" after="IrcReturn"/>
+      <move                      
+element="FndSaveAsDraft" after="FndSubmit"/>
+   </modifications>
+</customization>
+                                                         
+

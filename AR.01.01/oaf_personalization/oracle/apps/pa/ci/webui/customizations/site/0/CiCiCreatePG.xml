@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>                                                                                                      
+<customization xmlns="http://xmlns.oracle.com/jrad" version="9.0.5.4.89_555" xml:lang="en-US"                                               
+customizes="/oracle/apps/pa/ci/webui/CiCiCreatePG">                                                                                         
+<modifications>                                                                                                                             
+<modify element="PaFooterRg.paButtons" controllerClass="doi.oracle.apps.pa.ci.webui.DOICICommonFooterTopCO"/>                               
+<modify element="CIUpdateDetails" controllerClass="doi.oracle.apps.pa.ci.webui.DOICIUpdateTopCO"/>                                          
+<modify element="infoText" controllerClass="doi.oracle.apps.pa.ci.webui.DOICICopyFromCO"/>                                                  
+<modify element="detail1Region.Summary" prompt="Title"/>                                                                                    
+<modify element="Classification" prompt="Category"/>                                                                                        
+<modify element="EffortLevel" rendered="false"/>                                                                                            
+<modify element="Priority" required="yes"/>                                                                                                 
+<modify element="DateRequired" required="yes"/>                                                                                             
+<modify element="Reason" rendered="false"/>                                                                                                 
+<modify element="Price" prompt="Cost"/>                                                                                                     
+<modify element="Currency" rendered="false"/>                                                                                               
+<modify element="sourceRegion.SourceTypeList" prompt="Fund Source"/>                                                                        
+<modify element="CiNumber" prompt="Fund Source"/>                                                                                           
+<modify element="sourceRegion.SourcePersonId" rendered="false"/>                                                                            
+<modify element="sourceRegion.SourceDateRequired" rendered="false"/>                                                                        
+<modify element="sourceRegion.SourceComment" prompt="Consequence"/>                                                                         
+<modify element="DummyLabel3" prompt="Other Change Alert Information"/>                                                                     
+<modify element="DummyLabel1" prompt="Other Information"/>
+      <modify element="sourceRegion.SourceNumber" prompt="Location"/>
+          
+
+<modify element="sourceRegion" text=""/>
+   </modifications>
+</customization>
+                                                             
+

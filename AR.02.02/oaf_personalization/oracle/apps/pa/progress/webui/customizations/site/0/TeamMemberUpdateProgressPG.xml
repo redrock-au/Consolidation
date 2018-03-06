@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8'?>                                                                                                      
+<customization xmlns="http://xmlns.oracle.com/jrad" version="9.0.5.4.89_555" xml:lang="en-US"                                               
+customizes="/oracle/apps/pa/progress/webui/TeamMemberUpdateProgressPG">                                                                     
+<modifications>                                                                                                                             
+<move element="taskcolumn53" after="taskcolumn54"/>                                                                                         
+<move element="taskcolumn63" after="taskcolumn53"/>                                                                                         
+<move element="taskcolumn27" after="taskcolumn63"/>                                                                                         
+<move element="taskcolumn26" after="taskcolumn27"/>                                                                                         
+<move element="taskcolumn49" after="taskcolumn26"/>                                                                                         
+<move element="taskcolumn10" after="taskcolumn49"/>                                                                                         
+<move element="taskcolumn37" after="taskcolumn10"/>                                                                                         
+<move element="taskcolumn11" after="taskcolumn37"/>                                                                                         
+<move element="taskcolumn19" after="taskcolumn11"/>                                                                                         
+<move element="taskcolumn18" after="taskcolumn19"/>                                                                                         
+<move element="taskcolumn12" after="taskcolumn18"/>                                                                                         
+<move element="taskcolumn23" after="taskcolumn12"/>                                                                                         
+<move element="taskcolumn62" after="taskcolumn23"/>                                                                                         
+<move element="taskcolumn13" after="taskcolumn62"/>                                                                                         
+<move element="taskcolumn48" after="taskcolumn13"/>                                                                                         
+<move element="taskcolumn47" after="taskcolumn48"/>                                                                                         
+<move element="taskcolumn29" after="taskcolumn47"/>                                                                                         
+<move element="column1" after="taskcolumn29"/>                                                                                              
+<move element="taskcolumn2" after="column1"/>                                                                                               
+<move element="taskcolumnGroup1" after="taskcolumn2"/>                                                                                      
+<move element="taskcolumnGroup2" after="taskcolumnGroup1"/>                                                                                 
+<move element="taskcolumn14" after="taskcolumnGroup2"/>                                                                                     
+<move element="taskcolumn15" after="taskcolumn14"/>                                                                                         
+<move element="taskcolumn16" after="taskcolumn15"/>                                                                                         
+<move element="taskcolumn17" after="taskcolumn16"/>                                                                                         
+<move element="taskcolumn20" after="taskcolumn17"/>                                                                                         
+<move element="taskcolumn24" after="taskcolumn20"/>                                                                                         
+<move element="taskcolumn25" after="taskcolumn24"/>                                                                                         
+<move element="taskcolumn28" after="taskcolumn25"/>                                                                                         
+<move element="taskcolumn30" after="taskcolumn28"/>                                                                                         
+<move element="taskcolumn32" after="taskcolumn30"/>                                                                                         
+<move element="taskcolumn33" after="taskcolumn32"/>                                                                                         
+<move element="taskcolumn34" after="taskcolumn33"/>                                                                                         
+<move element="taskcolumn35" after="taskcolumn34"/>                                                                                         
+<move element="taskcolumn36" after="taskcolumn35"/>                                                                                         
+<move element="taskcolumn38" after="taskcolumn36"/>                                                                                         
+<move element="taskcolumn39" after="taskcolumn38"/>                                                                                         
+<move element="taskcolumn40" after="taskcolumn39"/>                                                                                         
+<move element="taskcolumn41" after="taskcolumn40"/>                                                                                         
+<move element="taskcolumn42" after="taskcolumn41"/>                                                                                         
+<move element="taskcolumn43" after="taskcolumn42"/>                                                                                         
+<move element="taskcolumn44" after="taskcolumn43"/>                                                                                         
+<move element="taskcolumn55" after="taskcolumn44"/>                                                                                         
+<move element="taskcolumn57" after="taskcolumn55"/>                                                                                         
+<move element="taskcolumn58" after="taskcolumn57"/>                                                                                         
+<move element="taskcolumn64" after="taskcolumn58"/>                                                                                         
+<move element="taskcolumn74" after="taskcolumn64"/>                                                                                         
+<move element="taskcolumn75" after="taskcolumn74"/>                                                                                         
+<move element="taskcolumn76" after="taskcolumn75"/>                                                                                         
+<move element="taskcolumn77" after="taskcolumn76"/>                                                                                         
+<move element="taskcolumn81" after="taskcolumn77"/>                                                                                         
+<move element="taskcolumn82" after="taskcolumn81"/>                                                                                         
+<move element="taskcolumn83" after="taskcolumn82"/>                                                                                         
+<move element="taskcolumn84" after="taskcolumn83"/>                                                                                         
+<move element="taskcolumn80" after="taskcolumn84"/>                                                                                         
+<move element="taskcolumn86" after="taskcolumn80"/>
+      <move element="taskProjectId" after="taskcolumn86"/>
+      <move                  
+element="taskTaskId" after="taskProjectId"/>
+   </modifications>
+</customization>
+                                                         
+

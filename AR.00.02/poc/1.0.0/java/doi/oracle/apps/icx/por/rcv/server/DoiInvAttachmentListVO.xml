@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding='windows-1252'?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<!--/*$Header: svn://d02584/consolrepos/branches/AR.00.02/poc/1.0.0/java/doi/oracle/apps/icx/por/rcv/server/DoiInvAttachmentListVO.xml 1957 2017-07-24 05:12:17Z svnuser $*/-->
+
+<ViewObject
+   Name="DoiInvAttachmentListVO"
+   BindingStyle="Oracle"
+   CustomQuery="true"
+   RowClass="oracle.apps.fnd.framework.server.OAViewRowImpl"
+   ComponentClass="doi.oracle.apps.icx.por.rcv.server.DoiInvAttachmentListVOImpl"
+   MsgBundleClass="oracle.jbo.common.JboResourceBundle"
+   FetchMode="FETCH_AS_NEEDED"
+   Passivate="None"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT import_id file_import_id, 
+                 Invoice_num,  
+                 po_header_id, 
+                 po_number_attachment,
+                 po_number_attachment attribute15 ,
+                (
+                   SELECT MAX(segment1) 
+                   FROM po_headers_all pha
+                   WHERE pha.po_header_id = xisf.po_header_id
+                ) po_number,
+                invoice_amount_exc_gst invoice_amount,
+                xxpo_rcv_oaf_util_pkg.get_primary(xisf.po_header_id,invoice_amount_exc_gst) primary,
+                xxpo_rcv_oaf_util_pkg.get_secondary(xisf.po_header_id,invoice_amount_exc_gst)secondary,
+                invoice_date invoice_date
+FROM     xxap_inv_scanned_file xisf
+WHERE invoice_amount_exc_gst IS NOT NULL
+AND        po_header_id IS NOT NULL
+AND        nvl(active_flag,'Y') = 'Y'
+AND        (SELECT nvl(sum(nvl(x.quantity,0)),0) from rcv_transactions x where x.attribute5 = xisf.import_id ) =0
+AND        NOT EXISTS (SELECT 1 from ap_invoices_all x where x.invoice_num = xisf.invoice_num and x.vendor_id = xisf.vendor_internal_id )
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_version" Value="9.0.3.14.01" />
+      <Attr Name="_CodeGenFlagNew" Value="36" />
+   </DesignTime>
+   <ViewAttribute
+      Name="FileImportId"
+      IsPersistent="false"
+      IsNotNull="true"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="VARCHAR2"
+      AliasName="FILE_IMPORT_ID"
+      Expression="FILE_IMPORT_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="InvoiceNum"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="INVOICE_NUM"
+      Expression="INVOICE_NUM"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PoHeaderId"
+      IsPersistent="false"
+      Precision="10"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PO_HEADER_ID"
+      Expression="PO_HEADER_ID"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="10" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PoNumberAttachment"
+      IsPersistent="false"
+      Precision="255"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PO_NUMBER_ATTACHMENT"
+      Expression="PO_NUMBER_ATTACHMENT"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="255" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute15"
+      IsPersistent="false"
+      Precision="150"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="Attribute15"
+      Expression="Attribute15"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="150" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PoNumber"
+      IsPersistent="false"
+      Precision="20"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PO_NUMBER"
+      Expression="PO_NUMBER"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="20" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="InvoiceAmount"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="INVOICE_AMOUNT"
+      Expression="INVOICE_AMOUNT"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Primary"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="PRIMARY1"
+      Expression="PRIMARY"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Secondary"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="SECONDARY"
+      Expression="SECONDARY"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="InvoiceDate"
+      IsPersistent="false"
+      Type="java.lang.String"
+      ColumnType="DATE"
+      AliasName="INVOICE_DATE"
+      Expression="INVOICE_DATE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

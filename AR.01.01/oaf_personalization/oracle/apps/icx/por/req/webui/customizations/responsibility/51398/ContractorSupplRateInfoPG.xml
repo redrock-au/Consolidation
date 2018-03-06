@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8'?>                                                                                                      
+<customization xmlns="http://xmlns.oracle.com/jrad" version="9.0.5.4.89_555" xml:lang="en-US"                                               
+customizes="/oracle/apps/icx/por/req/webui/ContractorSupplRateInfoPG">                                                                      
+<modifications>                                                                                                                             
+<modify element="SupplierRadioGroup" rendered="false"/>                                                                                     
+<modify element="SelectSupplierTable.SupplierContact" rendered="false"/>                                                                    
+<modify element="SelectSupplierTable.SupplierPhone" rendered="false"/>                                                                      
+<modify element="SelectSupplierTable.SupplierEmail" rendered="false"/>                                                                      
+<modify element="SelectSupplierTable.SupplierFax" rendered="false"/>                                                                        
+<modify element="SelectSupplierTable.SourceDocNumber" rendered="false"/>                                                                    
+<modify element="SelectSupplierTable.SourceDocLineNum" rendered="false"/>                                                                   
+<modify element="SelectSupplierTable.DocumentTypeCode" rendered="false"/>                                                                   
+<modify element="SelectSupplierTable.NoteToSupplierPrompt" rendered="false"/>                                                               
+<modify element="SelectSupplierTable.AddNoteToSupplier" rendered="false"/>                                                                  
+<modify element="SelectSupplierTable.Unit" rendered="false"/>                                                                               
+<modify element="SelectSupplierTable.SupplierRate" rendered="false"/>                                                                       
+<modify element="SelectSupplierTable.SupplierAmount" rendered="false"/>                                                                     
+<modify element="SelectSupplierTable.RateNegotiable" rendered="false"/>                                                                     
+<modify element="SelectSupplierTable.AmountNegotiable" rendered="false"/>                                                                   
+<modify element="SelectSupplierTable.RateDifferentialYes" rendered="false"/>                                                                
+<modify element="SelectSupplierTable.RateDifferentialNo" rendered="false"/>                                                                 
+<modify element="SelectSupplierTable.SupplierAmountLimit" rendered="false"/>                                                                
+<modify element="AllowRateDiff" rendered="false"/>                                                                                          
+<modify element="UnitOfMeasure" defaultValue="HOUR" readOnly="false"/>                                                                      
+<modify element="UnitOfMeasureReadOnly" defaultValue="HOUR" readOnly="false"/>                                                              
+<modify element="EstimatedQuantity" prompt="Estimated Labor Hour" required="yes"/>                                                          
+<modify element="SelectSupplierTable.SupplierRateLimit" rendered="false"/>                                                                  
+<modify element="PageLayoutRN" controllerClass="doi.oracle.apps.icx.por.req.webui.ContractorSupplRateInfoCO"/>                              
+<modify element="SelectSupplierTable" controllerClass="doi.oracle.apps.icx.por.req.webui.ContractorSupplInfoCO"/>
+                         
+
+</modifications>
+</customization>
+                                                                                                         
+

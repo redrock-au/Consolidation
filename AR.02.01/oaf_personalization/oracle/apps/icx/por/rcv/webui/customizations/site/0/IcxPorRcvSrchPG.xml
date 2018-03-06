@@ -1,0 +1,76 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<customization xmlns="http://xmlns.oracle.com/jrad" version="9.0.5.5.65_565" xml:lang="en-US" customizes="/oracle/apps/icx/por/rcv/webui/IcxPorRcvSrchPG" MDSActiveDoc="true" xmlns:oa="http://xmlns.oracle.com/oa">
+   <modifications>
+      <modify element="OrderNumber" prompt="PO Number"/>
+      <modify element="OrderType" rendered="false"/>
+      <modify element="PoNumber" prompt="PO Number"/>
+      <modify element="RcvShipmentNumber" rendered="false"/>
+      <move element="RequisitionNumberBlind" after="RequisitionNumber"/>
+      <move element="ItemDescription" after="RequisitionNumberBlind"/>
+      <move element="ItemDescriptionBlind" after="ItemDescription"/>
+      <move element="NeedByDate" after="ItemDescriptionBlind"/>
+      <move element="ReceiptQuantity" after="NeedByDate"/>
+      <move element="ReceiptUnit" after="ReceiptQuantity"/>
+      <move element="xx_derived_qty_amt" before="ReceiptUnit"/>
+      <move element="QuantityOrdered" after="ReceiptUnit"/>
+      <move element="QuantityDelivered" after="QuantityOrdered"/>
+      <move element="Source" after="QuantityDelivered"/>
+      <move element="OrderType" after="Source"/>
+      <move element="PoNumber" after="OrderType"/>
+      <move element="OperatingUnit" after="PoNumber"/>
+      <move element="RcvShipmentNumber" after="OperatingUnit"/>
+      <move element="RequesterName" after="RcvShipmentNumber"/>
+      <move element="ItemNumber" after="RequesterName"/>
+      <move element="ReqHeaderId" after="ItemNumber"/>
+      <move element="ReqLineId" after="ReqHeaderId"/>
+      <move element="VendorProductNum" after="ReqLineId"/>
+      <move element="DistributionNumber" after="VendorProductNum"/>
+      <move element="PrimaryUomClass" after="DistributionNumber"/>
+      <move element="SupplierSite" after="PrimaryUomClass"/>
+      <move element="ReceiptDate" after="SupplierSite"/>
+      <move element="PoLineNumber" after="ReceiptDate"/>
+      <move element="PoShipmentNumber" after="PoLineNumber"/>
+      <move element="DeliverToLocationId" after="PoShipmentNumber"/>
+      <move element="RequesterId" after="DeliverToLocationId"/>
+      <move element="Unit" after="RequesterId"/>
+      <move element="MatchingBasis" after="Unit"/>
+      <move element="ManufacturerPartNumber" after="MatchingBasis"/>
+      <move element="PromisedDate" after="ManufacturerPartNumber"/>
+      <insert after="PromisedDate">
+         <oa:formValue id="XXINVOICEDATEFV" adminCustomizable="true" dataType="VARCHAR2" encrypted="false" queryable="false" rendered="true" scope="." securityMode="standard" selectiveSearchCriteria="false" userCustomizable="false" viewAttr="Attribute4" viewName="ReceiveReqItemsVO" xmlns:oa="http://xmlns.oracle.com/oa"/>
+      </insert>
+      <insert after="PromisedDate">
+         <oa:messageLovInput id="XXINVOICEMULTI" adminCustomizable="true" cellNoWrapFormat="false" dataType="VARCHAR2" disabled="false" externalListOfValues="/doi/oracle/apps/icx/por/rcv/webui/DoiInvAttachmentLOVRN" initSortSeq="none" prompt="Invoice Number" queryable="true" readOnly="false" rendered="${oa.ReceiveReqItemsVO.DisplayMultiInv}" required="no" rows="1" scope="." selectiveSearchCriteria="false" sortState="no" tipType="none" unvalidated="false" userCustomizable="false" vAlign="middle" viewAttr="Attribute1" viewName="ReceiveReqItemsVO" warnAboutChanges="true" xmlns:oa="http://xmlns.oracle.com/oa">
+            <lovMappings>
+               <lovMap id="LOVMAP7" criteriaFrom="xxlovFV" lovItem="PoHeaderId" programmaticQuery="false" requiredForLOV="false" resultTo="xx_po_header_id1" scope="." useForValidation="default"/>
+               <lovMap id="LOVMAP8" lovItem="InvoiceNum" programmaticQuery="false" requiredForLOV="false" resultTo="XXINVOICEMULTI" scope="." useForValidation="default"/>
+               <lovMap id="LOVMAP9" lovItem="InvoiceDate" programmaticQuery="false" requiredForLOV="false" resultTo="XXINVOICEDATEFV" scope="." useForValidation="default"/>
+               <lovMap id="LOVMAP10" lovItem="InvAmount" programmaticQuery="false" requiredForLOV="false" resultTo="XXINVAMOUNT" scope="." useForValidation="default"/>
+            </lovMappings>
+         </oa:messageLovInput>
+      </insert>
+      <insert after="PromisedDate">
+         <oa:formValue id="XXINVAMOUNT" adminCustomizable="true" dataType="VARCHAR2" encrypted="false" queryable="false" rendered="true" scope="." securityMode="standard" selectiveSearchCriteria="false" userCustomizable="false" viewAttr="Attribute3" viewName="ReceiveReqItemsVO" xmlns:oa="http://xmlns.oracle.com/oa"/>
+      </insert>
+      <insert after="PromisedDate">
+         <oa:formValue id="xxlovFV" adminCustomizable="true" dataType="VARCHAR2" encrypted="false" prompt="xxlovFV" queryable="false" rendered="true" scope="." securityMode="standard" selectiveSearchCriteria="false" userCustomizable="false" viewAttr="PoHeaderId" viewName="ReceiveReqItemsVO" xmlns:oa="http://xmlns.oracle.com/oa"/>
+      </insert>
+      <insert after="PromisedDate">
+         <oa:messageLovInput id="XXINVOICE" adminCustomizable="true" cellNoWrapFormat="false" dataType="VARCHAR2" disabled="false" externalListOfValues="/doi/oracle/apps/icx/por/rcv/webui/DoiInvAttachmentLOVRN" initSortSeq="none" prompt="Invoice Number" queryable="true" readOnly="false" rendered="${oa.ReceiveReqItemsVO.DisplaySingleInv}" required="no" rows="1" scope="." selectiveSearchCriteria="false" sortState="no" tipType="none" unvalidated="false" userCustomizable="false" vAlign="middle" viewAttr="Attribute1" viewName="ReceiveReqItemsVO" warnAboutChanges="true" xmlns:oa="http://xmlns.oracle.com/oa">
+            <lovMappings>
+               <lovMap id="XXINVNUM" criteriaFrom="xxlovFV" lovItem="PoHeaderId" programmaticQuery="false" requiredForLOV="true" resultTo="xx_po_header_id1" scope="." useForValidation="default"/>
+               <lovMap id="LOVMAP2" lovItem="InvoiceNum" programmaticQuery="false" requiredForLOV="false" resultTo="XXINVOICE" scope="." useForValidation="default"/>
+               <lovMap id="LOVMAP3" lovItem="primary" programmaticQuery="false" requiredForLOV="false" resultTo="ReceiptQuantity" scope="." useForValidation="default"/>
+               <lovMap id="LOVMAP4" lovItem="secondary" programmaticQuery="false" requiredForLOV="false" resultTo="xx_derived_qty_amt" scope="." useForValidation="default"/>
+               <lovMap id="LOVMAP5" lovItem="InvAmount" programmaticQuery="false" requiredForLOV="false" resultTo="XXINVAMOUNT" scope="." useForValidation="default"/>
+               <lovMap id="LOVMAP6" lovItem="InvoiceDate" programmaticQuery="false" requiredForLOV="false" resultTo="XXINVOICEDATEFV" scope="." useForValidation="default"/>
+            </lovMappings>
+         </oa:messageLovInput>
+      </insert>
+      <insert after="PromisedDate">
+         <oa:messageTextInput id="xx_po_header_id1" adminCustomizable="true" cellNoWrapFormat="false" dataType="VARCHAR2" disabled="false" initSortSeq="none" prompt="PO Header ID" queryable="false" readOnly="false" rendered="false" required="no" rows="1" scope="." secret="false" selectiveSearchCriteria="false" serverUnvalidated="false" sortState="no" tipType="none" totalValue="false" userCustomizable="false" vAlign="middle" viewAttr="PoHeaderId" viewName="ReceiveReqItemsVO" warnAboutChanges="true" xmlns:oa="http://xmlns.oracle.com/oa"/>
+      </insert>
+      <modify element="SearchResultsTip" tipMessageAppShortName="ICX" tipMessageName="XXICX_POR_RCV_SRCH_TABLE_TIP"/>
+      <modify element="ReceiptQuantity" tipMessageAppShortName="ICX"/>
+   </modifications>
+</customization>

@@ -1,0 +1,35 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<customization xmlns="http://xmlns.oracle.com/jrad" version="9.0.5.5.65_565" xml:lang="en-US" customizes="/oracle/apps/icx/icatalog/shopping/webui/NonCatalogRequestPG">
+   <modifications>
+      <modify element="UnitPrice" prompt="Unit Price (GST Excl)"/>
+      <modify element="Amount" prompt="Amount (GST Excl)"/>
+      <modify element="NewSupplierFlag" rendered="false"/>
+      <modify element="PageLayoutRN" controllerClass="doi.oracle.apps.icx.icatalog.shopping.webui.DoiNonCatalogRequestCO" title="Create Requisitions"/>
+      <modify element="Currency" readOnly="true" styleClass="OraDataText"/>
+      <modify element="ItemType" defaultValue="TOTAL_AMOUNT" tipMessageAppShortName="ICX" tipMessageName="POC_POR_ITEM_TYPE_TIP"/>
+      <modify element="ContractNumberOnNonCat" rendered="false"/>
+      <modify element="SupplierOnNonCat" required="yes"/>
+      <modify element="SupplierSiteOnNonCat" required="yes"/>
+      <move element="ItemType" after="RequestType"/>
+      <move element="ItemDescription" after="ItemType"/>
+      <move element="Category" after="ItemDescription"/>
+      <move element="CategoryChoice" after="Category"/>
+      <move element="Quantity" after="CategoryChoice"/>
+      <move element="UnitPrice" after="Quantity"/>
+      <move element="RatePerUnit" after="UnitPrice"/>
+      <move element="UnitOfMeasureTl" after="RatePerUnit"/>
+      <move element="UnitOfMeasureChoice" after="UnitOfMeasureTl"/>
+      <move element="Amount" after="UnitOfMeasureChoice"/>
+      <move element="Currency" after="Amount"/>
+      <move element="NegotiatedByPreparerFlag" after="Currency"/>
+      <move element="RateType" after="NegotiatedByPreparerFlag"/>
+      <move element="RateDate" after="RateType"/>
+      <move element="Rate" after="RateDate"/>
+      <move element="UnitOfMeasure" after="Rate"/>
+      <move element="CategoryId" after="UnitOfMeasure"/>
+      <move element="CommodityId" after="CategoryId"/>
+      <move element="RestrictCategoryFlag" after="CommodityId"/>
+      <move element="AddToFavorite" after="ClearAll"/>
+      <move element="AddToCart" after="AddToFavorite"/>
+   </modifications>
+</customization>

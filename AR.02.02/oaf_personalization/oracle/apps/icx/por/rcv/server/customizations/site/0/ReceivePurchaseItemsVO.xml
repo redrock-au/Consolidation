@@ -1,0 +1,4 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<customization xmlns="http://xmlns.oracle.com/jrad" xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:user="http://xmlns.oracle.com/user" version="9.0.3.8.13_1570" xml:lang="en-US" customizes="/oracle/apps/icx/por/rcv/server/ReceivePurchaseItemsVO">
+   <replace with="/doi/oracle/apps/icx/por/rcv/server/DoiReceivePurchaseItemsVO"/>
+</customization>

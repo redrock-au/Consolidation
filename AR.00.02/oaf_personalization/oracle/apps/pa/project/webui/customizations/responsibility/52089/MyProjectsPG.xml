@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>                                                                                                      
+<customization xmlns="http://xmlns.oracle.com/jrad" version="9.0.5.4.89_555" xml:lang="en-US"                                               
+customizes="/oracle/apps/pa/project/webui/MyProjectsPG" developerMode="true">                                                               
+<modifications>                                                                                                                             
+<modify element="PPF_MSR_CBR_ITD" rendered="true"/>                                                                                         
+<modify element="PPF_MSR_TC_ITD" rendered="true"/>                                                                                          
+<modify element="PPF_MSR_TLH_ITD" rendered="true"/>                                                                                         
+<modify element="PPF_MSR_TCC" rendered="true"/>                                                                                             
+<modify element="PPF_MSR_CBR_PTD" rendered="true"/>                                                                                         
+<modify element="PPF_MSR_TC_PTD" rendered="true"/>                                                                                          
+<modify element="PPF_MSR_TLH_PTD" rendered="true"/>
+      <modify element="PPF_MSR_BA" rendered="true"/>
+      <modify element="PPF_MSR_OR" 
+rendered="true"/>
+   </modifications>
+</customization>
+                                                                                    
+

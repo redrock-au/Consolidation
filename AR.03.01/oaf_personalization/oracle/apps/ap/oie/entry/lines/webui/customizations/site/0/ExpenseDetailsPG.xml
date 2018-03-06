@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8'?>                                                                                                      
+<customization xmlns="http://xmlns.oracle.com/jrad" version="9.0.5.4.89_555" xml:lang="en-US"                                               
+customizes="/oracle/apps/ap/oie/entry/lines/webui/ExpenseDetailsPG">                                                                        
+<modifications>                                                                                                                             
+<modify element="OIEDetails.DetailExpGroup____1" rendered="false"/>                                                                         
+<modify element="OIEDetails.DetailDuplicate____1" rendered="false"/>                                                                        
+<modify element="OIEDetails.DetailReceiptMissing" tipMessageAppShortName="ICX" tipMessageName="APC_CC_REC_MISSING_TIP"                      
+tipType="longMessage"/>
+   </modifications>
+</customization>
+                                                                              
+

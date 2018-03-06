@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>                                                                                                      
+<customization xmlns="http://xmlns.oracle.com/jrad" file-version="$Header: svn://d02584/consolrepos/branches/AR.02.02/oaf_personalization/oracle/apps/ap/oie/webui/customizations/responsibility/51635/OIEMAINPAGE.xml 317 2017-05-05 02:11:23Z sryan $"     
+version="9.0.5.4.81_481" xml:lang="en-US" customizes="/oracle/apps/ap/oie/webui/OIEMAINPAGE"                                                
+xmlns:user="http://xmlns.oracle.com/jrad/user" user:responsibilityKey="oie_expense_auditor_helpdesk" user:responsibilityAppId="200"         
+package="/oracle/apps/ap/oie/webui/customizations/responsibility/60286">                                                                    
+<modifications>
+      <modify element="productBranding" text="Expenses Help Desk"/>
+   </modifications>
+</customization>
+                  
+

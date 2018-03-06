@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>                                                                                                      
+<customization xmlns="http://xmlns.oracle.com/jrad" version="9.0.5.4.89_555" xml:lang="en-US"                                               
+customizes="/oracle/apps/ap/oie/entry/lines/webui/CreditCardLinesPG">                                                                       
+<modifications>                                                                                                                             
+<modify element="BusinessToPersonal" rendered="false"/>                                                                                     
+<move element="LineNumber____3" after="ErrorExist____4"/>                                                                                   
+<move element="Date" after="LineNumber____3"/>                                                                                              
+<move element="ReceiptAmount____1" after="Date"/>                                                                                           
+<move element="ProjectNumber" after="ReceiptAmount____1"/>                                                                                  
+<move element="TaskNumber" after="ProjectNumber"/>                                                                                          
+<move element="ExpenseType" after="TaskNumber"/>                                                                                            
+<move element="AwardNumber" after="ExpenseType"/>                                                                                           
+<move element="FndExchangeRate" after="AwardNumber"/>                                                                                       
+<move element="LocationId" after="FndExchangeRate"/>                                                                                        
+<move element="OIELocation" after="LocationId"/>                                                                                            
+<move element="Merchant" after="OIELocation"/>                                                                                              
+<move element="Justification" after="Merchant"/>                                                                                            
+<move element="ExpenseGroup" after="Justification"/>                                                                                        
+<move element="RcptMissingFlag" after="ExpenseGroup"/>                                                                                      
+<move element="TaxIncludedFlag" after="RcptMissingFlag"/>                                                                                   
+<move element="TaxCode" after="TaxIncludedFlag"/>                                                                                           
+<move element="CostCenter" after="TaxCode"/>                                                                                                
+<move element="ReimbursableAmount" after="CostCenter"/>                                                                                     
+<move element="Details" after="ReimbursableAmount"/>
+      <move element="FndItemize" after="Details"/>
+      <move element="Remove"        
+after="FndItemize"/>
+   </modifications>
+</customization>
+                                                                                 
+

@@ -1,0 +1,942 @@
+<?xml version="1.0" encoding='windows-1252'?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<!-- $Header: svn://d02584/consolrepos/branches/AR.03.01/poc/1.0.0/java/doi/oracle/apps/icx/por/rcv/server/DoiReceiveReqItemsVO.xml 1173 2017-06-23 00:56:04Z svnuser $*/-->
+
+<ViewObject
+   Name="DoiReceiveReqItemsVO"
+   Extends="oracle.apps.icx.por.rcv.server.ReceiveReqItemsVO"
+   BindingStyle="Oracle"
+   CustomQuery="true"
+   RowClass="oracle.apps.icx.por.rcv.server.ReceiveItemsVORowImpl"
+   ComponentClass="doi.oracle.apps.icx.por.rcv.server.DoiReceiveReqItemsVOImpl"
+   MsgBundleClass="oracle.jbo.common.JboResourceBundle"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+select  REQ_LINE_ID, 
+	RCV_SHIPMENT_NUMBER, 
+	ORDER_TYPE_CODE, 
+	RECEIPT_DATE, 
+	REQUESTOR_ID, 
+	PO_HEADER_ID,
+        PO_RELEASE_ID,
+        ORDER_ID, 
+	PO_NUMBER, 
+	PO_LINE_ID, 
+	PO_LINE_LOCATION_ID, 
+	PO_RELEASE_NUMBER,
+	PO_LINE_NUMBER,
+	PO_SHIPMENT_NUMBER,
+	TO_ORGANIZATION_ID,
+	ITEM_ID, 
+	PRIMARY_UOM,
+	PRIMARY_UOM_CLASS, 
+	QUANTITY_DELIVERED, 
+	EXPECTED_RECEIPT_QTY,
+	ITEM_DESCRIPTION, 
+	SHIP_TO_LOCATION_ID, 
+	VENDOR_ID, 
+	SOURCE, 
+	VENDOR_SITE_ID, 
+	SUPPLIER_SITE, 
+	NEED_BY_DATE, 
+	PROMISED_DATE, 
+	EXPECTED_RECEIPT_DATE, 
+	ORDERED_QTY,
+	ORDERED_UOM, 
+	USSGL_TRANSACTION_CODE, 
+	PO_DISTRIBUTION_ID, 
+	PO_NUM_REL_NUM,
+	PRIMARY_UOM UNIT,
+	EXPECTED_RECEIPT_QTY RECEIPT_QUANTITY,
+	REQ_DISTRIBUTION_ID,
+	DELIVER_TO_LOCATION_ID,	
+	REQ_HEADER_ID,
+	req_number REQUISITION_NUMBER,
+ 	(select lookup.meaning 
+	 from fnd_lookup_values_vl lookup
+	 where lookup.lookup_code = 
+		rcv.order_type_code
+	 and lookup.lookup_type ='POR_RCV_ORDER_TYPE')
+	ORDER_TYPE,
+	PO_DISTRIBUTION_NUM,
+	VENDOR_PRODUCT_NUM,
+	ORDER_NUMBER,
+  matching_basis,
+	decode(req_number, null,
+	  'ReqLinkDisabled', 'ReqLinkEnabled') 
+	REQ_LINK,
+	null shipment_header_id,
+        MANUFACTURER_PART_NUMBER,
+        OPERATING_UNIT,
+       to_char(null) attribute1,
+       to_char(null) attribute2,
+       to_char(null) attribute3,
+       to_char(null) attribute4,
+       to_char(null) attribute5,
+       to_char(null) attribute6,
+       to_char(null) attribute7,
+       to_char(null) attribute8,
+       case when nvl(fnd_profile.VALUE_SPECIFIC(NAME   => 'POC_KOFAX_ENABLED',ORG_ID => (select org_id from PO_REQUISITION_LINES_ALL x where x.requisition_line_id = rcv.REQ_LINE_ID)),'N') = 'N' THEN 0 ELSE (case when (select count(1) from po_lines_all l where l.po_header_id = rcv.po_header_id )>1 then 0 else 1 end) END display_single_inv,
+       case when nvl(fnd_profile.VALUE_SPECIFIC(NAME   => 'POC_KOFAX_ENABLED',ORG_ID => (select org_id from PO_REQUISITION_LINES_ALL x where x.requisition_line_id = rcv.REQ_LINE_ID)),'N') = 'N' THEN 0 ELSE (case when (select count(1) from po_lines_all l where l.po_header_id = rcv.po_header_id)<=1 then 0 else 1 end) END display_multi_inv,
+case when nvl(fnd_profile.VALUE_SPECIFIC(NAME => 'POC_KOFAX_ENABLED',ORG_ID => (select org_id from PO_REQUISITION_LINES_ALL x where x.requisition_line_id = rcv.REQ_LINE_ID)),'N') = 'N' THEN 0 ELSE 1 END displaykofax
+from 	por_rcv_req_items_v rcv
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_version" Value="9.0.3.14.01" />
+      <Attr Name="_CodeGenFlagNew" Value="36" />
+   </DesignTime>
+   <ViewAttribute
+      Name="ReqLineId"
+      IsQueriable="false"
+      IsPersistent="false"
+      Precision="255"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="VARCHAR2"
+      AliasName="REQ_LINE_ID"
+      Expression="REQ_LINE_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RcvShipmentNumber"
+      IsQueriable="false"
+      IsPersistent="false"
+      Precision="4000"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="RCV_SHIPMENT_NUMBER"
+      Expression="RCV_SHIPMENT_NUMBER"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OrderTypeCode"
+      IsQueriable="false"
+      IsPersistent="false"
+      Precision="3"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ORDER_TYPE_CODE"
+      Expression="ORDER_TYPE_CODE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+         <Attr Name="_DisplaySize" Value="3" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ReceiptDate"
+      IsQueriable="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="VARCHAR2"
+      AliasName="RECEIPT_DATE"
+      Expression="RECEIPT_DATE"
+      SQLType="DATE" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RequesterId"
+      IsQueriable="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="VARCHAR2"
+      AliasName="REQUESTER_ID"
+      Expression="REQUESTER_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PoHeaderId"
+      IsQueriable="false"
+      IsPersistent="false"
+      Precision="255"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="VARCHAR2"
+      AliasName="PO_HEADER_ID"
+      Expression="PO_HEADER_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PoReleaseId"
+      IsQueriable="false"
+      IsPersistent="false"
+      Precision="255"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="VARCHAR2"
+      AliasName="PO_RELEASE_ID"
+      Expression="PO_RELEASE_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OrderId"
+      IsQueriable="false"
+      IsPersistent="false"
+      Precision="255"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="VARCHAR2"
+      AliasName="ORDER_ID"
+      Expression="ORDER_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PoNumber"
+      IsQueriable="false"
+      IsPersistent="false"
+      Precision="4000"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PO_NUMBER"
+      Expression="PO_NUMBER"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PoLineId"
+      IsQueriable="false"
+      IsPersistent="false"
+      Precision="255"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="VARCHAR2"
+      AliasName="PO_LINE_ID"
+      Expression="PO_LINE_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PoLineLocationId"
+      IsQueriable="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="VARCHAR2"
+      AliasName="PO_LINE_LOCATION_ID"
+      Expression="PO_LINE_LOCATION_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PoReleaseNumber"
+      IsQueriable="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="VARCHAR2"
+      AliasName="PO_RELEASE_NUMBER"
+      Expression="PO_RELEASE_NUMBER"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PoLineNumber"
+      IsQueriable="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="VARCHAR2"
+      AliasName="PO_LINE_NUMBER"
+      Expression="PO_LINE_NUMBER"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PoShipmentNumber"
+      IsQueriable="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="VARCHAR2"
+      AliasName="PO_SHIPMENT_NUMBER"
+      Expression="PO_SHIPMENT_NUMBER"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ToOrganizationId"
+      IsQueriable="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="VARCHAR2"
+      AliasName="TO_ORGANIZATION_ID"
+      Expression="TO_ORGANIZATION_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ItemId"
+      IsQueriable="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="VARCHAR2"
+      AliasName="ITEM_ID"
+      Expression="ITEM_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PrimaryUom"
+      IsQueriable="false"
+      IsPersistent="false"
+      Precision="25"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PRIMARY_UOM"
+      Expression="PRIMARY_UOM"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+         <Attr Name="_DisplaySize" Value="25" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PrimaryUomClass"
+      IsQueriable="false"
+      IsPersistent="false"
+      Precision="10"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PRIMARY_UOM_CLASS"
+      Expression="PRIMARY_UOM_CLASS"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+         <Attr Name="_DisplaySize" Value="10" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="QuantityDelivered"
+      IsQueriable="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="VARCHAR2"
+      AliasName="QUANTITY_DELIVERED"
+      Expression="QUANTITY_DELIVERED"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ExpectedReceiptQty"
+      IsQueriable="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="VARCHAR2"
+      AliasName="EXPECTED_RECEIPT_QTY"
+      Expression="EXPECTED_RECEIPT_QTY"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ItemDescription"
+      IsQueriable="false"
+      IsPersistent="false"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ITEM_DESCRIPTION"
+      Expression="ITEM_DESCRIPTION"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+         <Attr Name="_DisplaySize" Value="240" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ShipToLocationId"
+      IsQueriable="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="VARCHAR2"
+      AliasName="SHIP_TO_LOCATION_ID"
+      Expression="SHIP_TO_LOCATION_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="VendorId"
+      IsQueriable="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="VARCHAR2"
+      AliasName="VENDOR_ID"
+      Expression="VENDOR_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Source"
+      IsQueriable="false"
+      IsPersistent="false"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="SOURCE"
+      Expression="SOURCE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+         <Attr Name="_DisplaySize" Value="240" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="VendorSiteId"
+      IsQueriable="false"
+      IsPersistent="false"
+      Precision="255"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="VARCHAR2"
+      AliasName="VENDOR_SITE_ID"
+      Expression="VENDOR_SITE_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SupplierSite"
+      IsQueriable="false"
+      IsPersistent="false"
+      Precision="15"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="SUPPLIER_SITE"
+      Expression="SUPPLIER_SITE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+         <Attr Name="_DisplaySize" Value="15" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="NeedByDate"
+      IsQueriable="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="VARCHAR2"
+      AliasName="NEED_BY_DATE"
+      Expression="NEED_BY_DATE"
+      SQLType="DATE" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PromisedDate"
+      IsQueriable="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="VARCHAR2"
+      AliasName="PROMISED_DATE"
+      Expression="PROMISED_DATE"
+      SQLType="DATE" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ExpectedReceiptDate"
+      IsQueriable="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="VARCHAR2"
+      AliasName="EXPECTED_RECEIPT_DATE"
+      Expression="EXPECTED_RECEIPT_DATE"
+      SQLType="DATE" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OrderedQty"
+      IsQueriable="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="VARCHAR2"
+      AliasName="ORDERED_QTY"
+      Expression="ORDERED_QTY"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OrderedUom"
+      IsQueriable="false"
+      IsPersistent="false"
+      Precision="25"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ORDERED_UOM"
+      Expression="ORDERED_UOM"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+         <Attr Name="_DisplaySize" Value="25" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="UssglTransactionCode"
+      IsQueriable="false"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="USSGL_TRANSACTION_CODE"
+      Expression="USSGL_TRANSACTION_CODE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+         <Attr Name="_DisplaySize" Value="30" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PoDistributionId"
+      IsQueriable="false"
+      IsPersistent="false"
+      Precision="255"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="VARCHAR2"
+      AliasName="PO_DISTRIBUTION_ID"
+      Expression="PO_DISTRIBUTION_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PoNumRelNum"
+      IsQueriable="false"
+      IsPersistent="false"
+      Precision="4000"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PO_NUM_REL_NUM"
+      Expression="PO_NUM_REL_NUM"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Unit"
+      IsQueriable="false"
+      IsPersistent="false"
+      Precision="25"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="UNIT"
+      Passivate="true"
+      Expression="UNIT"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+         <Attr Name="_DisplaySize" Value="25" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ReceiptQuantity"
+      IsQueriable="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="VARCHAR2"
+      AliasName="RECEIPT_QUANTITY"
+      Passivate="true"
+      Expression="RECEIPT_QUANTITY"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ReqDistributionId"
+      IsQueriable="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="VARCHAR2"
+      AliasName="REQ_DISTRIBUTION_ID"
+      Expression="REQ_DISTRIBUTION_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DeliverToLocationId"
+      IsQueriable="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="VARCHAR2"
+      AliasName="DELIVER_TO_LOCATION_ID"
+      Expression="DELIVER_TO_LOCATION_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ReqHeaderId"
+      IsQueriable="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      AliasName="REQ_HEADER_ID"
+      Expression="REQ_HEADER_ID"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RequisitionNumber"
+      IsQueriable="false"
+      IsPersistent="false"
+      Precision="20"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="REQUISITION_NUMBER"
+      Expression="REQUISITION_NUMBER"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OrderType"
+      IsQueriable="false"
+      IsPersistent="false"
+      Precision="80"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ORDER_TYPE"
+      Expression="ORDER_TYPE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PoDistributionNum"
+      IsUpdateable="false"
+      IsQueriable="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="VARCHAR2"
+      AliasName="PO_DISTRIBUTION_NUM"
+      Expression="PO_DISTRIBUTION_NUM"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="VendorProductNum"
+      IsUpdateable="false"
+      IsQueriable="false"
+      IsPersistent="false"
+      Precision="25"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="VENDOR_PRODUCT_NUM"
+      Expression="VENDOR_PRODUCT_NUM"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OrderNumber"
+      IsQueriable="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="VARCHAR2"
+      AliasName="ORDER_NUMBER"
+      Expression="ORDER_NUMBER"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="MatchingBasis"
+      IsQueriable="false"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="MatchingBasis"
+      Expression="MatchingBasis"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ReqLink"
+      IsQueriable="false"
+      IsPersistent="false"
+      Precision="15"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="REQ_LINK"
+      Expression="REQ_LINK"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ShipmentHeaderId"
+      IsQueriable="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="VARCHAR2"
+      AliasName="Shipment_Header_Id"
+      Expression="Shipment_Header_Id"
+      SQLType="NUMERIC" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ManufacturerPartNumber"
+      IsQueriable="false"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ManufacturerPartNumber"
+      Expression="ManufacturerPartNumber"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="OperatingUnit"
+      IsQueriable="false"
+      IsPersistent="false"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="OperatingUnit"
+      Expression="OperatingUnit"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SelectFlag"
+      IsQueriable="false"
+      IsPersistent="false"
+      Type="java.lang.String"
+      ColumnType="$none$"
+      AliasName="SELECT_FLAG"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ItemNumber"
+      IsQueriable="false"
+      IsPersistent="false"
+      Precision="40"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ITEM_NUMBER"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RequesterName"
+      IsQueriable="false"
+      IsPersistent="false"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="REQUESTER_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      IsPersistent="false"
+      Precision="255"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="Attribute4"
+      Expression="Attribute4"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      IsPersistent="false"
+      Precision="255"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="Attribute5"
+      Expression="Attribute5"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute6"
+      IsPersistent="false"
+      Precision="255"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="Attribute6"
+      Expression="Attribute6"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute7"
+      IsPersistent="false"
+      Precision="255"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="Attribute7"
+      Expression="Attribute7"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute8"
+      IsPersistent="false"
+      Precision="255"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="Attribute8"
+      Expression="Attribute8"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      IsPersistent="false"
+      Precision="255"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="Attribute1"
+      Expression="Attribute1"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      IsPersistent="false"
+      Precision="255"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="Attribute2"
+      Expression="Attribute2"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      IsPersistent="false"
+      Precision="255"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="Attribute3"
+      Expression="Attribute3"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_OverrideAttr" Value="true" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DisplaySingleInv"
+      IsPersistent="false"
+      Precision="255"
+      Type="java.lang.Boolean"
+      ColumnType="VARCHAR2"
+      AliasName="DisplaySingleInv"
+      Expression="DisplaySingleInv"
+      SQLType="BIT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DisplayMultiInv"
+      IsPersistent="false"
+      Precision="255"
+      Type="java.lang.Boolean"
+      ColumnType="VARCHAR2"
+      AliasName="DisplayMultiInv"
+      Expression="DisplayMultiInv"
+      SQLType="BIT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Displaykofax"
+      IsPersistent="false"
+      Precision="255"
+      Type="java.lang.Boolean"
+      ColumnType="VARCHAR2"
+      AliasName="Displaykofax"
+      Expression="Displaykofax"
+      SQLType="BIT" >
+   </ViewAttribute>
+</ViewObject>

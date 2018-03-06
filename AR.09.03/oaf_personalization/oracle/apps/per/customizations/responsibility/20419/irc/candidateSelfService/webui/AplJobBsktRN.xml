@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>                                                                                                      
+<customization customizes="/oracle/apps/per/irc/candidateSelfService/webui/AplJobBsktRN" xmlns="http://xmlns.oracle.com/jrad"               
+xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:user="http://xmlns.oracle.com/jrad/user"              
+file-version="$Header: svn://d02584/consolrepos/branches/AR.09.03/oaf_personalization/oracle/apps/per/customizations/responsibility/20419/irc/candidateSelfService/webui/AplJobBsktRN.xml 317 2017-05-05 02:11:23Z sryan $" version="9.0.3.8.12_1271" xml:lang="en-US">                                                                         
+<modifications>
+      <modify element="JobBasketTable" messageName=""/>
+      <move element="JobBasketTable" after="FndTipText"/>
+         
+
+<move element="VacancyDetailsDrillDown" after="JobBasketTable"/>
+   </modifications>
+</customization>
+                                     
+

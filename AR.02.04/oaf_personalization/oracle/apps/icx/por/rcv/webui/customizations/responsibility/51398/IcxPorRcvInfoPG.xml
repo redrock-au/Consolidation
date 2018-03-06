@@ -1,0 +1,6 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<customization xmlns="http://xmlns.oracle.com/jrad" version="9.0.5.4.89_555" xml:lang="en-US" customizes="/oracle/apps/icx/por/rcv/webui/IcxPorRcvInfoPG" xmlns:user="http://xmlns.oracle.com/jrad/user" user:responsibilityKey="ip - requisition - ipd opa" user:responsibilityAppId="20032">
+   <modifications>
+      <modify element="PageLayoutRN" controllerClass="doi.oracle.apps.icx.por.rcv.webui.RcvInfoCO"/>
+   </modifications>
+</customization>

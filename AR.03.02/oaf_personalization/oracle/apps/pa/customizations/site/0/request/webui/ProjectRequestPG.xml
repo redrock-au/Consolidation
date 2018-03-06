@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8'?>                                                                                                      
+<customization customizes="/oracle/apps/pa/request/webui/ProjectRequestPG" xmlns="http://xmlns.oracle.com/jrad"                             
+xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:user="http://xmlns.oracle.com/jrad/user"              
+file-version="$Header: svn://d02584/consolrepos/branches/AR.03.02/oaf_personalization/oracle/apps/pa/customizations/site/0/request/webui/ProjectRequestPG.xml 317 2017-05-05 02:11:23Z sryan $" version="9.0.3.6.2_398" xml:lang="en-US"        
+package="/oracle/apps/pa/customizations/site/0/request/webui">                                                                              
+<modifications>                                                                                                                             
+<modify element="ProjectRequestTable" blockSize="25"/>                                                                                      
+<modify element="Address3" sortState="no" rendered="false"/>                                                                                
+<modify element="Address4" rendered="false" sortState="no"/>                                                                                
+<modify element="RequestType" sortState="no"/>                                                                                              
+<modify element="RequestStatus" sortState="no"/>                                                                                            
+<modify element="RequestNumber" sortState="no"/>                                                                                            
+<modify element="RequestName" sortState="no"/>                                                                                              
+<modify element="Descrition" sortState="no"/>                                                                                               
+<modify element="PartyName" sortState="no"/>                                                                                                
+<modify element="Country" sortState="no"/>                                                                                                  
+<modify element="StateRegion" sortState="no"/>                                                                                              
+<modify element="City" sortState="no"/>                                                                                                     
+<modify element="Value" sortState="no"/>                                                                                                    
+<modify element="CurrencyCode" sortState="no"/>                                                                                             
+<modify element="Source" sortState="no"/>                                                                                                   
+<modify element="SourceReference" sortState="no"/>                                                                                          
+<modify element="ClosedDate" sortState="no"/>                                                                                               
+<modify element="Address1" rendered="false" sortState="no"/>                                                                                
+<modify element="Address2" rendered="false" sortState="no"/>                                                                                
+<modify element="Province" rendered="false" sortState="no"/>                                                                                
+<modify element="PostalCode" rendered="false" sortState="no"/>                                                                              
+<modify element="AddressLinesPhonetic" rendered="false" sortState="no"/>                                                                    
+<modify element="PartyNumber" rendered="false" sortState="no"/>                                                                             
+<modify element="County" rendered="false" sortState="no"/>                                                                                  
+<modify element="ExpectedProjectApprovalDate" rendered="false" sortState="no"/>                                                             
+<modify element="AccounttName" rendered="false" sortState="no"/>                                                                            
+<modify element="AccountNumber" rendered="false" sortState="no"/>                                                                           
+<modify element="SourceOrganization" rendered="false" sortState="no"/>                                                                      
+<move element="RequestStatus" after="RequestType"/>                                                                                         
+<move element="RequestNumber" after="RequestStatus"/>                                                                                       
+<move element="RequestName" after="RequestNumber"/>                                                                                         
+<move element="Descrition" after="RequestName"/>                                                                                            
+<move element="PartyName" after="Descrition"/>                                                                                              
+<move element="Country" after="PartyName"/>                                                                                                 
+<move element="StateRegion" after="Country"/>                                                                                               
+<move element="City" after="StateRegion"/>                                                                                                  
+<move element="Value" after="City"/>                                                                                                        
+<move element="CurrencyCode" after="Value"/>                                                                                                
+<move element="Source" after="CurrencyCode"/>                                                                                               
+<move element="SourceReference" after="Source"/>                                                                                            
+<move element="ClosedDate" after="SourceReference"/>                                                                                        
+<move element="RequestSystemStatusCode" after="ClosedDate"/>                                                                                
+<move element="RequestId" after="RequestSystemStatusCode"/>                                                                                 
+<move element="Address1" after="RequestId"/>                                                                                                
+<move element="Address2" after="Address1"/>                                                                                                 
+<move element="Address3" after="Address2"/>                                                                                                 
+<move element="Address4" after="Address3"/>                                                                                                 
+<move element="Province" after="Address4"/>                                                                                                 
+<move element="PostalCode" after="Province"/>                                                                                               
+<move element="AddressLinesPhonetic" after="PostalCode"/>                                                                                   
+<move element="PartyNumber" after="AddressLinesPhonetic"/>                                                                                  
+<move element="County" after="PartyNumber"/>                                                                                                
+<move element="ExpectedProjectApprovalDate" after="County"/>                                                                                
+<move element="AccounttName" after="ExpectedProjectApprovalDate"/>                                                                          
+<move element="AccountNumber" after="AccounttName"/>                                                                                        
+<move element="PROJECT_ROLE_NAME" after="AccountNumber"/>                                                                                   
+<move element="RESOURCE_NAME" after="PROJECT_ROLE_NAME"/>                                                                                   
+<move element="SourceOrganization" after="RESOURCE_NAME"/>
+      <move element="CancelRequest" after="CreateProject"/>
+      <move          
+element="ViewRelationships" after="CancelRequest"/>
+   </modifications>
+</customization>
+                                                  
+

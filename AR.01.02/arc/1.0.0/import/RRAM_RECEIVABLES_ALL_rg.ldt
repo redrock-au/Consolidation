@@ -1,0 +1,54 @@
+# $Header: svn://d02584/consolrepos/branches/AR.01.02/arc/1.0.0/import/RRAM_RECEIVABLES_ALL_rg.ldt 1832 2017-07-18 00:28:00Z svnuser $
+
+# dbdrv: exec fnd bin FNDLOAD bin &phase=daa+66 checkfile:~PROD:~PATH:~FILE &ui_apps 0 Y UPLOAD @FND:patch/115/import/afcpreqg.lct @~PROD:~PATH/~FILE
+LANGUAGE = "US"
+LDRCONFIG = "afcpreqg.lct 115.24"
+
+#Source Database CONDEV
+
+#RELEASE_NAME 11.5.10.2
+
+# -- Begin Entity Definitions -- 
+
+DEFINE REQUEST_GROUP
+  KEY   REQUEST_GROUP_NAME              VARCHAR2(30)
+  KEY   APPLICATION_SHORT_NAME          VARCHAR2(50)
+  CTX   OWNER                           VARCHAR2(4000)
+  BASE  LAST_UPDATE_DATE                VARCHAR2(75)
+  TRANS DESCRIPTION                     VARCHAR2(80)
+  BASE  REQUEST_GROUP_CODE              VARCHAR2(30)
+
+  DEFINE REQUEST_GROUP_UNIT
+    KEY   UNIT_TYPE                       VARCHAR2(1)
+    KEY   UNIT_APP                        VARCHAR2(50)
+    KEY   UNIT_NAME                       VARCHAR2(255)
+    CTX   OWNER                           VARCHAR2(4000)
+    BASE  LAST_UPDATE_DATE                VARCHAR2(75)
+  END REQUEST_GROUP_UNIT
+END REQUEST_GROUP
+
+# -- End Entity Definitions -- 
+
+
+BEGIN REQUEST_GROUP "Receivables All" "AR"
+  OWNER = "ORACLE"
+  LAST_UPDATE_DATE = "2000/11/28"
+  DESCRIPTION = "All reports and programs"
+
+  BEGIN REQUEST_GROUP_UNIT "P" "ARC" "RRAM_IMPORT_DEBTORS"
+    OWNER = "RYANSH"
+    LAST_UPDATE_DATE = "2017/03/08"
+  END REQUEST_GROUP_UNIT
+  
+  BEGIN REQUEST_GROUP_UNIT "P" "ARC" "RRAM_IMPORT_TRANS"
+    OWNER = "RYANSH"
+    LAST_UPDATE_DATE = "2017/03/09"
+  END REQUEST_GROUP_UNIT
+  
+  BEGIN REQUEST_GROUP_UNIT "P" "ARC" "XXAR_RRAM_STATUS_UPD"
+    OWNER = "RYANSH"
+    LAST_UPDATE_DATE = "2017/07/11"
+  END REQUEST_GROUP_UNIT
+
+END REQUEST_GROUP
+

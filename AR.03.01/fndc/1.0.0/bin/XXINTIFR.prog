@@ -1,0 +1,43 @@
+#!/usr/bin/ksh
+#*******************************************************************************
+#* 
+#* $Header: svn://d02584/consolrepos/branches/AR.03.01/fndc/1.0.0/bin/XXINTIFR.prog 2558 2017-09-19 04:46:44Z svnuser $
+#* 
+#* CEMLI ID: INT.02.00
+#*
+#* Description: Interface Framework - Fetch interface files to process
+#*
+#********************************************************************************
+
+#---------------------------------------
+# Arguments:
+#  1 - APPS/password
+#  2 - User ID
+#  3 - User Name
+#  4 - Request ID
+#  5 - Parent Request ID
+#  6 - Directory Path
+#  7 - File Name
+#  8 - Application ID
+#---------------------------------------
+
+echo $5
+echo $6
+echo $7
+echo $8
+
+for file in $6/$7
+do
+   echo File: $file
+   if sqlplus $1 @$FNDC_TOP/sql/XXINTIFR.sql $8 $5 $file $4 $2;
+   then 
+      echo $file
+   else
+      echo Unable to read files from directory $6
+      exit 1
+   fi
+done
+
+exit 0
+
+

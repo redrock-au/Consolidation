@@ -1,0 +1,14 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<customization xmlns="http://xmlns.oracle.com/jrad" version="9.0.5.5.65_565" xml:lang="en-US" customizes="/doi/oracle/apps/icx/por/rcv/webui/DoiInvAttachmentLOVRN" xmlns:oa="http://xmlns.oracle.com/oa">
+   <modifications>
+      <move element="InvoiceNum" after="FileImportId"/>
+      <move element="PoHeaderId" after="InvoiceNum"/>
+      <move element="PoNumberAttachment" after="PoHeaderId"/>
+      <move element="Attribute15" after="PoNumberAttachment"/>
+      <move element="PoNumber" after="Attribute15"/>
+      <move element="InvAmount" after="PoNumber"/>
+      <insert after="InvAmount">
+         <oa:image id="xxInvImage" adminCustomizable="true" cellNoWrapFormat="false" dataType="VARCHAR2" initSortSeq="none" prompt="Invoice Image" rendered="true" scope="." serverUnvalidated="false" sortState="no" source="pdf_icon1818.jpg" userCustomizable="false" warnAboutChanges="true" xmlns:oa="http://xmlns.oracle.com/oa"/>
+      </insert>
+   </modifications>
+</customization>
